@@ -1,0 +1,58 @@
+package com.wdyc.njtws.mapstruct.impl;
+
+import com.wdyc.njtws.mapstruct.*;
+import com.wdyc.njtws.domen.ShopEntity;
+import com.wdyc.njtws.dto.ShopDTO;
+import javax.annotation.Generated;
+
+@Generated(
+    value = "org.mapstruct.ap.MappingProcessor",
+    date = "2018-08-30T23:35:44+0200",
+    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_111 (Oracle Corporation)"
+)
+public class ShopMapperImpl implements ShopMapper {
+
+    @Override
+    public ShopDTO shopEntityToDto(ShopEntity shop) {
+        if ( shop == null ) {
+            return null;
+        }
+
+        ShopDTO shopDTO = new ShopDTO();
+
+        shopDTO.setPassword( shop.getPassword() );
+        if ( shop.getId() != null ) {
+            shopDTO.setId( String.valueOf( shop.getId() ) );
+        }
+        shopDTO.setUsername( shop.getUsername() );
+        shopDTO.setEmail( shop.getEmail() );
+        shopDTO.setType( shop.getType() );
+        shopDTO.setMaticni( shop.getMaticni() );
+        shopDTO.setNaziv( shop.getNaziv() );
+        shopDTO.setPib( shop.getPib() );
+
+        return shopDTO;
+    }
+
+    @Override
+    public ShopEntity shopDtoToEntity(ShopDTO shop) {
+        if ( shop == null ) {
+            return null;
+        }
+
+        ShopEntity shopEntity = new ShopEntity();
+
+        if ( shop.getId() != null ) {
+            shopEntity.setId( Integer.parseInt( shop.getId() ) );
+        }
+        shopEntity.setUsername( shop.getUsername() );
+        shopEntity.setPassword( shop.getPassword() );
+        shopEntity.setEmail( shop.getEmail() );
+        shopEntity.setType( shop.getType() );
+        shopEntity.setNaziv( shop.getNaziv() );
+        shopEntity.setPib( shop.getPib() );
+        shopEntity.setMaticni( shop.getMaticni() );
+
+        return shopEntity;
+    }
+}
