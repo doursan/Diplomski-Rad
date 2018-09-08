@@ -14,12 +14,15 @@ public class ActionFactory {
     public static AbstractAction createAction(String action) {
 
         AbstractAction command = null;
-
+     
         if (action.equalsIgnoreCase("login")) {
             command = new LoginAction();
         }
         if (action.equalsIgnoreCase("register")) {
             command = new RegisterAction();
+        }
+        if (action.equalsIgnoreCase("add_car")) {
+            command = new AddCarAction();
         }
 
         return command;

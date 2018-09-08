@@ -13,9 +13,9 @@ import org.mapstruct.Mapper;
  *
  * @author Dusan
  */
-@Mapper
+@Mapper(uses = CarMapper.class)
 public interface ClientMapper {
-    
+
     ClientDTO clientEntityToDto(ClientEntity client);
     
     ClientEntity clientDtoToEntity(ClientDTO client);

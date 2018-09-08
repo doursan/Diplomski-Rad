@@ -5,10 +5,13 @@
  */
 package com.wdyc.njtws.domen;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -17,7 +20,7 @@ import javax.validation.constraints.Size;
 @Entity
 @DiscriminatorValue(value = "C")
 public class ClientEntity extends UserEntity {
-
+    
     private static final long serialVersionUID = 1L;
 
     public ClientEntity() {
@@ -32,6 +35,8 @@ public class ClientEntity extends UserEntity {
     @Size(max = 13)
     @Column(name = "jmbg")
     private String jmbg;
+    @OneToMany(mappedBy = "client")
+    private List<CarEntity> carList;
 
     
     public String getIme() {
@@ -64,6 +69,21 @@ public class ClientEntity extends UserEntity {
         this.prezime = prezime;
         this.jmbg = jmbg;
     }
-    
-    
+
+    public ClientEntity(Integer id) {
+        super(id);
+    }
+
+    public ClientEntity(Integer id, String username, String password, String email) {
+        super(id, username, password, email);
+    }       
+
+    @XmlTransient
+    public List<CarEntity> getCarList() {
+        return carList;
+    }
+
+    public void setCarList(List<CarEntity> carList) {
+        this.carList = carList;
+    }    
 }

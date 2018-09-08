@@ -76,6 +76,7 @@ public class RegisterAction extends AbstractAction {
                 session.setAttribute("logged_user", returnedClient);
                 return "index";
             } catch (Exception ex) {
+                ex.printStackTrace();
                 request.setAttribute("errorMessage", ex.getMessage());
                 return "register";
             }

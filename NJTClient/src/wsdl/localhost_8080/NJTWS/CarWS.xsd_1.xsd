@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://services.njtws.wdyc.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://services.njtws.wdyc.com/">
+
+<xs:element name="Exception" type="tns:Exception"/>
+
+<xs:element name="addCar" type="tns:addCar"/>
+
+<xs:element name="addCarResponse" type="tns:addCarResponse"/>
+
+<xs:complexType name="addCar">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="addCarResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:carBrandsEnginesDTO" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="carBrandsEnginesDTO">
+<xs:sequence>
+<xs:element name="carBrands" type="tns:carBrandDTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="engines" type="tns:engineDTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="carBrandDTO">
+<xs:sequence>
+<xs:element name="carBrandModelList" type="tns:carBrandModelDTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="country" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:string" minOccurs="0"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="carBrandModelDTO">
+<xs:sequence>
+<xs:element name="carBrand" type="tns:carBrandDTO" minOccurs="0"/>
+<xs:element name="id" type="xs:string" minOccurs="0"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+<xs:element name="productionBegan" type="xs:string" minOccurs="0"/>
+<xs:element name="productionEnd" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="engineDTO">
+<xs:sequence>
+<xs:element name="fuel" type="xs:string" minOccurs="0"/>
+<xs:element name="hp" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:string" minOccurs="0"/>
+<xs:element name="kw" type="xs:string" minOccurs="0"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+<xs:element name="volume" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Exception">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

@@ -29,9 +29,6 @@ import javax.jws.WebParam;
 @WebService(serviceName = "UserWS")
 public class UserWS {
 
-    /**
-     * This is a sample web service operation
-     */
     UserMapper userMapper = new UserMapperImpl();
     ShopMapper shopMapper = new ShopMapperImpl();
     ClientMapper clientMapper = new ClientMapperImpl();

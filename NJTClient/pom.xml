@@ -111,6 +111,24 @@
                         <id>wsimport-generate-UserWS</id>
                         <phase>generate-sources</phase>
                     </execution>
+                    <execution>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+                            <wsdlFiles>
+                                <wsdlFile>localhost_8080/NJTWS/CarWS.wsdl</wsdlFile>
+                            </wsdlFiles>
+                            <packageName></packageName>
+                            <vmArgs>
+                                <vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
+                            </vmArgs>
+                            <wsdlLocation>http://localhost:8080/NJTWS/CarWS?wsdl</wsdlLocation>
+                            <staleFile>${project.build.directory}/jaxws/stale/CarWS.stale</staleFile>
+                        </configuration>
+                        <id>wsimport-generate-CarWS</id>
+                        <phase>generate-sources</phase>
+                    </execution>
                 </executions>
                 <dependencies>
                     <dependency>

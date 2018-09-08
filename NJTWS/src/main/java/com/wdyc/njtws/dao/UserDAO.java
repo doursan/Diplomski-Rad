@@ -16,13 +16,11 @@ import javax.persistence.Persistence;
  */
 public class UserDAO {
 
-    private static final String FIND_USER_BY_USERNAME = "SELECT u FROM UserEntity u WHERE u.username= :username";
-
     public UserEntity findUser(UserEntity user) throws Exception {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.wdyc_NJTWS_war_1.0-SNAPSHOTPU");
         EntityManager em = emf.createEntityManager();
         try {
-            UserEntity retrievedUser = (UserEntity) em.createQuery(FIND_USER_BY_USERNAME).setParameter("username", user.getUsername()).getSingleResult();
+            UserEntity retrievedUser = (UserEntity) em.createNamedQuery("UserEntity.findByUsername", UserEntity.class).setParameter("username", user.getUsername()).getSingleResult();
             System.out.println(retrievedUser);
             return retrievedUser;
         } catch (Exception e) {
@@ -42,6 +40,8 @@ public class UserDAO {
             em.getTransaction().commit();
             return user;
         } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
             throw new Exception("Greska prilikom registracije! Korisnik vec postoji!");
         } finally {
             em.close();

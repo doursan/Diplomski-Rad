@@ -12,6 +12,7 @@
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <m2e.apt.activation>jdt_apt</m2e.apt.activation>
     </properties>
     
     <dependencies>

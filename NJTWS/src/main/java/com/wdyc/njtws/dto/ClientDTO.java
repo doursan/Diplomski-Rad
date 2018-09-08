@@ -5,6 +5,8 @@
  */
 package com.wdyc.njtws.dto;
 
+import java.util.List;
+
 /**
  *
  * @author Dusan
@@ -15,7 +17,8 @@ public class ClientDTO extends UserDTO {
     private String ime;
     private String prezime;
     private String jmbg;
-
+    private List<CarDTO> carList;
+    
     public ClientDTO() {
     }
 
@@ -62,4 +65,12 @@ public class ClientDTO extends UserDTO {
     public void setPrezime(String prezime) {
         this.prezime = prezime;
     }     
+
+    public List<CarDTO> getCarList() {
+        return carList;
+    }
+
+    public void setCarList(List<CarDTO> carList) {
+        this.carList = carList;
+    }
 }
