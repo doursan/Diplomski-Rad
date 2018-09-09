@@ -24,6 +24,7 @@
 <xs:complexContent>
 <xs:extension base="tns:userDTO">
 <xs:sequence>
+<xs:element name="carList" type="tns:carDTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
 <xs:element name="ime" type="xs:string" minOccurs="0"/>
 <xs:element name="jmbg" type="xs:string" minOccurs="0"/>
 <xs:element name="prezime" type="xs:string" minOccurs="0"/>
@@ -39,6 +40,47 @@
 <xs:element name="password" type="xs:string" minOccurs="0"/>
 <xs:element name="type" type="xs:string" minOccurs="0"/>
 <xs:element name="username" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="carDTO">
+<xs:sequence>
+<xs:element name="brandModel" type="tns:carBrandModelDTO" minOccurs="0"/>
+<xs:element name="client" type="tns:clientDTO" minOccurs="0"/>
+<xs:element name="engine" type="tns:engineDTO" minOccurs="0"/>
+<xs:element name="productionYear" type="xs:string" minOccurs="0"/>
+<xs:element name="registration" type="xs:string" minOccurs="0"/>
+<xs:element name="vin" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="carBrandModelDTO">
+<xs:sequence>
+<xs:element name="carBrand" type="tns:carBrandDTO" minOccurs="0"/>
+<xs:element name="id" type="xs:string" minOccurs="0"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+<xs:element name="productionBegan" type="xs:string" minOccurs="0"/>
+<xs:element name="productionEnd" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="carBrandDTO">
+<xs:sequence>
+<xs:element name="carBrandModelList" type="tns:carBrandModelDTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="country" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:string" minOccurs="0"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="engineDTO">
+<xs:sequence>
+<xs:element name="fuel" type="xs:string" minOccurs="0"/>
+<xs:element name="hp" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:string" minOccurs="0"/>
+<xs:element name="kw" type="xs:string" minOccurs="0"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+<xs:element name="volume" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

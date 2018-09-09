@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        
     </head>
     <body>
         <!-- start banner Area -->
@@ -17,10 +17,7 @@
             <div class="container">
                 <div class="row d-flex align-items-center justify-content-center">
                     <div class="about-content col-lg-12">
-                        <h1 class="text-white">
-                            About Us				
-                        </h1>	
-                        <p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="about.html"> About Us</a></p>
+                        <jsp:include page="${banner_page}"></jsp:include>
                     </div>											
                 </div>
             </div>

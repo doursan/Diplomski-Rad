@@ -28,19 +28,20 @@
         CSS
         ============================================= -->
         <link rel="stylesheet" href="/NJTClient/pages/css/linearicons.css">
-        <link rel="stylesheet" href="/NJTClient/pages/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="/NJTClient/pages/css/font-awesome.min.css">
         <link rel="stylesheet" href="/NJTClient/pages/css/bootstrap.css">
         <link rel="stylesheet" href="/NJTClient/pages/css/magnific-popup.css">
         <link rel="stylesheet" href="/NJTClient/pages/css/nice-select.css">					
         <link rel="stylesheet" href="/NJTClient/pages/css/animate.min.css">
         <link rel="stylesheet" href="/NJTClient/pages/css/owl.carousel.css">
-        <link rel="stylesheet" href="/NJTClient/pages/css/main.css">
+        <link rel="stylesheet" type="text/css" href="/NJTClient/pages/css/main.css">
+        <link type="text/css" rel="stylesheet" href="http://fakedomain.com/smilemachine/html.css" />
     </head>
     <body>
-        
+
         <jsp:include page="header.jsp"></jsp:include> 
         <jsp:include page="banner.jsp"></jsp:include> 
-        
+
         <script src="/NJTClient/pages/js/vendor/jquery-2.2.4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="/NJTClient/pages/js/vendor/bootstrap.min.js"></script>			

@@ -31,7 +31,7 @@
                         <ul class="nav-menu">
                             <li class="menu-active"><a href="inxed.html">Home</a></li>
                             <li><a href=" 
-                                   <c:url value="/NJTClient/controller">
+                                   <c:url value="/controller">
                                        <c:param name="action" value="add_car"></c:param>
                                    </c:url> ">Add a Car</a></li>
                             <li><a href="service.html">Service</a></li>

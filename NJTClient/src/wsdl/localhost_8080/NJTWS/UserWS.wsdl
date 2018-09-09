@@ -13,17 +13,17 @@
 <message name="Exception">
 <part name="fault" element="tns:Exception"/>
 </message>
-<message name="registerClient">
-<part name="parameters" element="tns:registerClient"/>
-</message>
-<message name="registerClientResponse">
-<part name="parameters" element="tns:registerClientResponse"/>
-</message>
 <message name="registerShop">
 <part name="parameters" element="tns:registerShop"/>
 </message>
 <message name="registerShopResponse">
 <part name="parameters" element="tns:registerShopResponse"/>
+</message>
+<message name="registerClient">
+<part name="parameters" element="tns:registerClient"/>
+</message>
+<message name="registerClientResponse">
+<part name="parameters" element="tns:registerClientResponse"/>
 </message>
 <portType name="UserWS">
 <operation name="login">
@@ -31,15 +31,15 @@
 <output wsam:Action="http://services.njtws.wdyc.com/UserWS/loginResponse" message="tns:loginResponse"/>
 <fault message="tns:Exception" name="Exception" wsam:Action="http://services.njtws.wdyc.com/UserWS/login/Fault/Exception"/>
 </operation>
-<operation name="registerClient">
-<input wsam:Action="http://services.njtws.wdyc.com/UserWS/registerClientRequest" message="tns:registerClient"/>
-<output wsam:Action="http://services.njtws.wdyc.com/UserWS/registerClientResponse" message="tns:registerClientResponse"/>
-<fault message="tns:Exception" name="Exception" wsam:Action="http://services.njtws.wdyc.com/UserWS/registerClient/Fault/Exception"/>
-</operation>
 <operation name="registerShop">
 <input wsam:Action="http://services.njtws.wdyc.com/UserWS/registerShopRequest" message="tns:registerShop"/>
 <output wsam:Action="http://services.njtws.wdyc.com/UserWS/registerShopResponse" message="tns:registerShopResponse"/>
 <fault message="tns:Exception" name="Exception" wsam:Action="http://services.njtws.wdyc.com/UserWS/registerShop/Fault/Exception"/>
+</operation>
+<operation name="registerClient">
+<input wsam:Action="http://services.njtws.wdyc.com/UserWS/registerClientRequest" message="tns:registerClient"/>
+<output wsam:Action="http://services.njtws.wdyc.com/UserWS/registerClientResponse" message="tns:registerClientResponse"/>
+<fault message="tns:Exception" name="Exception" wsam:Action="http://services.njtws.wdyc.com/UserWS/registerClient/Fault/Exception"/>
 </operation>
 </portType>
 <binding name="UserWSPortBinding" type="tns:UserWS">
@@ -56,7 +56,7 @@
 <soap:fault name="Exception" use="literal"/>
 </fault>
 </operation>
-<operation name="registerClient">
+<operation name="registerShop">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -68,7 +68,7 @@
 <soap:fault name="Exception" use="literal"/>
 </fault>
 </operation>
-<operation name="registerShop">
+<operation name="registerClient">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

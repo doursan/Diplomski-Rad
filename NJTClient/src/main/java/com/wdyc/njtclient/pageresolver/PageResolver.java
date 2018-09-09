@@ -23,6 +23,7 @@ public class PageResolver {
         view.put("login", "/pages/login.jsp");
         view.put("register", "/pages/register.jsp");
         view.put("admin", "/WEB-INF/pages/admin.jsp");
+        view.put("add_car", "/WEB-INF/pages/add_car.jsp");
     }
 
     public static PageResolver getInstance() {

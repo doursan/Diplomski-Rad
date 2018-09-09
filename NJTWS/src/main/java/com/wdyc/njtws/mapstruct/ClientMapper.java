@@ -13,7 +13,7 @@ import org.mapstruct.Mapper;
  *
  * @author Dusan
  */
-@Mapper(uses = CarMapper.class)
+@Mapper
 public interface ClientMapper {
 
     ClientDTO clientEntityToDto(ClientEntity client);

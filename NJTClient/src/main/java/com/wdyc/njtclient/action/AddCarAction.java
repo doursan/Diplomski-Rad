@@ -31,10 +31,11 @@ public class AddCarAction extends AbstractAction {
             System.out.println("Car brands and engines returned. There are "+ carBrands.size() + " car brands and " + carBrands.size() + " engines.");
             request.setAttribute("car_brands", carBrands);
             request.setAttribute("engines", engines);
+            request.setAttribute("banner_page", "/WEB-INF/pages/save_car_form.jsp");
             return "add_car";
         } catch (Exception ex) {
             request.setAttribute("errorMessage", ex.getMessage());
-            return "login";
+            return "index";
         }
 
     }
