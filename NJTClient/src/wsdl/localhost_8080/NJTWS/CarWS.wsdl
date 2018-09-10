@@ -13,16 +13,39 @@
 <message name="Exception">
 <part name="fault" element="tns:Exception"/>
 </message>
+<message name="saveCar">
+<part name="parameters" element="tns:saveCar"/>
+</message>
+<message name="saveCarResponse">
+<part name="parameters" element="tns:saveCarResponse"/>
+</message>
 <portType name="CarWS">
 <operation name="addCar">
 <input wsam:Action="http://services.njtws.wdyc.com/CarWS/addCarRequest" message="tns:addCar"/>
 <output wsam:Action="http://services.njtws.wdyc.com/CarWS/addCarResponse" message="tns:addCarResponse"/>
 <fault message="tns:Exception" name="Exception" wsam:Action="http://services.njtws.wdyc.com/CarWS/addCar/Fault/Exception"/>
 </operation>
+<operation name="saveCar">
+<input wsam:Action="http://services.njtws.wdyc.com/CarWS/saveCarRequest" message="tns:saveCar"/>
+<output wsam:Action="http://services.njtws.wdyc.com/CarWS/saveCarResponse" message="tns:saveCarResponse"/>
+<fault message="tns:Exception" name="Exception" wsam:Action="http://services.njtws.wdyc.com/CarWS/saveCar/Fault/Exception"/>
+</operation>
 </portType>
 <binding name="CarWSPortBinding" type="tns:CarWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
 <operation name="addCar">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+<fault name="Exception">
+<soap:fault name="Exception" use="literal"/>
+</fault>
+</operation>
+<operation name="saveCar">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

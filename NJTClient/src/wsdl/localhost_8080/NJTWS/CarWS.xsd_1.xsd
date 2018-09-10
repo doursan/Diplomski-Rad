@@ -6,20 +6,34 @@
 
 <xs:element name="addCarResponse" type="tns:addCarResponse"/>
 
-<xs:complexType name="addCar">
-<xs:sequence/>
-</xs:complexType>
+<xs:element name="saveCar" type="tns:saveCar"/>
 
-<xs:complexType name="addCarResponse">
+<xs:element name="saveCarResponse" type="tns:saveCarResponse"/>
+
+<xs:complexType name="saveCar">
 <xs:sequence>
-<xs:element name="return" type="tns:carBrandsEnginesDTO" minOccurs="0"/>
+<xs:element name="car" type="tns:carDTO" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="carBrandsEnginesDTO">
+<xs:complexType name="carDTO">
 <xs:sequence>
-<xs:element name="carBrands" type="tns:carBrandDTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-<xs:element name="engines" type="tns:engineDTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="brandModel" type="tns:carBrandModelDTO" minOccurs="0"/>
+<xs:element name="client" type="tns:clientDTO" minOccurs="0"/>
+<xs:element name="engine" type="tns:engineDTO" minOccurs="0"/>
+<xs:element name="productionYear" type="xs:string" minOccurs="0"/>
+<xs:element name="registration" type="xs:string" minOccurs="0"/>
+<xs:element name="vin" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="carBrandModelDTO">
+<xs:sequence>
+<xs:element name="carBrand" type="tns:carBrandDTO" minOccurs="0"/>
+<xs:element name="id" type="xs:string" minOccurs="0"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+<xs:element name="productionBegan" type="xs:string" minOccurs="0"/>
+<xs:element name="productionEnd" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -32,13 +46,26 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="carBrandModelDTO">
+<xs:complexType name="clientDTO">
+<xs:complexContent>
+<xs:extension base="tns:userDTO">
 <xs:sequence>
-<xs:element name="carBrand" type="tns:carBrandDTO" minOccurs="0"/>
+<xs:element name="carList" type="tns:carDTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="ime" type="xs:string" minOccurs="0"/>
+<xs:element name="jmbg" type="xs:string" minOccurs="0"/>
+<xs:element name="prezime" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="userDTO">
+<xs:sequence>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
 <xs:element name="id" type="xs:string" minOccurs="0"/>
-<xs:element name="name" type="xs:string" minOccurs="0"/>
-<xs:element name="productionBegan" type="xs:string" minOccurs="0"/>
-<xs:element name="productionEnd" type="xs:string" minOccurs="0"/>
+<xs:element name="password" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+<xs:element name="username" type="xs:string" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -53,9 +80,32 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="saveCarResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:carDTO" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="Exception">
 <xs:sequence>
 <xs:element name="message" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="addCar">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="addCarResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:carBrandsEnginesDTO" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="carBrandsEnginesDTO">
+<xs:sequence>
+<xs:element name="carBrands" type="tns:carBrandDTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="engines" type="tns:engineDTO" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 </xs:schema>

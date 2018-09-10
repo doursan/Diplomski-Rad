@@ -6,11 +6,14 @@
 package com.wdyc.njtws.services;
 
 import com.wdyc.njtws.dao.CarBrandDAO;
+import com.wdyc.njtws.dao.CarDAO;
 import com.wdyc.njtws.dao.EngineDAO;
 import com.wdyc.njtws.domen.CarBrandEntity;
 import com.wdyc.njtws.domen.CarBrandsEngines;
+import com.wdyc.njtws.domen.CarEntity;
 import com.wdyc.njtws.domen.EngineEntity;
 import com.wdyc.njtws.dto.CarBrandsEnginesDTO;
+import com.wdyc.njtws.dto.CarDTO;
 import com.wdyc.njtws.mapstruct.CarBrandMapper;
 import com.wdyc.njtws.mapstruct.CarBrandModelMapper;
 import com.wdyc.njtws.mapstruct.CarBrandsEnginesMapper;
@@ -41,6 +44,7 @@ public class CarWS {
     
     CarBrandDAO carBrandDao = new CarBrandDAO();
     EngineDAO engineDao = new EngineDAO();
+    CarDAO carDao = new CarDAO();
     
     @WebMethod(operationName = "addCar")
     public CarBrandsEnginesDTO addCar() throws Exception {
@@ -52,5 +56,14 @@ public class CarWS {
         CarBrandsEnginesDTO cbeDto = cbeMapper.carBrandsEnginesToDto(cbe);
         return cbeDto;
         
+    }
+    
+    @WebMethod(operationName = "saveCar")
+    public CarDTO saveCar(@WebParam(name = "car") CarDTO car) throws Exception {
+        System.out.println("Calling save car from CarWS");  
+        
+        CarEntity convertedCar = carMapper.carDtoToEntity(car);
+        CarEntity savedCar = carDao.saveCar(convertedCar);
+        return carMapper.carEntityToDto(savedCar);
     }
 }

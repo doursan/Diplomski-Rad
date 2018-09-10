@@ -5,6 +5,11 @@
  */
 package com.wdyc.njtws.dao;
 
+import com.wdyc.njtws.domen.CarEntity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 /**
  *
  * @author Dusan
@@ -12,5 +17,23 @@ package com.wdyc.njtws.dao;
 public class CarDAO {
     
     private static final String something = "";
+
+    public CarEntity saveCar(CarEntity car) throws Exception {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.wdyc_NJTWS_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(car);
+            em.getTransaction().commit();
+            return car;
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+            throw new Exception("Greska prilikom cuvanja automobila! Automobil vec postoji!");
+        } finally {
+            em.close();
+            emf.close();
+        }
+    }
   
 }

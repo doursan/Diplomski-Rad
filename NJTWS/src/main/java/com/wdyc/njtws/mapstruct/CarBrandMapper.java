@@ -14,7 +14,7 @@ import org.mapstruct.Mapping;
  *
  * @author Dusan
  */
-@Mapper
+@Mapper(uses = CarBrandModelMapper.class)
 public interface CarBrandMapper {
    
     CarBrandDTO carBrandEntityToDto(CarBrandEntity carBrand);

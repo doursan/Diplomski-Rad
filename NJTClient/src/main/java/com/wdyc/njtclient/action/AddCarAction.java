@@ -28,7 +28,7 @@ public class AddCarAction extends AbstractAction {
             CarBrandsEnginesDTO result = port.addCar();
             List<CarBrandDTO> carBrands = result.getCarBrands();
             List<EngineDTO> engines = result.getEngines();
-            System.out.println("Car brands and engines returned. There are "+ carBrands.size() + " car brands and " + carBrands.size() + " engines.");
+            System.out.println("Car brands and engines returned. There are "+ carBrands.size() + " car brands and " + engines.size() + " engines.");
             request.setAttribute("car_brands", carBrands);
             request.setAttribute("engines", engines);
             request.setAttribute("banner_page", "/WEB-INF/pages/save_car_form.jsp");

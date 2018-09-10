@@ -24,6 +24,9 @@ public class ActionFactory {
         if (action.equalsIgnoreCase("add_car")) {
             command = new AddCarAction();
         }
+        if (action.equalsIgnoreCase("save_car")) {
+            command = new SaveCarAction();
+        }
 
         return command;
     }

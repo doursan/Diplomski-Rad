@@ -16,7 +16,7 @@ import org.mapstruct.Mapping;
  */
 @Mapper
 public interface CarBrandModelMapper {
-    
+    @Mapping(target = "carBrand", ignore = true)
     CarBrandModelDTO carBrandModelEntityToDto(CarBrandModelEntity carBrandModel);
     
     @Mapping(target = "carList", ignore = true)
