@@ -9,21 +9,20 @@ import com.wdyc.njtws.dao.CarBrandDAO;
 import com.wdyc.njtws.dao.CarDAO;
 import com.wdyc.njtws.dao.EngineDAO;
 import com.wdyc.njtws.domen.CarBrandEntity;
-import com.wdyc.njtws.domen.CarBrandsEngines;
 import com.wdyc.njtws.domen.CarEntity;
 import com.wdyc.njtws.domen.EngineEntity;
-import com.wdyc.njtws.dto.CarBrandsEnginesDTO;
+import com.wdyc.njtws.dto.CarBrandDTO;
 import com.wdyc.njtws.dto.CarDTO;
+import com.wdyc.njtws.dto.EngineDTO;
 import com.wdyc.njtws.mapstruct.CarBrandMapper;
 import com.wdyc.njtws.mapstruct.CarBrandModelMapper;
-import com.wdyc.njtws.mapstruct.CarBrandsEnginesMapper;
 import com.wdyc.njtws.mapstruct.CarMapper;
 import com.wdyc.njtws.mapstruct.EngineMapper;
 import com.wdyc.njtws.mapstruct.impl.CarBrandMapperImpl;
 import com.wdyc.njtws.mapstruct.impl.CarBrandModelMapperImpl;
-import com.wdyc.njtws.mapstruct.impl.CarBrandsEnginesMapperImpl;
 import com.wdyc.njtws.mapstruct.impl.CarMapperImpl;
 import com.wdyc.njtws.mapstruct.impl.EngineMapperImpl;
+import java.util.ArrayList;
 import java.util.List;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
@@ -40,21 +39,36 @@ public class CarWS {
     CarBrandMapper carBrandMapper = new CarBrandMapperImpl();
     CarBrandModelMapper carBrandModelMapper = new CarBrandModelMapperImpl();
     EngineMapper engineMapper = new EngineMapperImpl();
-    CarBrandsEnginesMapper cbeMapper= new CarBrandsEnginesMapperImpl();
     
     CarBrandDAO carBrandDao = new CarBrandDAO();
     EngineDAO engineDao = new EngineDAO();
     CarDAO carDao = new CarDAO();
     
+   
     @WebMethod(operationName = "addCar")
-    public CarBrandsEnginesDTO addCar() throws Exception {
+    public CarDTO addCar() throws Exception {
         System.out.println("Calling add car from CarWS");
         
         List<CarBrandEntity> retrievedCarBrands = carBrandDao.retrieveAllCarBrands();
-        List<EngineEntity> retrievedEngines = engineDao.retrieveAllEngines();        
-        CarBrandsEngines cbe = new CarBrandsEngines(retrievedCarBrands, retrievedEngines);
-        CarBrandsEnginesDTO cbeDto = cbeMapper.carBrandsEnginesToDto(cbe);
-        return cbeDto;
+        List<EngineEntity> retrievedEngines = engineDao.retrieveAllEngines();  
+        List<CarBrandDTO> convertedBrands = new ArrayList<>();
+        List<EngineDTO> convertedEngines = new ArrayList<>();
+        
+        for(CarBrandEntity brand : retrievedCarBrands) {
+            CarBrandDTO brandDto = carBrandMapper.carBrandEntityToDto(brand);
+            convertedBrands.add(brandDto);
+        }
+        
+        for(EngineEntity engine : retrievedEngines) {
+            EngineDTO engineDto = engineMapper.engineEntityToDto(engine);
+            convertedEngines.add(engineDto);
+        }
+        
+        CarDTO car = new CarDTO();
+        car.setBrands(convertedBrands);
+        car.setEngines(convertedEngines);
+        
+        return car;
         
     }
     

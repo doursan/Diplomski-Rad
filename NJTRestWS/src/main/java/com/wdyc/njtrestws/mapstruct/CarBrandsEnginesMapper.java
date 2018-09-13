@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.wdyc.njtws.mapstruct;
+package com.wdyc.njtrestws.mapstruct;
 
-import com.wdyc.njtws.domen.CarBrandsEngines;
-import com.wdyc.njtws.dto.CarBrandsEnginesDTO;
+import com.wdyc.njtrestws.domen.CarBrandsEngines;
+import com.wdyc.njtrestws.dto.CarBrandsEnginesDTO;
 import org.mapstruct.Mapper;
 
 /**

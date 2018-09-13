@@ -35,7 +35,7 @@ public class ClientEntity extends UserEntity {
     @Size(max = 13)
     @Column(name = "jmbg")
     private String jmbg;
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "owner")
     private List<CarEntity> carList;
 
     

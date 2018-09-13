@@ -9,7 +9,7 @@ import com.wdyc.njtws.services.CarBrandDTO;
 import javax.servlet.http.HttpServletRequest;
 import com.wdyc.njtws.services.CarWS_Service;
 import com.wdyc.njtws.services.CarWS;
-import com.wdyc.njtws.services.CarBrandsEnginesDTO;
+import com.wdyc.njtws.services.CarDTO;
 import com.wdyc.njtws.services.EngineDTO;
 import java.util.List;
 /**
@@ -25,8 +25,8 @@ public class AddCarAction extends AbstractAction {
             CarWS_Service service = new CarWS_Service();
             CarWS port = service.getCarWSPort();
             // TODO process result here
-            CarBrandsEnginesDTO result = port.addCar();
-            List<CarBrandDTO> carBrands = result.getCarBrands();
+            CarDTO result = port.addCar();
+            List<CarBrandDTO> carBrands = result.getBrands();
             List<EngineDTO> engines = result.getEngines();
             System.out.println("Car brands and engines returned. There are "+ carBrands.size() + " car brands and " + engines.size() + " engines.");
             request.setAttribute("car_brands", carBrands);

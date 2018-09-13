@@ -14,11 +14,11 @@ import org.mapstruct.Mapping;
  *
  * @author Dusan
  */
-@Mapper
+@Mapper(uses = ModelEngineMapper.class)
 public interface CarBrandModelMapper {
+    
     @Mapping(target = "carBrand", ignore = true)
     CarBrandModelDTO carBrandModelEntityToDto(CarBrandModelEntity carBrandModel);
     
-    @Mapping(target = "carList", ignore = true)
     CarBrandModelEntity carBrandModelDtoToEntity(CarBrandModelDTO carBrandModel);
 }

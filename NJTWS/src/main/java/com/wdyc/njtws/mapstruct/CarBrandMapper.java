@@ -8,7 +8,6 @@ package com.wdyc.njtws.mapstruct;
 import com.wdyc.njtws.domen.CarBrandEntity;
 import com.wdyc.njtws.dto.CarBrandDTO;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 /**
  *

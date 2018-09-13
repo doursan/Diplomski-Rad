@@ -6,46 +6,70 @@
 package com.wdyc.njtws.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
  * @author Dusan
  */
 public class CarDTO implements Serializable {
-    
+
+    private String id;
     private String vin;
     private String registration;
     private String productionYear;
-    private ClientDTO client;
-    private EngineDTO engine;
-    private CarBrandModelDTO brandModel;
+    private ClientDTO owner;
+    private ModelEngineDTO modelEngine;
+    private List<EngineDTO> engines;
+    private List<CarBrandDTO> brands;
 
     public CarDTO() {
     }
 
-    public CarDTO(String registration, String productionYear, ClientDTO client, EngineDTO engine, CarBrandModelDTO brandModel) {
-        this.registration = registration;
-        this.productionYear = productionYear;
-        this.client = client;
-        this.engine = engine;
-        this.brandModel = brandModel;
-    }
-
-    public CarDTO(String vin, String registration, String productionYear, ClientDTO client, EngineDTO engine, CarBrandModelDTO brandModel) {
+    public CarDTO(String vin, String registration, String productionYear, ClientDTO owner, ModelEngineDTO modelEngine) {
         this.vin = vin;
         this.registration = registration;
         this.productionYear = productionYear;
-        this.client = client;
-        this.engine = engine;
-        this.brandModel = brandModel;
+        this.owner = owner;
+        this.modelEngine = modelEngine;
     }
 
-    public CarBrandModelDTO getBrandModel() {
-        return brandModel;
+    public CarDTO(String id, String vin, String registration, String productionYear, ClientDTO owner, ModelEngineDTO modelEngine) {
+        this.id = id;
+        this.vin = vin;
+        this.registration = registration;
+        this.productionYear = productionYear;
+        this.owner = owner;
+        this.modelEngine = modelEngine;
     }
 
-    public void setBrandModel(CarBrandModelDTO brandModel) {
-        this.brandModel = brandModel;
+    public CarDTO(String vin, String registration, String productionYear, ClientDTO owner, ModelEngineDTO modelEngine, List<EngineDTO> engines, List<CarBrandDTO> brands) {
+        this.vin = vin;
+        this.registration = registration;
+        this.productionYear = productionYear;
+        this.owner = owner;
+        this.modelEngine = modelEngine;
+        this.engines = engines;
+        this.brands = brands;
+    }
+
+    public CarDTO(String id, String vin, String registration, String productionYear, ClientDTO owner, ModelEngineDTO modelEngine, List<EngineDTO> engines, List<CarBrandDTO> brands) {
+        this.id = id;
+        this.vin = vin;
+        this.registration = registration;
+        this.productionYear = productionYear;
+        this.owner = owner;
+        this.modelEngine = modelEngine;
+        this.engines = engines;
+        this.brands = brands;
+    }
+    
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getVin() {
@@ -72,19 +96,35 @@ public class CarDTO implements Serializable {
         this.productionYear = productionYear;
     }
 
-    public ClientDTO getClient() {
-        return client;
+    public ClientDTO getOwner() {
+        return owner;
     }
 
-    public void setClient(ClientDTO client) {
-        this.client = client;
+    public void setOwner(ClientDTO owner) {
+        this.owner = owner;
     }
 
-    public EngineDTO getEngine() {
-        return engine;
+    public ModelEngineDTO getModelEngine() {
+        return modelEngine;
     }
 
-    public void setEngine(EngineDTO engine) {
-        this.engine = engine;
+    public void setModelEngine(ModelEngineDTO modelEngine) {
+        this.modelEngine = modelEngine;
+    }
+
+    public List<EngineDTO> getEngines() {
+        return engines;
+    }
+
+    public void setEngines(List<EngineDTO> engines) {
+        this.engines = engines;
+    }
+
+    public List<CarBrandDTO> getBrands() {
+        return brands;
+    }
+
+    public void setBrands(List<CarBrandDTO> brands) {
+        this.brands = brands;
     }
 }

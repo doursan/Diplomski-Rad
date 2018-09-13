@@ -1,12 +1,12 @@
-package com.wdyc.njtws.mapstruct.impl;
+package com.wdyc.njtrestws.mapstruct.impl;
 
-import com.wdyc.njtws.mapstruct.*;
-import com.wdyc.njtws.domen.CarBrandEntity;
-import com.wdyc.njtws.domen.CarBrandsEngines;
-import com.wdyc.njtws.domen.EngineEntity;
-import com.wdyc.njtws.dto.CarBrandDTO;
-import com.wdyc.njtws.dto.CarBrandsEnginesDTO;
-import com.wdyc.njtws.dto.EngineDTO;
+import com.wdyc.njtrestws.mapstruct.*;
+import com.wdyc.njtrestws.domen.CarBrandEntity;
+import com.wdyc.njtrestws.domen.CarBrandsEngines;
+import com.wdyc.njtrestws.domen.EngineEntity;
+import com.wdyc.njtrestws.dto.CarBrandDTO;
+import com.wdyc.njtrestws.dto.CarBrandsEnginesDTO;
+import com.wdyc.njtrestws.dto.EngineDTO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
@@ -14,7 +14,7 @@ import org.mapstruct.factory.Mappers;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2018-09-10T00:02:06+0200",
+    date = "2018-09-12T18:38:26+0200",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_111 (Oracle Corporation)"
 )
 public class CarBrandsEnginesMapperImpl implements CarBrandsEnginesMapper {

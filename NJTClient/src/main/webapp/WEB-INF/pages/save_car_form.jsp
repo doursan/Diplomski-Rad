@@ -14,14 +14,33 @@
             function populateModels(brandId) {
                 var select = document.getElementById("car_models");
                 select.options.length = 1;
+            <c:forEach var="brand" items="${car_brands}">
+                var id = <c:out value="${brand.getId()}"/>;
+                if (id == brandId) {
+                <c:forEach var="model" items="${brand.getCarBrandModelList()}">
+                    select.options[select.options.length] = new Option("${model.getName()}", "${model.getId()}");
+                </c:forEach>
+                }
+            </c:forEach>
+            }
+            function populateEngines(modelId) {
+                var brandSelect = document.getElementById("car_brands");
+                var brandId = brandSelect.options[brandSelect.selectedIndex].value;
+                var select = document.getElementById("engines");
+                select.options.length = 1;
                 <c:forEach var="brand" items="${car_brands}">
-                    var id = <c:out value="${brand.getId()}"/>;
-                    if (id == brandId) {
+                    var bId = <c:out value="${brand.getId()}"/>;
+                    if (bId == brandId) {
                         <c:forEach var="model" items="${brand.getCarBrandModelList()}">
-                            select.options[select.options.length] = new Option("${model.getName()}", "${model.getId()}");
+                            var id = <c:out value="${model.getId()}"/>;
+                            if (id == modelId) {
+                                <c:forEach var="modelEngine" items="${model.getModelEngineList()}">
+                                    select.options[select.options.length] = new Option("${modelEngine.getEngine().getName()}", "${modelEngine.getId()}");
+                                </c:forEach>
+                            }
                         </c:forEach>
                     }
-                </c:forEach>
+            </c:forEach>
             }
         </script>
     </head>
@@ -31,6 +50,7 @@
                 <div class="col-md-12">
                     <form class="save_car" action="/NJTClient/controller" method="POST">
                         <input type="hidden" name="action" value="save_car" />
+                        <input type="hidden" name="model_engine" value="" />
                         <div class="form-row align-items-center justify-content-center">
                             <div class="form-group col-md-5">
                                 <label for="vin">VIN</label>
@@ -47,9 +67,9 @@
                             <div class="form-group col-md-2">
                                 <label for="car_brands">Car Brand</label> 
                                 <select class="form-control sacuvaj" name="car_brands" id="car_brands" onchange="populateModels(this.value)"> 
-                                    <option selected disabled>Select brand</option>
-                                    <c:forEach var="brand" items="${car_brands}">
-                                        <option value="${brand.getId()}">${brand.getName()}</option>                                        
+                                    <option selected>Select brand</option>
+                                    <c:forEach var="brandOption" items="${car_brands}">
+                                        <option value="${brandOption.getId()}">${brandOption.getName()}</option>                                        
                                     </c:forEach>
                                 </select>
                             </div>
@@ -57,8 +77,8 @@
                         <div class="form-row align-items-center justify-content-center">
                             <div class="form-group col-md-2">
                                 <label for="production_year">Car Model</label> 
-                                <select class="form-control sacuvaj" name="car_models" id="car_models" > 
-                                    <option selected disabled>Select model</option>
+                                <select class="form-control sacuvaj" name="car_models" id="car_models" onchange="populateEngines(this.value)"> 
+                                    <option selected>Select model</option>
                                 </select>
                             </div>
                         </div>  
@@ -66,10 +86,7 @@
                             <div class="form-group col-md-2">
                                 <label for="engines">Engine</label> 
                                 <select class="form-control sacuvaj" name="engines" id="engines"> 
-                                    <option selected disabled>Select engine</option>
-                                    <c:forEach var="engine" items="${engines}">
-                                        <option value="${engine.getId()}">${engine.getName()}</option>                                        
-                                    </c:forEach>
+                                    <option selected>Select engine</option>                                    
                                 </select>
                             </div>
                         </div>

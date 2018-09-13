@@ -3,18 +3,23 @@ package com.wdyc.njtws.mapstruct.impl;
 import com.wdyc.njtws.mapstruct.*;
 import com.wdyc.njtws.domen.CarBrandEntity;
 import com.wdyc.njtws.domen.CarBrandModelEntity;
+import com.wdyc.njtws.domen.ModelEngineEntity;
 import com.wdyc.njtws.dto.CarBrandDTO;
 import com.wdyc.njtws.dto.CarBrandModelDTO;
+import com.wdyc.njtws.dto.ModelEngineDTO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
+import org.mapstruct.factory.Mappers;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2018-09-10T00:02:06+0200",
+    date = "2018-09-13T17:25:15+0200",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_111 (Oracle Corporation)"
 )
 public class CarBrandModelMapperImpl implements CarBrandModelMapper {
+
+    private final ModelEngineMapper modelEngineMapper = Mappers.getMapper( ModelEngineMapper.class );
 
     @Override
     public CarBrandModelDTO carBrandModelEntityToDto(CarBrandModelEntity carBrandModel) {
@@ -24,7 +29,6 @@ public class CarBrandModelMapperImpl implements CarBrandModelMapper {
 
         CarBrandModelDTO carBrandModelDTO = new CarBrandModelDTO();
 
-        carBrandModelDTO.setCarBrand( carBrandEntityToCarBrandDTO( carBrandModel.getCarBrand() ) );
         if ( carBrandModel.getId() != null ) {
             carBrandModelDTO.setId( String.valueOf( carBrandModel.getId() ) );
         }
@@ -35,6 +39,7 @@ public class CarBrandModelMapperImpl implements CarBrandModelMapper {
         if ( carBrandModel.getProductionEnd() != null ) {
             carBrandModelDTO.setProductionEnd( String.valueOf( carBrandModel.getProductionEnd() ) );
         }
+        carBrandModelDTO.setModelEngineList( modelEngineEntityListToModelEngineDTOList( carBrandModel.getModelEngineList() ) );
 
         return carBrandModelDTO;
     }
@@ -58,38 +63,22 @@ public class CarBrandModelMapperImpl implements CarBrandModelMapper {
             carBrandModelEntity.setProductionEnd( Short.parseShort( carBrandModel.getProductionEnd() ) );
         }
         carBrandModelEntity.setCarBrand( carBrandDTOToCarBrandEntity( carBrandModel.getCarBrand() ) );
+        carBrandModelEntity.setModelEngineList( modelEngineDTOListToModelEngineEntityList( carBrandModel.getModelEngineList() ) );
 
         return carBrandModelEntity;
     }
 
-    protected List<CarBrandModelDTO> carBrandModelEntityListToCarBrandModelDTOList(List<CarBrandModelEntity> list) {
+    protected List<ModelEngineDTO> modelEngineEntityListToModelEngineDTOList(List<ModelEngineEntity> list) {
         if ( list == null ) {
             return null;
         }
 
-        List<CarBrandModelDTO> list1 = new ArrayList<CarBrandModelDTO>( list.size() );
-        for ( CarBrandModelEntity carBrandModelEntity : list ) {
-            list1.add( carBrandModelEntityToDto( carBrandModelEntity ) );
+        List<ModelEngineDTO> list1 = new ArrayList<ModelEngineDTO>( list.size() );
+        for ( ModelEngineEntity modelEngineEntity : list ) {
+            list1.add( modelEngineMapper.modelEngineEntityToDto( modelEngineEntity ) );
         }
 
         return list1;
-    }
-
-    protected CarBrandDTO carBrandEntityToCarBrandDTO(CarBrandEntity carBrandEntity) {
-        if ( carBrandEntity == null ) {
-            return null;
-        }
-
-        CarBrandDTO carBrandDTO = new CarBrandDTO();
-
-        carBrandDTO.setCarBrandModelList( carBrandModelEntityListToCarBrandModelDTOList( carBrandEntity.getCarBrandModelList() ) );
-        if ( carBrandEntity.getId() != null ) {
-            carBrandDTO.setId( String.valueOf( carBrandEntity.getId() ) );
-        }
-        carBrandDTO.setName( carBrandEntity.getName() );
-        carBrandDTO.setCountry( carBrandEntity.getCountry() );
-
-        return carBrandDTO;
     }
 
     protected List<CarBrandModelEntity> carBrandModelDTOListToCarBrandModelEntityList(List<CarBrandModelDTO> list) {
@@ -120,5 +109,18 @@ public class CarBrandModelMapperImpl implements CarBrandModelMapper {
         carBrandEntity.setCarBrandModelList( carBrandModelDTOListToCarBrandModelEntityList( carBrandDTO.getCarBrandModelList() ) );
 
         return carBrandEntity;
+    }
+
+    protected List<ModelEngineEntity> modelEngineDTOListToModelEngineEntityList(List<ModelEngineDTO> list) {
+        if ( list == null ) {
+            return null;
+        }
+
+        List<ModelEngineEntity> list1 = new ArrayList<ModelEngineEntity>( list.size() );
+        for ( ModelEngineDTO modelEngineDTO : list ) {
+            list1.add( modelEngineMapper.modelEngineDtoToEntity( modelEngineDTO ) );
+        }
+
+        return list1;
     }
 }

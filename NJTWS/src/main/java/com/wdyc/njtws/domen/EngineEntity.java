@@ -57,7 +57,7 @@ public class EngineEntity implements Serializable {
     @Column(name = "volume")
     private Integer volume;
     @OneToMany(mappedBy = "engine")
-    private List<CarEntity> carList;
+    private List<ModelEngineEntity> modelEngineList;
 
     public EngineEntity() {
     }
@@ -112,16 +112,7 @@ public class EngineEntity implements Serializable {
 
     public void setVolume(Integer volume) {
         this.volume = volume;
-    }
-
-    @XmlTransient
-    public List<CarEntity> getCarEntityList() {
-        return carList;
-    }
-
-    public void setCarEntityList(List<CarEntity> carEntityList) {
-        this.carList = carEntityList;
-    }
+    }   
 
     @Override
     public int hashCode() {
@@ -147,5 +138,14 @@ public class EngineEntity implements Serializable {
     public String toString() {
         return "com.wdyc.njtws.domen.EngineEntity[ id=" + id + " ]";
     }
-    
+
+    @XmlTransient
+    public List<ModelEngineEntity> getModelEngineList() {
+        return modelEngineList;
+    }
+
+    public void setModelEngineList(List<ModelEngineEntity> modelEngineList) {
+        this.modelEngineList = modelEngineList;
+    }
+
 }

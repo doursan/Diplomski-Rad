@@ -9,6 +9,7 @@ import com.wdyc.njtws.domen.CarEntity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.validation.ConstraintViolationException;
 
 /**
  *
@@ -27,8 +28,6 @@ public class CarDAO {
             em.getTransaction().commit();
             return car;
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
             throw new Exception("Greska prilikom cuvanja automobila! Automobil vec postoji!");
         } finally {
             em.close();

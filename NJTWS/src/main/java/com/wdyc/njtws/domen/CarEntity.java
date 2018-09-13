@@ -9,6 +9,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -28,6 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "CarEntity.findAll", query = "SELECT c FROM CarEntity c")
+    , @NamedQuery(name = "CarEntity.findById", query = "SELECT c FROM CarEntity c WHERE c.id = :id")
     , @NamedQuery(name = "CarEntity.findByVin", query = "SELECT c FROM CarEntity c WHERE c.vin = :vin")
     , @NamedQuery(name = "CarEntity.findByRegistration", query = "SELECT c FROM CarEntity c WHERE c.registration = :registration")
     , @NamedQuery(name = "CarEntity.findByProductionYear", query = "SELECT c FROM CarEntity c WHERE c.productionYear = :productionYear")})
@@ -35,31 +38,65 @@ public class CarEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id")
+    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 17)
     @Column(name = "vin")
     private String vin;
-    @Size(max = 15)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 15)
     @Column(name = "registration")
     private String registration;
     @Column(name = "production_year")
     private Short productionYear;
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     @ManyToOne
-    private ClientEntity client;
-    @JoinColumn(name = "engine_id", referencedColumnName = "id")
+    private ClientEntity owner;
+    @JoinColumn(name = "model_engine_id", referencedColumnName = "id")
     @ManyToOne
-    private EngineEntity engine;
-    @JoinColumn(name = "brand_model_id", referencedColumnName = "id")
-    @ManyToOne
-    private CarBrandModelEntity brandModel;
+    private ModelEngineEntity modelEngine;
 
     public CarEntity() {
     }
 
-    public CarEntity(String vin) {
+    public CarEntity(Integer id) {
+        this.id = id;
+    }
+
+    public CarEntity(Integer id, String vin, String registration) {
+        this.id = id;
         this.vin = vin;
+        this.registration = registration;
+    }
+
+    public CarEntity(String vin, String registration, Short productionYear, ClientEntity owner, ModelEngineEntity modelEngine) {
+        this.vin = vin;
+        this.registration = registration;
+        this.productionYear = productionYear;
+        this.owner = owner;
+        this.modelEngine = modelEngine;
+    }
+
+    public CarEntity(Integer id, String vin, String registration, Short productionYear, ClientEntity owner, ModelEngineEntity modelEngine) {
+        this.id = id;
+        this.vin = vin;
+        this.registration = registration;
+        this.productionYear = productionYear;
+        this.owner = owner;
+        this.modelEngine = modelEngine;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getVin() {
@@ -86,34 +123,10 @@ public class CarEntity implements Serializable {
         this.productionYear = productionYear;
     }
 
-    public ClientEntity getClient() {
-        return client;
-    }
-
-    public void setClient(ClientEntity client) {
-        this.client = client;
-    }
-
-    public EngineEntity getEngine() {
-        return engine;
-    }
-
-    public void setEngine(EngineEntity engine) {
-        this.engine = engine;
-    }
-
-    public CarBrandModelEntity getBrandModel() {
-        return brandModel;
-    }
-
-    public void setBrandModel(CarBrandModelEntity brandModel) {
-        this.brandModel = brandModel;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (vin != null ? vin.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -124,7 +137,7 @@ public class CarEntity implements Serializable {
             return false;
         }
         CarEntity other = (CarEntity) object;
-        if ((this.vin == null && other.vin != null) || (this.vin != null && !this.vin.equals(other.vin))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -132,7 +145,23 @@ public class CarEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wdyc.njtws.domen.CarEntity[ vin=" + vin + " ]";
+        return "com.wdyc.njtws.domen.CarEntity[ id=" + id + " ]";
     }
-    
+
+    public ClientEntity getOwner() {
+        return owner;
+    }
+
+    public void setOwner(ClientEntity owner) {
+        this.owner = owner;
+    }
+
+    public ModelEngineEntity getModelEngine() {
+        return modelEngine;
+    }
+
+    public void setModelEngine(ModelEngineEntity modelEngine) {
+        this.modelEngine = modelEngine;
+    }
+
 }

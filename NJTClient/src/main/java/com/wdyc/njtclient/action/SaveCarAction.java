@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import com.wdyc.njtws.services.CarWS_Service;
 import com.wdyc.njtws.services.CarWS;
+import com.wdyc.njtws.services.ModelEngineDTO;
 import com.wdyc.njtws.services.UserDTO;
 
 /**
@@ -28,7 +29,7 @@ public class SaveCarAction extends AbstractAction {
         String registration = request.getParameter("registration");
         String carBrandId = request.getParameter("car_brands");
         String brandModelId = request.getParameter("car_models");
-        String engineId = request.getParameter("engines");
+        String modelEngineId = request.getParameter("engines");
         String productionYear = request.getParameter("production_year");
         
         HttpSession session = request.getSession();
@@ -36,21 +37,13 @@ public class SaveCarAction extends AbstractAction {
         
         ClientDTO client = new ClientDTO();
         client.setId(clientId);
-        
-        CarBrandDTO brand = new CarBrandDTO();
-        brand.setId(carBrandId);
-        
-        CarBrandModelDTO model = new CarBrandModelDTO();
-        model.setId(brandModelId);
-        model.setCarBrand(brand);
-        
-        EngineDTO engine = new EngineDTO();
-        engine.setId(engineId);
+     
+        ModelEngineDTO modelEngine = new ModelEngineDTO();
+        modelEngine.setId(modelEngineId);
         
         CarDTO car = new CarDTO();
-        car.setBrandModel(model);
-        car.setClient(client);
-        car.setEngine(engine);
+        car.setOwner(client);
+        car.setModelEngine(modelEngine);
         car.setProductionYear(productionYear);
         car.setRegistration(registration);
         car.setVin(vin);
