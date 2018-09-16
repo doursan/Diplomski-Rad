@@ -18,7 +18,7 @@ import javax.persistence.Persistence;
 public class EngineDAO {
 
     public List<EngineEntity> retrieveAllEngines() throws Exception {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.wdyc_NJTWS_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.wdyc_NJTRestWS_war_1.0-SNAPSHOTPU");
         EntityManager em = emf.createEntityManager();
         try {
             List<EngineEntity> engines = em.createNamedQuery("EngineEntity.findAll", EngineEntity.class).getResultList();

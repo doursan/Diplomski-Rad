@@ -6,37 +6,41 @@
 package com.wdyc.njtrestws.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
  * @author Dusan
  */
 public class CarBrandModelDTO implements Serializable {
-    
+
     private String id;
     private String name;
     private String productionBegan;
     private String productionEnd;
     private CarBrandDTO carBrand;
+    private List<ModelEngineDTO> modelEngineList;
 
     public CarBrandModelDTO() {
     }
 
-    public CarBrandModelDTO(String name, String productionBegan, String productionEnd, CarBrandDTO carBrand) {
+    public CarBrandModelDTO(String name, String productionBegan, String productionEnd, CarBrandDTO carBrand, List<ModelEngineDTO> modelEngineList) {
         this.name = name;
         this.productionBegan = productionBegan;
         this.productionEnd = productionEnd;
         this.carBrand = carBrand;
+        this.modelEngineList = modelEngineList;
     }
 
-    public CarBrandModelDTO(String id, String name, String productionBegan, String productionEnd, CarBrandDTO carBrand) {
+    public CarBrandModelDTO(String id, String name, String productionBegan, String productionEnd, CarBrandDTO carBrand, List<ModelEngineDTO> modelEngineList) {
         this.id = id;
         this.name = name;
         this.productionBegan = productionBegan;
         this.productionEnd = productionEnd;
         this.carBrand = carBrand;
+        this.modelEngineList = modelEngineList;
     }
-
+    
     public CarBrandDTO getCarBrand() {
         return carBrand;
     }
@@ -75,5 +79,13 @@ public class CarBrandModelDTO implements Serializable {
 
     public void setProductionEnd(String productionEnd) {
         this.productionEnd = productionEnd;
+    }
+
+    public List<ModelEngineDTO> getModelEngineList() {
+        return modelEngineList;
+    }
+
+    public void setModelEngineList(List<ModelEngineDTO> modelEngineList) {
+        this.modelEngineList = modelEngineList;
     }
 }

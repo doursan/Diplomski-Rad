@@ -4,14 +4,12 @@ import com.wdyc.njtrestws.mapstruct.*;
 import com.wdyc.njtrestws.domen.UserEntity;
 import com.wdyc.njtrestws.dto.UserDTO;
 import javax.annotation.Generated;
-import javax.enterprise.context.ApplicationScoped;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2018-09-12T18:38:26+0200",
+    date = "2018-09-16T02:12:08+0200",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_111 (Oracle Corporation)"
 )
-@ApplicationScoped
 public class UserMapperImpl implements UserMapper {
 
     @Override
@@ -28,7 +26,7 @@ public class UserMapperImpl implements UserMapper {
         userEntity.setUsername( user.getUsername() );
         userEntity.setPassword( user.getPassword() );
         userEntity.setEmail( user.getEmail() );
-        userEntity.setType( user.getType() );
+        userEntity.setTip( user.getTip() );
 
         return userEntity;
     }
@@ -47,7 +45,7 @@ public class UserMapperImpl implements UserMapper {
         }
         userDTO.setUsername( user.getUsername() );
         userDTO.setEmail( user.getEmail() );
-        userDTO.setType( user.getType() );
+        userDTO.setTip( user.getTip() );
 
         return userDTO;
     }

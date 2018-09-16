@@ -7,7 +7,7 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2018-09-12T18:38:25+0200",
+    date = "2018-09-16T02:12:08+0200",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_111 (Oracle Corporation)"
 )
 public class ShopMapperImpl implements ShopMapper {
@@ -26,7 +26,7 @@ public class ShopMapperImpl implements ShopMapper {
         }
         shopDTO.setUsername( shop.getUsername() );
         shopDTO.setEmail( shop.getEmail() );
-        shopDTO.setType( shop.getType() );
+        shopDTO.setTip( shop.getTip() );
         shopDTO.setMaticni( shop.getMaticni() );
         shopDTO.setNaziv( shop.getNaziv() );
         shopDTO.setPib( shop.getPib() );
@@ -48,7 +48,7 @@ public class ShopMapperImpl implements ShopMapper {
         shopEntity.setUsername( shop.getUsername() );
         shopEntity.setPassword( shop.getPassword() );
         shopEntity.setEmail( shop.getEmail() );
-        shopEntity.setType( shop.getType() );
+        shopEntity.setTip( shop.getTip() );
         shopEntity.setNaziv( shop.getNaziv() );
         shopEntity.setPib( shop.getPib() );
         shopEntity.setMaticni( shop.getMaticni() );

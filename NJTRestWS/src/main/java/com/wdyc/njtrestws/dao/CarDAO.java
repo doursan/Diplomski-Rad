@@ -19,7 +19,7 @@ public class CarDAO {
     private static final String something = "";
 
     public CarEntity saveCar(CarEntity car) throws Exception {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.wdyc_NJTWS_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.wdyc_NJTRestWS_war_1.0-SNAPSHOTPU");
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -27,8 +27,6 @@ public class CarDAO {
             em.getTransaction().commit();
             return car;
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
             throw new Exception("Greska prilikom cuvanja automobila! Automobil vec postoji!");
         } finally {
             em.close();

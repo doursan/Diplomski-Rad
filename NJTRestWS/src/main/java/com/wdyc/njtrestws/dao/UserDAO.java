@@ -15,12 +15,12 @@ import javax.persistence.Persistence;
  * @author Dusan
  */
 public class UserDAO {
-
-    public UserEntity findUser(UserEntity user) throws Exception {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.wdyc_NJTWS_war_1.0-SNAPSHOTPU");
+    
+    public UserEntity retrieveByUsername(String username) throws Exception {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.wdyc_NJTRestWS_war_1.0-SNAPSHOTPU");
         EntityManager em = emf.createEntityManager();
         try {
-            UserEntity retrievedUser = (UserEntity) em.createNamedQuery("UserEntity.findByUsername", UserEntity.class).setParameter("username", user.getUsername()).getSingleResult();
+            UserEntity retrievedUser = (UserEntity) em.createNamedQuery("UserEntity.findByUsername", UserEntity.class).setParameter("username",username).getSingleResult();
             System.out.println(retrievedUser);
             return retrievedUser;
         } catch (Exception e) {
@@ -32,7 +32,7 @@ public class UserDAO {
     }
 
     public UserEntity registerUser(UserEntity user) throws Exception {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.wdyc_NJTWS_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.wdyc_NJTRestWS_war_1.0-SNAPSHOTPU");
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();

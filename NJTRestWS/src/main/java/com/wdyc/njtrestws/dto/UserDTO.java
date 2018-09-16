@@ -6,28 +6,30 @@
 package com.wdyc.njtrestws.dto;
 
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Dusan
  */
+@XmlRootElement
 public class UserDTO implements Serializable {
     
     private String id;
     private String username;
     private String password;
     private String email;
-    private String type;
+    private String tip;
 
     public UserDTO() {
     }
 
-    public UserDTO(String id, String username, String password, String email, String type) {
+    public UserDTO(String id, String username, String password, String email, String tip) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.type = type;
+        this.tip = tip;
     }
     
     public UserDTO(String username, String password) {
@@ -67,12 +69,12 @@ public class UserDTO implements Serializable {
         this.email = email;
     }
 
-    public String getType() {
-        return type;
+    public String getTip() {
+        return tip;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTip(String tip) {
+        this.tip = tip;
     }
     
     

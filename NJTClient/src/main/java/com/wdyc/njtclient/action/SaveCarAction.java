@@ -5,17 +5,15 @@
  */
 package com.wdyc.njtclient.action;
 
-import com.wdyc.njtws.services.CarBrandDTO;
-import com.wdyc.njtws.services.CarBrandModelDTO;
-import com.wdyc.njtws.services.CarDTO;
-import com.wdyc.njtws.services.ClientDTO;
-import com.wdyc.njtws.services.EngineDTO;
+import com.wdyc.njtclient.constants.Constants;
+import com.wdyc.njtclient.dto.CarDTO;
+import com.wdyc.njtclient.dto.ClientDTO;
+import com.wdyc.njtclient.dto.ModelEngineDTO;
+import com.wdyc.njtclient.dto.UserDTO;
+import com.wdyc.njtclient.rest.ws.RestWSClient;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import com.wdyc.njtws.services.CarWS_Service;
-import com.wdyc.njtws.services.CarWS;
-import com.wdyc.njtws.services.ModelEngineDTO;
-import com.wdyc.njtws.services.UserDTO;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -31,33 +29,33 @@ public class SaveCarAction extends AbstractAction {
         String brandModelId = request.getParameter("car_models");
         String modelEngineId = request.getParameter("engines");
         String productionYear = request.getParameter("production_year");
-        
+
         HttpSession session = request.getSession();
         String clientId = ((UserDTO) session.getAttribute("logged_user")).getId();
-        
+
         ClientDTO client = new ClientDTO();
         client.setId(clientId);
-     
+
         ModelEngineDTO modelEngine = new ModelEngineDTO();
         modelEngine.setId(modelEngineId);
-        
+
         CarDTO car = new CarDTO();
         car.setOwner(client);
         car.setModelEngine(modelEngine);
         car.setProductionYear(productionYear);
         car.setRegistration(registration);
         car.setVin(vin);
-        
-        try { // Call Web Service Operation
-            CarWS_Service service = new CarWS_Service();
-            CarWS port = service.getCarWSPort();
-            CarDTO result = port.saveCar(car);
-            System.out.println("Result = "+result.getRegistration());
+
+        RestWSClient.getInstance().setTarget(Constants.CAR_PATH);
+        Response response = RestWSClient.getInstance().create_JSON(car);
+        if (response.getStatus() == 201) {
+            CarDTO returnedCar = response.readEntity(CarDTO.class);
+
             request.setAttribute("message", "You have successfully saved your car");
-            return "index";
-        } catch (Exception ex) {
-            request.setAttribute("message", ex.getMessage());
-            return "index";
+        } else {
+            String errorMessage = response.readEntity(String.class);
+            request.setAttribute("message", errorMessage);
         }
+        return "index";            
     }
 }

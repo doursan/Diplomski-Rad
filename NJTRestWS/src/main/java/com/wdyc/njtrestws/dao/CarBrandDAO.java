@@ -18,7 +18,7 @@ import javax.persistence.Persistence;
 public class CarBrandDAO {
 
     public List<CarBrandEntity> retrieveAllCarBrands() throws Exception {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.wdyc_NJTWS_war_1.0-SNAPSHOTPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.wdyc_NJTRestWS_war_1.0-SNAPSHOTPU");
         EntityManager em = emf.createEntityManager();
         try {
             List<CarBrandEntity> carBrands = em.createNamedQuery("CarBrandEntity.findAll", CarBrandEntity.class).getResultList();

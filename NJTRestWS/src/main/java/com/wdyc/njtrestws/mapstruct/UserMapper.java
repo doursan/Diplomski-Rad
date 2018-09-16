@@ -13,7 +13,7 @@ import org.mapstruct.Mapper;
  *
  * @author Dusan
  */
-@Mapper(componentModel = "cdi")
+@Mapper
 public interface UserMapper {
     
     UserEntity userDtoToEntity(UserDTO user);

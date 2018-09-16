@@ -5,10 +5,13 @@
  */
 package com.wdyc.njtrestws.dto;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  *
  * @author Dusan
  */
+@XmlRootElement
 public class ShopDTO extends UserDTO {
 
     private String naziv;

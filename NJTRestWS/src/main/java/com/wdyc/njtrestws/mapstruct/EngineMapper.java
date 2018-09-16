@@ -18,6 +18,6 @@ import org.mapstruct.Mapping;
 public interface EngineMapper {
     
     EngineDTO engineEntityToDto(EngineEntity engine);
-    @Mapping(target = "carEntityList", ignore = true)
+    @Mapping(target = "modelEngineList", ignore = true)
     EngineEntity engineDtoToEntity(EngineDTO engine);
 }

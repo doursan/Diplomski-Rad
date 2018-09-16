@@ -8,13 +8,12 @@ import org.mapstruct.factory.Mappers;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2018-09-12T18:38:25+0200",
+    date = "2018-09-16T02:12:09+0200",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_111 (Oracle Corporation)"
 )
 public class CarMapperImpl implements CarMapper {
 
-    private final CarBrandModelMapper carBrandModelMapper = Mappers.getMapper( CarBrandModelMapper.class );
-    private final EngineMapper engineMapper = Mappers.getMapper( EngineMapper.class );
+    private final ModelEngineMapper modelEngineMapper = Mappers.getMapper( ModelEngineMapper.class );
     private final ClientMapper clientMapper = Mappers.getMapper( ClientMapper.class );
 
     @Override
@@ -25,14 +24,16 @@ public class CarMapperImpl implements CarMapper {
 
         CarDTO carDTO = new CarDTO();
 
-        carDTO.setBrandModel( carBrandModelMapper.carBrandModelEntityToDto( car.getBrandModel() ) );
+        if ( car.getId() != null ) {
+            carDTO.setId( String.valueOf( car.getId() ) );
+        }
         carDTO.setVin( car.getVin() );
         carDTO.setRegistration( car.getRegistration() );
         if ( car.getProductionYear() != null ) {
             carDTO.setProductionYear( String.valueOf( car.getProductionYear() ) );
         }
-        carDTO.setClient( clientMapper.clientEntityToDto( car.getClient() ) );
-        carDTO.setEngine( engineMapper.engineEntityToDto( car.getEngine() ) );
+        carDTO.setOwner( clientMapper.clientEntityToDto( car.getOwner() ) );
+        carDTO.setModelEngine( modelEngineMapper.modelEngineEntityToDto( car.getModelEngine() ) );
 
         return carDTO;
     }
@@ -45,14 +46,16 @@ public class CarMapperImpl implements CarMapper {
 
         CarEntity carEntity = new CarEntity();
 
+        if ( car.getId() != null ) {
+            carEntity.setId( Integer.parseInt( car.getId() ) );
+        }
         carEntity.setVin( car.getVin() );
         carEntity.setRegistration( car.getRegistration() );
         if ( car.getProductionYear() != null ) {
             carEntity.setProductionYear( Short.parseShort( car.getProductionYear() ) );
         }
-        carEntity.setClient( clientMapper.clientDtoToEntity( car.getClient() ) );
-        carEntity.setEngine( engineMapper.engineDtoToEntity( car.getEngine() ) );
-        carEntity.setBrandModel( carBrandModelMapper.carBrandModelDtoToEntity( car.getBrandModel() ) );
+        carEntity.setOwner( clientMapper.clientDtoToEntity( car.getOwner() ) );
+        carEntity.setModelEngine( modelEngineMapper.modelEngineDtoToEntity( car.getModelEngine() ) );
 
         return carEntity;
     }

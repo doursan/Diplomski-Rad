@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "user")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "TYPE")
+@DiscriminatorColumn(name = "TIP")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "UserEntity.findAll", query = "SELECT u FROM UserEntity u")
@@ -62,8 +62,8 @@ public class UserEntity implements Serializable {
     @Column(name = "email")
     private String email;
     @Size(max = 1)
-    @Column(name = "TYPE")
-    private String type;
+    @Column(name = "TIP")
+    private String tip;
 
     
     public UserEntity() {
@@ -136,10 +136,7 @@ public class UserEntity implements Serializable {
             return false;
         }
         UserEntity other = (UserEntity) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override
@@ -147,12 +144,12 @@ public class UserEntity implements Serializable {
         return "ws.user.UserEntity[ id=" + id + " ]";
     }
 
-    public String getType() {
-        return type;
+    public String getTip() {
+        return tip;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTip(String tip) {
+        this.tip = tip;
     }
     
 }

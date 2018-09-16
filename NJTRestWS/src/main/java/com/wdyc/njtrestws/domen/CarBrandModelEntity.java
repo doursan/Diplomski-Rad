@@ -51,11 +51,11 @@ public class CarBrandModelEntity implements Serializable {
     private Short productionBegan;
     @Column(name = "production_end")
     private Short productionEnd;
-    @OneToMany(mappedBy = "brandModel")
-    private List<CarEntity> carList;
     @JoinColumn(name = "carbrand_id")
     @ManyToOne
     private CarBrandEntity carBrand;
+    @OneToMany(mappedBy = "model")
+    private List<ModelEngineEntity> modelEngineList;
 
     public CarBrandModelEntity() {
     }
@@ -95,16 +95,7 @@ public class CarBrandModelEntity implements Serializable {
     public void setProductionEnd(Short productionEnd) {
         this.productionEnd = productionEnd;
     }
-
-    @XmlTransient
-    public List<CarEntity> getCarList() {
-        return carList;
-    }
-
-    public void setCarList(List<CarEntity> carList) {
-        this.carList = carList;
-    }
-
+   
     public CarBrandEntity getCarBrand() {
         return carBrand;
     }
@@ -137,5 +128,14 @@ public class CarBrandModelEntity implements Serializable {
     public String toString() {
         return "com.wdyc.njtws.domen.CarBrandModelEntity[ id=" + id + " ]";
     }
-    
+
+    @XmlTransient
+    public List<ModelEngineEntity> getModelEngineList() {
+        return modelEngineList;
+    }
+
+    public void setModelEngineList(List<ModelEngineEntity> modelEngineList) {
+        this.modelEngineList = modelEngineList;
+    }
+
 }

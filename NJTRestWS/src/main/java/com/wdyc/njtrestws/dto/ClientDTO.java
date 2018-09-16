@@ -6,11 +6,13 @@
 package com.wdyc.njtrestws.dto;
 
 import java.util.List;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Dusan
  */
+@XmlRootElement
 public class ClientDTO extends UserDTO {
     
     
