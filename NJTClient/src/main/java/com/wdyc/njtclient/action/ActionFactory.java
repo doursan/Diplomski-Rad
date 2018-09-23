@@ -27,7 +27,19 @@ public class ActionFactory {
         if (action.equalsIgnoreCase("save_car")) {
             command = new SaveCarAction();
         }
-
+        if (action.equalsIgnoreCase("update_car_page")) {
+            command = new UpdateCarPageAction();
+        }
+        if (action.equalsIgnoreCase("update_car")) {
+            command = new UpdateCarAction();
+        }
+        if (action.equalsIgnoreCase("sell_car_page")) {
+            command = new SellCarPageAction();
+        }  
+        if (action.equalsIgnoreCase("sell_car")) {
+            command = new SellCarAction();
+        }
+        
         return command;
     }
 }

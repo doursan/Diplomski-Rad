@@ -24,6 +24,8 @@ public class PageResolver {
         view.put("register", "/pages/register.jsp");
         view.put("admin", "/WEB-INF/pages/admin.jsp");
         view.put("add_car", "/WEB-INF/pages/add_car.jsp");
+        view.put("update_car", "/WEB-INF/pages/update_car.jsp");
+        view.put("sell_car", "/WEB-INF/pages/sell_car.jsp");
     }
 
     public static PageResolver getInstance() {

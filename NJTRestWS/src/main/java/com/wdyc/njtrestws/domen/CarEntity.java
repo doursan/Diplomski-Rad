@@ -54,6 +54,8 @@ public class CarEntity implements Serializable {
     private String registration;
     @Column(name = "production_year")
     private Short productionYear;
+    @Column(name = "color")
+    private String color;
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     @ManyToOne
     private ClientEntity owner;
@@ -162,6 +164,14 @@ public class CarEntity implements Serializable {
 
     public void setModelEngine(ModelEngineEntity modelEngine) {
         this.modelEngine = modelEngine;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
 }

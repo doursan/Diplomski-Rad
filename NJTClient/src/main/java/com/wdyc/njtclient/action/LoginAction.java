@@ -23,9 +23,9 @@ public class LoginAction extends AbstractAction {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        RestWSClient.getInstance().setTarget(Constants.USER_PATH);
+        RestWSClient.getInstance().setTarget(Constants.USERS_PATH);
 
-        UserDTO returnedUser = RestWSClient.getInstance().getByParameter_JSON(UserDTO.class, Constants.USER_USERNAME, username);
+        UserDTO returnedUser = RestWSClient.getInstance().getByParameter_JSON(UserDTO.class, Constants.USER_USERNAME_PARAM, username);
 
         if (returnedUser == null || !returnedUser.getPassword().equals(password)) {
             request.setAttribute("errorMessage", "Invalid username or password");

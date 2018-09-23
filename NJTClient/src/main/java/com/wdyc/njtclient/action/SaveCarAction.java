@@ -46,7 +46,7 @@ public class SaveCarAction extends AbstractAction {
         car.setRegistration(registration);
         car.setVin(vin);
 
-        RestWSClient.getInstance().setTarget(Constants.CAR_PATH);
+        RestWSClient.getInstance().setTarget(Constants.CARS_PATH);
         Response response = RestWSClient.getInstance().create_JSON(car);
         if (response.getStatus() == 201) {
             CarDTO returnedCar = response.readEntity(CarDTO.class);

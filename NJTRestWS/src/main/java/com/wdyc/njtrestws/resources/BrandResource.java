@@ -12,8 +12,6 @@ import com.wdyc.njtrestws.mapstruct.CarBrandMapper;
 import com.wdyc.njtrestws.mapstruct.impl.CarBrandMapperImpl;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;

@@ -5,14 +5,11 @@
  */
 package com.wdyc.njtclient.rest.ws;
 
-import com.wdyc.njtclient.dto.CarBrandDTO;
 import java.text.MessageFormat;
-import java.util.List;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -42,6 +39,13 @@ public class RestWSClient {
         return resource.request(MediaType.APPLICATION_JSON).get(Response.class);         
     }
     
+    public Response getManyByParameter_JSON(String param, String value) {
+        WebTarget resource = target;
+        resource = resource.path(MessageFormat.format("{0}/{1}", new Object[] {param, value}));
+        return resource.request(MediaType.APPLICATION_JSON).get(Response.class);
+        
+    }
+    
     public <T> T getByParameter_JSON(Class<T> responseType, String param, String value) {
         WebTarget resource = target;
         resource = resource.path(MessageFormat.format("{0}/{1}", new Object[] {param, value}));        
@@ -51,6 +55,11 @@ public class RestWSClient {
     public Response create_JSON(Object requestEntity) {
         WebTarget resource = target;
         return resource.request(MediaType.APPLICATION_JSON).post(Entity.entity(requestEntity, MediaType.APPLICATION_JSON), Response.class);
+    }
+    
+    public Response update_JSON(Object requestEntity) {
+        WebTarget resource = target;
+        return resource.request(MediaType.APPLICATION_JSON).put(Entity.entity(requestEntity, MediaType.APPLICATION_JSON), Response.class);
     }
     
     public Client getClient() {

@@ -22,7 +22,7 @@ public class AddCarAction extends AbstractAction {
     @Override
     public String execute(HttpServletRequest request) {
 
-        RestWSClient.getInstance().setTarget(Constants.BRAND_PATH);
+        RestWSClient.getInstance().setTarget(Constants.BRANDS_PATH);
         Response response = RestWSClient.getInstance().getAll_JSON();
         List<CarBrandDTO> brands = response.readEntity(new GenericType<List<CarBrandDTO>>() { });
         

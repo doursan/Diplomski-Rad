@@ -29,11 +29,23 @@
                     </div>
                     <nav id="nav-menu-container">
                         <ul class="nav-menu">
-                            <li class="menu-active"><a href="inxed.html">Home</a></li>
-                            <li><a href=" 
-                                   <c:url value="/controller">
-                                       <c:param name="action" value="add_car"></c:param>
-                                   </c:url> ">Add a Car</a></li>
+                            <li class="menu-active"><a href="inxed.html">Home</a></li>	
+                            <li class="menu-has-children"><a href="#">YOUR CARS</a>
+                                <ul>
+                                    <li><a href=" 
+                                           <c:url value="/controller">
+                                               <c:param name="action" value="add_car"></c:param>
+                                           </c:url> ">Add a Car</a></li>
+                                    <li><a href=" 
+                                           <c:url value="/controller">
+                                               <c:param name="action" value="update_car_page"></c:param>
+                                           </c:url> ">Update a Car</a></li>
+                                    <li><a href=" 
+                                           <c:url value="/controller">
+                                               <c:param name="action" value="sell_car_page"></c:param>
+                                           </c:url> ">Sell a Car</a></li>
+                                </ul>
+                            </li>
                             <li><a href="service.html">Service</a></li>
                             <li><a href="team.html">Team</a></li>
                             <li><a href="price.html">Price</a></li>

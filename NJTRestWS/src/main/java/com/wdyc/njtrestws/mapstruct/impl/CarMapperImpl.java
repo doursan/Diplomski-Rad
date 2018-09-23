@@ -8,7 +8,7 @@ import org.mapstruct.factory.Mappers;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2018-09-16T02:12:09+0200",
+    date = "2018-09-18T20:36:32+0200",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_111 (Oracle Corporation)"
 )
 public class CarMapperImpl implements CarMapper {
@@ -34,6 +34,7 @@ public class CarMapperImpl implements CarMapper {
         }
         carDTO.setOwner( clientMapper.clientEntityToDto( car.getOwner() ) );
         carDTO.setModelEngine( modelEngineMapper.modelEngineEntityToDto( car.getModelEngine() ) );
+        carDTO.setColor( car.getColor() );
 
         return carDTO;
     }
@@ -56,6 +57,7 @@ public class CarMapperImpl implements CarMapper {
         }
         carEntity.setOwner( clientMapper.clientDtoToEntity( car.getOwner() ) );
         carEntity.setModelEngine( modelEngineMapper.modelEngineDtoToEntity( car.getModelEngine() ) );
+        carEntity.setColor( car.getColor() );
 
         return carEntity;
     }

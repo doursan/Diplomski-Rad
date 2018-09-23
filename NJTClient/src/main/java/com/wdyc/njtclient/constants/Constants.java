@@ -11,10 +11,11 @@ package com.wdyc.njtclient.constants;
  */
 public class Constants {
     
-    public static final String USER_PATH = "users";
-    public static final String SHOP_PATH = "users/shops";
-    public static final String CLIENT_PATH = "users/clients";
-    public static final String USER_USERNAME = "username";
-    public static final String BRAND_PATH = "brands";
-    public static final String CAR_PATH = "cars";
+    public static final String USERS_PATH = "users";
+    public static final String SHOPS_PATH = "users/shops";
+    public static final String CLIENTS_PATH = "users/clients";
+    public static final String USER_USERNAME_PARAM = "username";
+    public static final String BRANDS_PATH = "brands";
+    public static final String CARS_PATH = "cars";
+    public static final String CARS_USER_PARAM = "user";
 }

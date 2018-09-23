@@ -18,6 +18,7 @@ public class CarDTO implements Serializable {
     private String vin;
     private String registration;
     private String productionYear;
+    private String color;
     private ClientDTO owner;
     private ModelEngineDTO modelEngine;
     private List<EngineDTO> engines;
@@ -126,5 +127,13 @@ public class CarDTO implements Serializable {
 
     public void setBrands(List<CarBrandDTO> brands) {
         this.brands = brands;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }

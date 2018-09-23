@@ -18,7 +18,7 @@ import org.mapstruct.factory.Mappers;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2018-09-16T02:12:08+0200",
+    date = "2018-09-18T20:36:31+0200",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_111 (Oracle Corporation)"
 )
 public class ModelEngineMapperImpl implements ModelEngineMapper {
@@ -111,6 +111,7 @@ public class ModelEngineMapperImpl implements ModelEngineMapper {
         }
         carEntity.setOwner( clientDTOToClientEntity( carDTO.getOwner() ) );
         carEntity.setModelEngine( modelEngineDtoToEntity( carDTO.getModelEngine() ) );
+        carEntity.setColor( carDTO.getColor() );
 
         return carEntity;
     }

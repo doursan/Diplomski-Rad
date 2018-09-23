@@ -33,13 +33,13 @@ public class RegisterAction extends AbstractAction {
             String maticni = request.getParameter("maticni");
 
             user = new ShopDTO(naziv, pib, maticni, username, password, email);
-            RestWSClient.getInstance().setTarget(Constants.SHOP_PATH);
+            RestWSClient.getInstance().setTarget(Constants.SHOPS_PATH);
         } else {
             String ime = request.getParameter("ime");
             String prezime = request.getParameter("prezime");
             String jmbg = request.getParameter("jmbg");
 
-            RestWSClient.getInstance().setTarget(Constants.CLIENT_PATH);
+            RestWSClient.getInstance().setTarget(Constants.CLIENTS_PATH);
             user = new ClientDTO(ime, prezime, jmbg, username, password, email);
         }
         Response response = RestWSClient.getInstance().create_JSON(user);

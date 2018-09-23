@@ -4,7 +4,6 @@
     Author     : Dusan
 --%>
 
-<%@page import="com.wdyc.njtws.services.CarBrandDTO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
