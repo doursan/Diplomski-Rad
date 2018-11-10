@@ -39,7 +39,45 @@ public class ActionFactory {
         if (action.equalsIgnoreCase("sell_car")) {
             command = new SellCarAction();
         }
-        
+        if (action.equalsIgnoreCase("add_part")) {
+            command = new AddCarPartAction();
+        }     
+        if (action.equalsIgnoreCase("save_part")) {
+            command = new SaveCarPartAction();
+        }
+        if (action.equalsIgnoreCase("delete_part")) {
+            command = new DeleteCarPartAction();
+        }
+        if (action.equalsIgnoreCase("remove_part")) {
+            command = new RemoveCarPartAction();
+        }
+        if (action.equalsIgnoreCase("change_part")) {
+            command = new ChangeCarPartAction();
+        }
+        if (action.equalsIgnoreCase("update_part")) {
+            command = new UpdateCarPartAction();
+        }
+        if (action.equalsIgnoreCase("add_service")) {
+            command = new AddServiceAction();
+        }
+        if (action.equalsIgnoreCase("save_service")) {
+            command = new SaveServiceAction();
+        }
+        if (action.equalsIgnoreCase("change_service")) {
+            command = new ChangeServiceAction();
+        }
+        if (action.equalsIgnoreCase("update_service")) {
+            command = new UpdateServiceAction();
+        }
+        if (action.equalsIgnoreCase("delete_service")) {
+            command = new DeleteServiceAction();
+        }
+        if (action.equalsIgnoreCase("remove_service")) {
+            command = new RemoveServiceAction();
+        }
+        if (action.equalsIgnoreCase("create_repair")) {
+            command = new AddRepairAction();
+        }
         return command;
     }
 }

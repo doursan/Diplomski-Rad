@@ -35,32 +35,32 @@ public class RestWSClient {
     }
     
     public Response getAll_JSON() {
-        WebTarget resource = target;
-        return resource.request(MediaType.APPLICATION_JSON).get(Response.class);         
+        return target.request(MediaType.APPLICATION_JSON).get(Response.class);         
     }
     
     public Response getManyByParameter_JSON(String param, String value) {
-        WebTarget resource = target;
-        resource = resource.path(MessageFormat.format("{0}/{1}", new Object[] {param, value}));
-        return resource.request(MediaType.APPLICATION_JSON).get(Response.class);
+        target = target.path(MessageFormat.format("{0}/{1}", new Object[] {param, value}));
+        return target.request(MediaType.APPLICATION_JSON).get(Response.class);
         
     }
     
     public <T> T getByParameter_JSON(Class<T> responseType, String param, String value) {
-        WebTarget resource = target;
-        resource = resource.path(MessageFormat.format("{0}/{1}", new Object[] {param, value}));        
-        return resource.request(MediaType.APPLICATION_JSON).get(responseType);
+        target = target.path(MessageFormat.format("{0}/{1}", new Object[] {param, value}));        
+        return target.request(MediaType.APPLICATION_JSON).get(responseType);
     }
     
     public Response create_JSON(Object requestEntity) {
-        WebTarget resource = target;
-        return resource.request(MediaType.APPLICATION_JSON).post(Entity.entity(requestEntity, MediaType.APPLICATION_JSON), Response.class);
+        return target.request(MediaType.APPLICATION_JSON).post(Entity.entity(requestEntity, MediaType.APPLICATION_JSON), Response.class);
     }
     
-    public Response update_JSON(Object requestEntity) {
-        WebTarget resource = target;
-        return resource.request(MediaType.APPLICATION_JSON).put(Entity.entity(requestEntity, MediaType.APPLICATION_JSON), Response.class);
+    public Response updateById_JSON(Object requestEntity, String id) {
+        target = target.path(id);
+        return target.request(MediaType.APPLICATION_JSON).put(Entity.entity(requestEntity, MediaType.APPLICATION_JSON), Response.class);
     }
+    
+    public Response delete_JSON(String id) {
+        return target.path(id).request(MediaType.APPLICATION_JSON).delete(Response.class);
+    }       
     
     public Client getClient() {
         return client;
@@ -77,9 +77,5 @@ public class RestWSClient {
     public void setTarget(String path) {
         target = client.target(BASE_URI).path(path);
     }
-    
-    
-    
-    
-    
+
 }

@@ -5,9 +5,11 @@
  */
 package com.wdyc.njtrestws.domen;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
 
 /**
@@ -32,6 +34,8 @@ public class ShopEntity extends UserEntity {
     @Size(max = 8)
     @Column(name = "maticni")
     private String maticni;
+    @OneToMany(mappedBy = "shop")
+    private List<RepairEntity> repairList;
 
     public String getNaziv() {
         return naziv;
@@ -55,6 +59,14 @@ public class ShopEntity extends UserEntity {
 
     public void setMaticni(String maticni) {
         this.maticni = maticni;
+    }
+
+    public List<RepairEntity> getRepairList() {
+        return repairList;
+    }
+
+    public void setRepairList(List<RepairEntity> repairList) {
+        this.repairList = repairList;
     }
 
     public ShopEntity(String naziv, String pib, String maticni, String username, String password, String email) {

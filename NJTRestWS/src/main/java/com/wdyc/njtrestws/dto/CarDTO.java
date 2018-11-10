@@ -23,6 +23,7 @@ public class CarDTO implements Serializable {
     private ModelEngineDTO modelEngine;
     private List<EngineDTO> engines;
     private List<CarBrandDTO> brands;
+    private List<RepairDTO> repairList;
 
     public CarDTO() {
     }
@@ -64,7 +65,7 @@ public class CarDTO implements Serializable {
         this.engines = engines;
         this.brands = brands;
     }
-    
+
     public String getId() {
         return id;
     }
@@ -136,4 +137,13 @@ public class CarDTO implements Serializable {
     public void setColor(String color) {
         this.color = color;
     }
+
+    public List<RepairDTO> getRepairList() {
+        return repairList;
+    }
+
+    public void setRepairList(List<RepairDTO> repairList) {
+        this.repairList = repairList;
+    }
+
 }

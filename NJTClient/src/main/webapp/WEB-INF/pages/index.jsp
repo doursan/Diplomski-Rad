@@ -54,7 +54,7 @@
                         </p>
                         <a href="#" class="primary-btn text-uppercase">Get Started</a>
                     </div>
-                    <h1>${message}</h1>
+                    <h1 class="poruka">${message}</h1>
                 </div>
             </div>					
         </section>

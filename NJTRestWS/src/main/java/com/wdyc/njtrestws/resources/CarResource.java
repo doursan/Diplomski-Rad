@@ -13,8 +13,6 @@ import com.wdyc.njtrestws.mapstruct.impl.CarMapperImpl;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -82,10 +80,12 @@ public class CarResource {
     }
 
     @PUT
+    @Path("/{carId}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces({MediaType.APPLICATION_JSON,MediaType.TEXT_PLAIN})
-    public Response updateCar(@NotNull CarDTO car) {
+    public Response updateCar(@PathParam("carId") String id, @NotNull CarDTO car) {
             System.out.println("Pozivam UPDATE CAR iz REST Servisa");
+            car.setId(id);
         try {            
             CarEntity convertedCar = carMapper.carDtoToEntity(car);
             CarEntity updatedCar = carDao.updateCar(convertedCar);
@@ -96,8 +96,6 @@ public class CarResource {
             ex.printStackTrace();
             return Response.serverError().type(MediaType.TEXT_PLAIN).entity(ex.getMessage()).build();
         }
-        
-
     }
 
 }

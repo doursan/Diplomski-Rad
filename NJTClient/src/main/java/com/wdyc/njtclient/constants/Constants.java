@@ -18,4 +18,6 @@ public class Constants {
     public static final String BRANDS_PATH = "brands";
     public static final String CARS_PATH = "cars";
     public static final String CARS_USER_PARAM = "user";
+    public static final String CAR_PARTS_PATH = "parts";
+    public static final String SERVICES_PATH = "services";
 }

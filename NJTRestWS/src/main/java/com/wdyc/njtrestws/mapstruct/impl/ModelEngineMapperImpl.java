@@ -4,13 +4,25 @@ import com.wdyc.njtrestws.mapstruct.*;
 import com.wdyc.njtrestws.domen.CarBrandEntity;
 import com.wdyc.njtrestws.domen.CarBrandModelEntity;
 import com.wdyc.njtrestws.domen.CarEntity;
+import com.wdyc.njtrestws.domen.CarPartEntity;
 import com.wdyc.njtrestws.domen.ClientEntity;
+import com.wdyc.njtrestws.domen.ItemEntity;
+import com.wdyc.njtrestws.domen.ItemEntityPK;
 import com.wdyc.njtrestws.domen.ModelEngineEntity;
+import com.wdyc.njtrestws.domen.RepairEntity;
+import com.wdyc.njtrestws.domen.ServiceEntity;
+import com.wdyc.njtrestws.domen.ShopEntity;
 import com.wdyc.njtrestws.dto.CarBrandDTO;
 import com.wdyc.njtrestws.dto.CarBrandModelDTO;
 import com.wdyc.njtrestws.dto.CarDTO;
+import com.wdyc.njtrestws.dto.CarPartDTO;
 import com.wdyc.njtrestws.dto.ClientDTO;
+import com.wdyc.njtrestws.dto.ItemDTO;
+import com.wdyc.njtrestws.dto.ItemDTOPK;
 import com.wdyc.njtrestws.dto.ModelEngineDTO;
+import com.wdyc.njtrestws.dto.RepairDTO;
+import com.wdyc.njtrestws.dto.ServiceDTO;
+import com.wdyc.njtrestws.dto.ShopDTO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
@@ -18,7 +30,7 @@ import org.mapstruct.factory.Mappers;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2018-09-18T20:36:31+0200",
+    date = "2018-10-08T16:24:08+0200",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_111 (Oracle Corporation)"
 )
 public class ModelEngineMapperImpl implements ModelEngineMapper {
@@ -94,6 +106,154 @@ public class ModelEngineMapperImpl implements ModelEngineMapper {
         return clientEntity;
     }
 
+    protected List<RepairEntity> repairDTOListToRepairEntityList(List<RepairDTO> list) {
+        if ( list == null ) {
+            return null;
+        }
+
+        List<RepairEntity> list1 = new ArrayList<RepairEntity>( list.size() );
+        for ( RepairDTO repairDTO : list ) {
+            list1.add( repairDTOToRepairEntity( repairDTO ) );
+        }
+
+        return list1;
+    }
+
+    protected ShopEntity shopDTOToShopEntity(ShopDTO shopDTO) {
+        if ( shopDTO == null ) {
+            return null;
+        }
+
+        ShopEntity shopEntity = new ShopEntity();
+
+        if ( shopDTO.getId() != null ) {
+            shopEntity.setId( Integer.parseInt( shopDTO.getId() ) );
+        }
+        shopEntity.setUsername( shopDTO.getUsername() );
+        shopEntity.setPassword( shopDTO.getPassword() );
+        shopEntity.setEmail( shopDTO.getEmail() );
+        shopEntity.setTip( shopDTO.getTip() );
+        shopEntity.setNaziv( shopDTO.getNaziv() );
+        shopEntity.setPib( shopDTO.getPib() );
+        shopEntity.setMaticni( shopDTO.getMaticni() );
+        shopEntity.setRepairList( repairDTOListToRepairEntityList( shopDTO.getRepairList() ) );
+
+        return shopEntity;
+    }
+
+    protected ItemEntityPK itemDTOPKToItemEntityPK(ItemDTOPK itemDTOPK) {
+        if ( itemDTOPK == null ) {
+            return null;
+        }
+
+        ItemEntityPK itemEntityPK = new ItemEntityPK();
+
+        if ( itemDTOPK.getId() != null ) {
+            itemEntityPK.setId( Integer.parseInt( itemDTOPK.getId() ) );
+        }
+        if ( itemDTOPK.getRepairId() != null ) {
+            itemEntityPK.setRepairId( Integer.parseInt( itemDTOPK.getRepairId() ) );
+        }
+
+        return itemEntityPK;
+    }
+
+    protected List<ItemEntity> itemDTOListToItemEntityList(List<ItemDTO> list) {
+        if ( list == null ) {
+            return null;
+        }
+
+        List<ItemEntity> list1 = new ArrayList<ItemEntity>( list.size() );
+        for ( ItemDTO itemDTO : list ) {
+            list1.add( itemDTOToItemEntity( itemDTO ) );
+        }
+
+        return list1;
+    }
+
+    protected CarPartEntity carPartDTOToCarPartEntity(CarPartDTO carPartDTO) {
+        if ( carPartDTO == null ) {
+            return null;
+        }
+
+        CarPartEntity carPartEntity = new CarPartEntity();
+
+        if ( carPartDTO.getId() != null ) {
+            carPartEntity.setId( Integer.parseInt( carPartDTO.getId() ) );
+        }
+        carPartEntity.setName( carPartDTO.getName() );
+        carPartEntity.setItemList( itemDTOListToItemEntityList( carPartDTO.getItemList() ) );
+
+        return carPartEntity;
+    }
+
+    protected ServiceEntity serviceDTOToServiceEntity(ServiceDTO serviceDTO) {
+        if ( serviceDTO == null ) {
+            return null;
+        }
+
+        ServiceEntity serviceEntity = new ServiceEntity();
+
+        if ( serviceDTO.getId() != null ) {
+            serviceEntity.setId( Integer.parseInt( serviceDTO.getId() ) );
+        }
+        if ( serviceDTO.getHours() != null ) {
+            serviceEntity.setHours( Double.parseDouble( serviceDTO.getHours() ) );
+        }
+        if ( serviceDTO.getPrice() != null ) {
+            serviceEntity.setPrice( Double.parseDouble( serviceDTO.getPrice() ) );
+        }
+        serviceEntity.setName( serviceDTO.getName() );
+        serviceEntity.setItemList( itemDTOListToItemEntityList( serviceDTO.getItemList() ) );
+
+        return serviceEntity;
+    }
+
+    protected ItemEntity itemDTOToItemEntity(ItemDTO itemDTO) {
+        if ( itemDTO == null ) {
+            return null;
+        }
+
+        ItemEntity itemEntity = new ItemEntity();
+
+        itemEntity.setItemPK( itemDTOPKToItemEntityPK( itemDTO.getItemPK() ) );
+        if ( itemDTO.getAmount() != null ) {
+            itemEntity.setAmount( Double.parseDouble( itemDTO.getAmount() ) );
+        }
+        if ( itemDTO.getPrice() != null ) {
+            itemEntity.setPrice( Double.parseDouble( itemDTO.getPrice() ) );
+        }
+        itemEntity.setCarPart( carPartDTOToCarPartEntity( itemDTO.getCarPart() ) );
+        itemEntity.setService( serviceDTOToServiceEntity( itemDTO.getService() ) );
+
+        return itemEntity;
+    }
+
+    protected RepairEntity repairDTOToRepairEntity(RepairDTO repairDTO) {
+        if ( repairDTO == null ) {
+            return null;
+        }
+
+        RepairEntity repairEntity = new RepairEntity();
+
+        if ( repairDTO.getId() != null ) {
+            repairEntity.setId( Integer.parseInt( repairDTO.getId() ) );
+        }
+        repairEntity.setDatum( repairDTO.getDatum() );
+        if ( repairDTO.getKilometers() != null ) {
+            repairEntity.setKilometers( Integer.parseInt( repairDTO.getKilometers() ) );
+        }
+        repairEntity.setIsActive( repairDTO.isIsActive() );
+        if ( repairDTO.getPrice() != null ) {
+            repairEntity.setPrice( Double.parseDouble( repairDTO.getPrice() ) );
+        }
+        repairEntity.setCar( carDTOToCarEntity( repairDTO.getCar() ) );
+        repairEntity.setShop( shopDTOToShopEntity( repairDTO.getShop() ) );
+        repairEntity.setItemList( itemDTOListToItemEntityList( repairDTO.getItemList() ) );
+
+        return repairEntity;
+    }
+
     protected CarEntity carDTOToCarEntity(CarDTO carDTO) {
         if ( carDTO == null ) {
             return null;
@@ -112,6 +272,7 @@ public class ModelEngineMapperImpl implements ModelEngineMapper {
         carEntity.setOwner( clientDTOToClientEntity( carDTO.getOwner() ) );
         carEntity.setModelEngine( modelEngineDtoToEntity( carDTO.getModelEngine() ) );
         carEntity.setColor( carDTO.getColor() );
+        carEntity.setRepairList( repairDTOListToRepairEntityList( carDTO.getRepairList() ) );
 
         return carEntity;
     }

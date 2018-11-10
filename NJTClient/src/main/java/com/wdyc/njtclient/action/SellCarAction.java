@@ -28,11 +28,10 @@ public class SellCarAction extends AbstractAction {
         UserDTO buyer = RestWSClient.getInstance().getByParameter_JSON(UserDTO.class, Constants.USER_USERNAME_PARAM, buyerUsername);
         ClientDTO newOwner = new ClientDTO();
         newOwner.setId(buyer.getId());
-        CarDTO car = new CarDTO();        
-        car.setId(carId);
+        CarDTO car = new CarDTO();     
         car.setOwner(newOwner);
         RestWSClient.getInstance().setTarget(Constants.CARS_PATH);
-        Response response = RestWSClient.getInstance().update_JSON(car);
+        Response response = RestWSClient.getInstance().updateById_JSON(car, carId);
         if(response.getStatus() == 200) {
             CarDTO soldCar = response.readEntity(CarDTO.class);
             request.setAttribute("message", "You have successfully sold your car");

@@ -16,7 +16,7 @@
                     </div>
                     <div class="col-6 top-head-right">
                         <ul>
-                            <li><a href="#">Register / Login</a></li>
+                            <li><a href="#">Hello, ${logged_user.getUsername()}</a></li>
                         </ul>
                     </div>			  			
                 </div>
@@ -29,7 +29,11 @@
                     </div>
                     <nav id="nav-menu-container">
                         <ul class="nav-menu">
-                            <li class="menu-active"><a href="inxed.html">Home</a></li>	
+                            <li class="menu-active">
+                                <a href="
+                                   <c:url value="/controller">
+                                       <c:param name="action" value="home"></c:param>
+                                   </c:url>">Home</a></li>	
                             <li class="menu-has-children"><a href="#">YOUR CARS</a>
                                 <ul>
                                     <li><a href=" 

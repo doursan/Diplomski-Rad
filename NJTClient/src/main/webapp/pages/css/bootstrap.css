@@ -1743,9 +1743,11 @@ select.form-control:focus::-ms-value {
 }
 
 .save_car .form-control {
-    background-color: rgba(255, 255, 255, 0);
+    background-color: rgba(0, 0, 0, 0.6);
 }
-
+.poruka {
+    color : rgba(255, 255, 0, 0.6);
+}
 select {
     background: transparent;
     width: 10%;

@@ -6,6 +6,7 @@
 package com.wdyc.njtrestws.domen;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,10 +17,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -35,7 +38,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "CarEntity.findByRegistration", query = "SELECT c FROM CarEntity c WHERE c.registration = :registration")
     , @NamedQuery(name = "CarEntity.findByProductionYear", query = "SELECT c FROM CarEntity c WHERE c.productionYear = :productionYear")})
 public class CarEntity implements Serializable {
-
+ 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,6 +65,8 @@ public class CarEntity implements Serializable {
     @JoinColumn(name = "model_engine_id", referencedColumnName = "id")
     @ManyToOne
     private ModelEngineEntity modelEngine;
+    @OneToMany(mappedBy = "car")
+    private List<RepairEntity> repairList;
 
     public CarEntity() {
     }
@@ -124,6 +129,39 @@ public class CarEntity implements Serializable {
     public void setProductionYear(Short productionYear) {
         this.productionYear = productionYear;
     }
+    
+    public ClientEntity getOwner() {
+        return owner;
+    }
+
+    public void setOwner(ClientEntity owner) {
+        this.owner = owner;
+    }
+
+    public ModelEngineEntity getModelEngine() {
+        return modelEngine;
+    }
+
+    public void setModelEngine(ModelEngineEntity modelEngine) {
+        this.modelEngine = modelEngine;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    @XmlTransient
+    public List<RepairEntity> getRepairList() {
+        return repairList;
+    }
+
+    public void setRepairList(List<RepairEntity> repairList) {
+        this.repairList = repairList;
+    }
 
     @Override
     public int hashCode() {
@@ -149,29 +187,4 @@ public class CarEntity implements Serializable {
     public String toString() {
         return "com.wdyc.njtws.domen.CarEntity[ id=" + id + " ]";
     }
-
-    public ClientEntity getOwner() {
-        return owner;
-    }
-
-    public void setOwner(ClientEntity owner) {
-        this.owner = owner;
-    }
-
-    public ModelEngineEntity getModelEngine() {
-        return modelEngine;
-    }
-
-    public void setModelEngine(ModelEngineEntity modelEngine) {
-        this.modelEngine = modelEngine;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
 }

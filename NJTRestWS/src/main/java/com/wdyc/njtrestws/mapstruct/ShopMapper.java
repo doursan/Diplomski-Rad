@@ -8,6 +8,7 @@ package com.wdyc.njtrestws.mapstruct;
 import com.wdyc.njtrestws.domen.ShopEntity;
 import com.wdyc.njtrestws.dto.ShopDTO;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 /**
  *
@@ -16,6 +17,9 @@ import org.mapstruct.Mapper;
 @Mapper
 public interface ShopMapper {
     
+    @Mapping(target = "repairList", ignore = true)
     ShopDTO shopEntityToDto(ShopEntity shop);
+    
+    @Mapping(target = "repairList", ignore = true)
     ShopEntity shopDtoToEntity(ShopDTO shop);
 }

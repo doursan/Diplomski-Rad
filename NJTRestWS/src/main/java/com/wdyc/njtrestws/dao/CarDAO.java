@@ -74,7 +74,7 @@ public class CarDAO {
                 return foundCar;
             }
         } catch (Exception e) {
-            throw e;
+            throw new Exception("Greska prilikom promene vozila u bazi!");
         } finally {
             em.close();
             emf.close();

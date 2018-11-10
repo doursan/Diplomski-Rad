@@ -30,7 +30,7 @@ public class BrandResource {
     CarBrandMapper carBrandMapper = new CarBrandMapperImpl();
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
     public Response getAll() {
 
         try {
@@ -46,7 +46,7 @@ public class BrandResource {
             return response;
         } catch (Exception ex) {
             ex.printStackTrace();
-            return Response.serverError().type(MediaType.TEXT_PLAIN).entity(ex).build();
+            return Response.serverError().type(MediaType.TEXT_PLAIN).entity(ex.getMessage()).build();
         }
     }
 }

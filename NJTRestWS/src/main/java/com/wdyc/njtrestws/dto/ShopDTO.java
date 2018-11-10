@@ -5,6 +5,7 @@
  */
 package com.wdyc.njtrestws.dto;
 
+import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -17,6 +18,7 @@ public class ShopDTO extends UserDTO {
     private String naziv;
     private String pib;
     private String maticni;
+    private List<RepairDTO> repairList;
 
     public ShopDTO() {
     }
@@ -27,8 +29,8 @@ public class ShopDTO extends UserDTO {
         this.maticni = maticni;
     }
 
-    public ShopDTO(String naziv, String pib, String maticni, String username, String password) {
-        super(username, password);
+    public ShopDTO(String naziv, String pib, String maticni, String username, String password, String email) {
+        super(username, password, email);
         this.naziv = naziv;
         this.pib = pib;
         this.maticni = maticni;
@@ -64,4 +66,13 @@ public class ShopDTO extends UserDTO {
     public void setPib(String pib) {
         this.pib = pib;
     }      
+
+    public List<RepairDTO> getRepairList() {
+        return repairList;
+    }
+
+    public void setRepairList(List<RepairDTO> repairList) {
+        this.repairList = repairList;
+    }
+    
 }
