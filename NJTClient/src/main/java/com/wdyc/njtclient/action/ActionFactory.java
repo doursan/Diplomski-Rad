@@ -78,6 +78,12 @@ public class ActionFactory {
         if (action.equalsIgnoreCase("create_repair")) {
             command = new AddRepairAction();
         }
+        if (action.equalsIgnoreCase("add_repair_item")) {
+            command = new AddRepairItemAction();
+        }
+        if (action.equalsIgnoreCase("save_repair")) {
+            command = new SaveRepairAction();
+        }
         return command;
     }
 }

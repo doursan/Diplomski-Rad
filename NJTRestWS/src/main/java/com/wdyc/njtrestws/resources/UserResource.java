@@ -32,7 +32,7 @@ import javax.ws.rs.core.UriInfo;
 @Path("users")
 public class UserResource {
 
-    UserDAO dao = new UserDAO();
+    UserDAO userDao = new UserDAO();
 
     UserMapper userMapper = new UserMapperImpl();
     ClientMapper clientMapper = new ClientMapperImpl();
@@ -46,10 +46,10 @@ public class UserResource {
      */
     @GET
     @Path("/username/{username}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
     public Response getByUsername(@PathParam("username") @NotNull String username) {
         try {
-            UserEntity retrievedUser = dao.retrieveByUsername(username);
+            UserEntity retrievedUser = userDao.retrieveByUsername(username);
             UserDTO convertedUser = userMapper.userEntityToDto(retrievedUser);
 
             return Response.ok(convertedUser).build();
@@ -59,9 +59,26 @@ public class UserResource {
         }
 
     }
+    
+    @GET
+    @Path("shops/username/{username}")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
+    public Response getShopByUsername(@PathParam("username") @NotNull String username) {
+        try {
+            ShopEntity retrievedShop = userDao.retrieveShopByUsername(username);
+            ShopDTO convertedShop = shopMapper.shopEntityToDto(retrievedShop);
+
+            return Response.ok(convertedShop).build();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return Response.serverError().type(MediaType.TEXT_PLAIN).entity(ex).build();
+        }
+
+    }
+    
 
     @POST
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("shops")
     public Response registerShop(@NotNull ShopDTO user, @Context UriInfo uriInfo) {
@@ -72,7 +89,7 @@ public class UserResource {
 
         try {
             ShopEntity convertedUser = shopMapper.shopDtoToEntity(user);
-            registredUser = dao.registerUser(convertedUser);
+            registredUser = userDao.registerUser(convertedUser);
             responseUser = shopMapper.shopEntityToDto((ShopEntity) registredUser);
             
             String id = String.valueOf(responseUser.getId());
@@ -87,7 +104,7 @@ public class UserResource {
     }
 
     @POST
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("clients")
     public Response registerShop(@NotNull ClientDTO user, @Context UriInfo uriInfo) {
@@ -98,7 +115,7 @@ public class UserResource {
         UserDTO responseUser = null;
         try {
             convertedUser = clientMapper.clientDtoToEntity((ClientDTO) user);
-            registredUser = dao.registerUser(convertedUser);
+            registredUser = userDao.registerUser(convertedUser);
             responseUser = clientMapper.clientEntityToDto((ClientEntity) registredUser);
             
             String id = String.valueOf(responseUser.getId());

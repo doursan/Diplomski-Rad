@@ -81,4 +81,19 @@ public class CarDAO {
         }
     }
 
+    public CarEntity retrieveByRegistration(String registration) throws Exception {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.wdyc_NJTRestWS_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+        try {
+            CarEntity retrievedCar = em.createNamedQuery("CarEntity.findByRegistration", CarEntity.class).setParameter("registration", registration).getSingleResult();
+            System.out.println(retrievedCar);
+            return retrievedCar;
+        } catch (Exception e) {
+            throw new Exception("Greska! Automobil sa tom registarskom oznokom ne postoji!");
+        } finally {
+            em.close();
+            emf.close();
+        }
+    }
+
 }

@@ -11,21 +11,15 @@ package com.wdyc.njtclient.dto;
  */
 public class ItemDTO {
     
-    private ItemDTOPK itemPK;
     private String amount;
     private String price;
     private CarPartDTO carPart;
     private ServiceDTO service;
+    private int rowNumber;
+    private String name;
+    private String pricePerUnit;
 
     public ItemDTO() {
-    }
-
-    public ItemDTOPK getItemPK() {
-        return itemPK;
-    }
-
-    public void setItemPK(ItemDTOPK itemPK) {
-        this.itemPK = itemPK;
     }
 
     public String getAmount() {
@@ -59,5 +53,29 @@ public class ItemDTO {
     public void setService(ServiceDTO service) {
         this.service = service;
     }   
-    
+
+    public int getRowNumber() {
+        return rowNumber;
+    }
+
+    public void setRowNumber(int rowNumber) {
+        this.rowNumber = rowNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPricePerUnit() {
+        return pricePerUnit;
+    }
+
+    public void setPricePerUnit(String pricePerUnit) {
+        this.pricePerUnit = pricePerUnit;
+    }
+
 }

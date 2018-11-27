@@ -3,6 +3,8 @@
   <persistence-unit name="com.wdyc_NJTRestWS_war_1.0-SNAPSHOTPU" transaction-type="JTA">
     <jta-data-source>java:app/dmddatabase</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties/>
+    <properties>
+        <property name="eclipselink.allow-zero-id" value="true"/>
+    </properties>
   </persistence-unit>
 </persistence>

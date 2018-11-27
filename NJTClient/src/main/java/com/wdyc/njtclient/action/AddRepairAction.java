@@ -27,6 +27,7 @@ public class AddRepairAction extends AbstractAction {
         }
         
         request.setAttribute("banner_page", "/WEB-INF/pages/save_repair_form.jsp");
+        request.setAttribute("items", AddRepairItemAction.getItems());
 
         return "add_repair";
 

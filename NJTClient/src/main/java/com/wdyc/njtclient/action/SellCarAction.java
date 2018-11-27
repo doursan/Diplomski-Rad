@@ -10,6 +10,8 @@ import com.wdyc.njtclient.dto.CarDTO;
 import com.wdyc.njtclient.dto.ClientDTO;
 import com.wdyc.njtclient.dto.UserDTO;
 import com.wdyc.njtclient.rest.ws.RestWSClient;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Response;
 
@@ -21,25 +23,30 @@ public class SellCarAction extends AbstractAction {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String carId = request.getParameter("cars");
-        String buyerUsername = request.getParameter("buyer");
-        
-        RestWSClient.getInstance().setTarget(Constants.USERS_PATH);
-        UserDTO buyer = RestWSClient.getInstance().getByParameter_JSON(UserDTO.class, Constants.USER_USERNAME_PARAM, buyerUsername);
-        ClientDTO newOwner = new ClientDTO();
-        newOwner.setId(buyer.getId());
-        CarDTO car = new CarDTO();     
-        car.setOwner(newOwner);
-        RestWSClient.getInstance().setTarget(Constants.CARS_PATH);
-        Response response = RestWSClient.getInstance().updateById_JSON(car, carId);
-        if(response.getStatus() == 200) {
-            CarDTO soldCar = response.readEntity(CarDTO.class);
-            request.setAttribute("message", "You have successfully sold your car");
-        } else {
-            String errorMessage = response.readEntity(String.class);
-            request.setAttribute("message", errorMessage);
+        try {
+            String carId = request.getParameter("cars");
+            String buyerUsername = request.getParameter("buyer");
+            
+            RestWSClient.getInstance().setTarget(Constants.USERS_PATH);
+            UserDTO buyer = RestWSClient.getInstance().getByParameter_JSON(UserDTO.class, Constants.USER_USERNAME_PARAM, buyerUsername);
+            ClientDTO newOwner = new ClientDTO();
+            newOwner.setId(buyer.getId());
+            CarDTO car = new CarDTO();
+            car.setOwner(newOwner);
+            RestWSClient.getInstance().setTarget(Constants.CARS_PATH);
+            Response response = RestWSClient.getInstance().updateById_JSON(car, carId);
+            if(response.getStatus() == 200) {
+                CarDTO soldCar = response.readEntity(CarDTO.class);
+                request.setAttribute("message", "You have successfully sold your car");
+            } else {
+                String errorMessage = response.readEntity(String.class);
+                request.setAttribute("message", errorMessage);
+            }
+            return "index";
+        } catch (Exception ex) {
+            request.setAttribute("message", "Buyer with that username does not exist!");
+            return "index";
         }
-        return "index";
     }
     
 }

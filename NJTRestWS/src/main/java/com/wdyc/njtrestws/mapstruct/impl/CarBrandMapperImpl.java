@@ -12,7 +12,7 @@ import org.mapstruct.factory.Mappers;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2018-10-08T16:24:09+0200",
+    date = "2018-11-26T01:41:19+0100",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_111 (Oracle Corporation)"
 )
 public class CarBrandMapperImpl implements CarBrandMapper {

@@ -7,22 +7,20 @@ import com.wdyc.njtrestws.domen.CarEntity;
 import com.wdyc.njtrestws.domen.CarPartEntity;
 import com.wdyc.njtrestws.domen.ClientEntity;
 import com.wdyc.njtrestws.domen.ItemEntity;
-import com.wdyc.njtrestws.domen.ItemEntityPK;
 import com.wdyc.njtrestws.domen.ModelEngineEntity;
 import com.wdyc.njtrestws.domen.RepairEntity;
 import com.wdyc.njtrestws.domen.ServiceEntity;
-import com.wdyc.njtrestws.domen.ShopEntity;
+import com.wdyc.njtrestws.domen.UserEntity;
 import com.wdyc.njtrestws.dto.CarBrandDTO;
 import com.wdyc.njtrestws.dto.CarBrandModelDTO;
 import com.wdyc.njtrestws.dto.CarDTO;
 import com.wdyc.njtrestws.dto.CarPartDTO;
 import com.wdyc.njtrestws.dto.ClientDTO;
 import com.wdyc.njtrestws.dto.ItemDTO;
-import com.wdyc.njtrestws.dto.ItemDTOPK;
 import com.wdyc.njtrestws.dto.ModelEngineDTO;
 import com.wdyc.njtrestws.dto.RepairDTO;
 import com.wdyc.njtrestws.dto.ServiceDTO;
-import com.wdyc.njtrestws.dto.ShopDTO;
+import com.wdyc.njtrestws.dto.UserDTO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
@@ -30,7 +28,7 @@ import org.mapstruct.factory.Mappers;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2018-10-08T16:24:08+0200",
+    date = "2018-11-26T01:41:19+0100",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_111 (Oracle Corporation)"
 )
 public class ModelEngineMapperImpl implements ModelEngineMapper {
@@ -106,56 +104,22 @@ public class ModelEngineMapperImpl implements ModelEngineMapper {
         return clientEntity;
     }
 
-    protected List<RepairEntity> repairDTOListToRepairEntityList(List<RepairDTO> list) {
-        if ( list == null ) {
+    protected UserEntity userDTOToUserEntity(UserDTO userDTO) {
+        if ( userDTO == null ) {
             return null;
         }
 
-        List<RepairEntity> list1 = new ArrayList<RepairEntity>( list.size() );
-        for ( RepairDTO repairDTO : list ) {
-            list1.add( repairDTOToRepairEntity( repairDTO ) );
+        UserEntity userEntity = new UserEntity();
+
+        if ( userDTO.getId() != null ) {
+            userEntity.setId( Integer.parseInt( userDTO.getId() ) );
         }
+        userEntity.setUsername( userDTO.getUsername() );
+        userEntity.setPassword( userDTO.getPassword() );
+        userEntity.setEmail( userDTO.getEmail() );
+        userEntity.setTip( userDTO.getTip() );
 
-        return list1;
-    }
-
-    protected ShopEntity shopDTOToShopEntity(ShopDTO shopDTO) {
-        if ( shopDTO == null ) {
-            return null;
-        }
-
-        ShopEntity shopEntity = new ShopEntity();
-
-        if ( shopDTO.getId() != null ) {
-            shopEntity.setId( Integer.parseInt( shopDTO.getId() ) );
-        }
-        shopEntity.setUsername( shopDTO.getUsername() );
-        shopEntity.setPassword( shopDTO.getPassword() );
-        shopEntity.setEmail( shopDTO.getEmail() );
-        shopEntity.setTip( shopDTO.getTip() );
-        shopEntity.setNaziv( shopDTO.getNaziv() );
-        shopEntity.setPib( shopDTO.getPib() );
-        shopEntity.setMaticni( shopDTO.getMaticni() );
-        shopEntity.setRepairList( repairDTOListToRepairEntityList( shopDTO.getRepairList() ) );
-
-        return shopEntity;
-    }
-
-    protected ItemEntityPK itemDTOPKToItemEntityPK(ItemDTOPK itemDTOPK) {
-        if ( itemDTOPK == null ) {
-            return null;
-        }
-
-        ItemEntityPK itemEntityPK = new ItemEntityPK();
-
-        if ( itemDTOPK.getId() != null ) {
-            itemEntityPK.setId( Integer.parseInt( itemDTOPK.getId() ) );
-        }
-        if ( itemDTOPK.getRepairId() != null ) {
-            itemEntityPK.setRepairId( Integer.parseInt( itemDTOPK.getRepairId() ) );
-        }
-
-        return itemEntityPK;
+        return userEntity;
     }
 
     protected List<ItemEntity> itemDTOListToItemEntityList(List<ItemDTO> list) {
@@ -182,6 +146,9 @@ public class ModelEngineMapperImpl implements ModelEngineMapper {
             carPartEntity.setId( Integer.parseInt( carPartDTO.getId() ) );
         }
         carPartEntity.setName( carPartDTO.getName() );
+        if ( carPartDTO.getPrice() != null ) {
+            carPartEntity.setPrice( Double.parseDouble( carPartDTO.getPrice() ) );
+        }
         carPartEntity.setItemList( itemDTOListToItemEntityList( carPartDTO.getItemList() ) );
 
         return carPartEntity;
@@ -216,7 +183,6 @@ public class ModelEngineMapperImpl implements ModelEngineMapper {
 
         ItemEntity itemEntity = new ItemEntity();
 
-        itemEntity.setItemPK( itemDTOPKToItemEntityPK( itemDTO.getItemPK() ) );
         if ( itemDTO.getAmount() != null ) {
             itemEntity.setAmount( Double.parseDouble( itemDTO.getAmount() ) );
         }
@@ -248,10 +214,23 @@ public class ModelEngineMapperImpl implements ModelEngineMapper {
             repairEntity.setPrice( Double.parseDouble( repairDTO.getPrice() ) );
         }
         repairEntity.setCar( carDTOToCarEntity( repairDTO.getCar() ) );
-        repairEntity.setShop( shopDTOToShopEntity( repairDTO.getShop() ) );
+        repairEntity.setShop( userDTOToUserEntity( repairDTO.getShop() ) );
         repairEntity.setItemList( itemDTOListToItemEntityList( repairDTO.getItemList() ) );
 
         return repairEntity;
+    }
+
+    protected List<RepairEntity> repairDTOListToRepairEntityList(List<RepairDTO> list) {
+        if ( list == null ) {
+            return null;
+        }
+
+        List<RepairEntity> list1 = new ArrayList<RepairEntity>( list.size() );
+        for ( RepairDTO repairDTO : list ) {
+            list1.add( repairDTOToRepairEntity( repairDTO ) );
+        }
+
+        return list1;
     }
 
     protected CarEntity carDTOToCarEntity(CarDTO carDTO) {

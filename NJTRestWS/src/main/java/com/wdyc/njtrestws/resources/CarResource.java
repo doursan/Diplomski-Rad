@@ -98,4 +98,19 @@ public class CarResource {
         }
     }
 
+    @GET
+    @Path("registration/{registration}")
+    @Produces({MediaType.APPLICATION_JSON,MediaType.TEXT_PLAIN})
+    public Response getByRegistration(@PathParam("registration") @NotNull String registration) {
+        try {
+            CarEntity retrievedCar = carDao.retrieveByRegistration(registration);
+            CarDTO convertedCar = carMapper.carEntityToDto(retrievedCar);
+
+            Response response = Response.ok(convertedCar).build();
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().type(MediaType.TEXT_PLAIN).entity(e.getMessage()).build();
+        }
+    }
 }

@@ -8,6 +8,8 @@ package com.wdyc.njtclient.action;
 import com.wdyc.njtclient.constants.Constants;
 import com.wdyc.njtclient.dto.UserDTO;
 import com.wdyc.njtclient.rest.ws.RestWSClient;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -25,19 +27,24 @@ public class LoginAction extends AbstractAction {
 
         RestWSClient.getInstance().setTarget(Constants.USERS_PATH);
 
-        UserDTO returnedUser = RestWSClient.getInstance().getByParameter_JSON(UserDTO.class, Constants.USER_USERNAME_PARAM, username);
-
-        if (returnedUser == null || !returnedUser.getPassword().equals(password)) {
+        try {
+            UserDTO returnedUser = RestWSClient.getInstance().getByParameter_JSON(UserDTO.class, Constants.USER_USERNAME_PARAM, username);
+            if (!returnedUser.getPassword().equals(password)) {
+                request.setAttribute("errorMessage", "Invalid username or password");
+                return "login";
+            } else {
+                HttpSession session = request.getSession(true);
+                session.setAttribute("logged_user", returnedUser);
+                if (returnedUser.getTip().equalsIgnoreCase("S")) {
+                    return "admin";
+                } else {
+                    return "index";
+                }
+            }
+        } catch (Exception ex) {
             request.setAttribute("errorMessage", "Invalid username or password");
             return "login";
-        } else {
-            HttpSession session = request.getSession(true);
-            session.setAttribute("logged_user", returnedUser);
-            if (returnedUser.getTip().equalsIgnoreCase("S")) {
-                return "admin";
-            } else {
-                return "index";
-            }
         }
+
     }
 }

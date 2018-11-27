@@ -6,12 +6,14 @@
 package com.wdyc.njtrestws.domen;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -49,8 +51,6 @@ public class RepairEntity implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "datum")
     @Temporal(TemporalType.DATE)
     private Date datum;
@@ -70,9 +70,9 @@ public class RepairEntity implements Serializable {
     private CarEntity car;
     @JoinColumn(name = "shop_id", referencedColumnName = "id")
     @ManyToOne
-    private ShopEntity shop;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "repair")
-    private List<ItemEntity> itemList;
+    private UserEntity shop;
+    @OneToMany(mappedBy = "repair", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemEntity> itemList = new ArrayList<>();
 
     public RepairEntity() {
     }
@@ -136,11 +136,11 @@ public class RepairEntity implements Serializable {
         this.car = car;
     }
 
-    public ShopEntity getShop() {
+    public UserEntity getShop() {
         return shop;
     }
 
-    public void setShop(ShopEntity shop) {
+    public void setShop(UserEntity shop) {
         this.shop = shop;
     }
 
@@ -151,6 +151,11 @@ public class RepairEntity implements Serializable {
 
     public void setItemList(List<ItemEntity> itemList) {
         this.itemList = itemList;
+    }
+    
+    public void addItem(ItemEntity item) {
+        item.setRepair(this);
+        itemList.add(item);
     }
 
     @Override

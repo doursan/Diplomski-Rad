@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -33,7 +34,7 @@ public class ItemEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
-    protected ItemEntityPK itemPK;
+    protected ItemEntityPK itemPK = new ItemEntityPK();
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "amount")
     private Double amount;
@@ -42,8 +43,8 @@ public class ItemEntity implements Serializable {
     @JoinColumn(name = "car_part_id", referencedColumnName = "id")
     @ManyToOne
     private CarPartEntity carPart;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "repair_id", referencedColumnName = "id", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
     private RepairEntity repair;
     @JoinColumn(name = "service_id", referencedColumnName = "id")
     @ManyToOne

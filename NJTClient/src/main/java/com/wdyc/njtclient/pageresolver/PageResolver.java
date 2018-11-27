@@ -32,7 +32,7 @@ public class PageResolver {
         view.put("add_service", "/WEB-INF/pages/add_service.jsp");
         view.put("update_service", "/WEB-INF/pages/update_service.jsp");
         view.put("delete_service", "/WEB-INF/pages/delete_service.jsp");
-        view.put("delete_service", "/WEB-INF/pages/add_repair.jsp");
+        view.put("add_repair", "/WEB-INF/pages/add_repair.jsp");
     }
 
     public static PageResolver getInstance() {

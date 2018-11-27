@@ -14,11 +14,13 @@ import org.mapstruct.Mapping;
  *
  * @author Dusan
  */
-@Mapper(uses = {ItemPKMapper.class, CarPartMapper.class, ServiceMapper.class})
+@Mapper(uses = {CarPartMapper.class, ServiceMapper.class})
 public interface ItemMapper {
-    
+
+    @Mapping(target = "rowNumber", source = "itemPK.id")
+    @Mapping(target = "repairId", source = "itemPK.repairId")
     ItemDTO itemEntityToDto(ItemEntity item);
-    
-    @Mapping(target = "repair", ignore = true)
+
+    @Mapping(target = "itemPK", ignore = true)
     ItemEntity itemDtoToEntity(ItemDTO item);
 }

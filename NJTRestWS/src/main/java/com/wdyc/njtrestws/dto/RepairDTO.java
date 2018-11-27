@@ -5,6 +5,7 @@
  */
 package com.wdyc.njtrestws.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,8 +21,8 @@ public class RepairDTO {
     private boolean isActive;
     private String price;
     private CarDTO car;
-    private ShopDTO shop;
-    private List<ItemDTO> itemList;
+    private UserDTO shop;
+    private List<ItemDTO> itemList = new ArrayList<>();
 
     public RepairDTO() {
     }
@@ -84,11 +85,11 @@ public class RepairDTO {
         this.car = car;
     }
 
-    public ShopDTO getShop() {
+    public UserDTO getShop() {
         return shop;
     }
 
-    public void setShop(ShopDTO shop) {
+    public void setShop(UserDTO shop) {
         this.shop = shop;
     }
 

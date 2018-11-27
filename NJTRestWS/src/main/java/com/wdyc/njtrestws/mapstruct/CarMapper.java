@@ -14,11 +14,12 @@ import org.mapstruct.Mapping;
  *
  * @author Dusan
  */
-@Mapper(uses = {ModelEngineMapper.class, ClientMapper.class, RepairMapper.class})
+@Mapper(uses = {ModelEngineMapper.class, ClientMapper.class})
 public interface CarMapper {
     
     @Mapping(target = "engines", ignore = true)
     @Mapping(target = "brands", ignore = true)
+    @Mapping(target = "repairList", ignore = true)
     CarDTO carEntityToDto(CarEntity car);    
     
     @Mapping(target = "repairList", ignore = true)
