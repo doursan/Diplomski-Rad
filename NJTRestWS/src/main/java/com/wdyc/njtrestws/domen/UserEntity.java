@@ -62,7 +62,7 @@ public class UserEntity implements Serializable {
     @Column(name = "email")
     private String email;
     @Size(max = 1)
-    @Column(name = "TIP")
+    @Column(name = "TIP", insertable = false, updatable = false)
     private String tip;
 
     

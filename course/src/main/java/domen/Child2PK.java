@@ -3,30 +3,33 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.wdyc.njtrestws.domen;
+package domen;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author Dusan
  */
 @Embeddable
-public class ItemEntityPK implements Serializable {
+public class Child2PK implements Serializable {
 
+    @Basic(optional = false)
+    @Column(name = "id")
     private int id;
-    private int repair;
+    @Basic(optional = false)
+    @Column(name = "parent2_id")
+    private int parent2;
 
-    public ItemEntityPK() {
+    public Child2PK() {
     }
 
-    public ItemEntityPK(int id, int repair) {
+    public Child2PK(int id, int parent2) {
         this.id = id;
-        this.repair = repair;
+        this.parent2 = parent2;
     }
 
     public int getId() {
@@ -37,33 +40,33 @@ public class ItemEntityPK implements Serializable {
         this.id = id;
     }
 
-    public int getRepair() {
-        return repair;
+    public int getParent2() {
+        return parent2;
     }
 
-    public void setRepair(int repair) {
-        this.repair = repair;
+    public void setParent2(int parent2) {
+        this.parent2 = parent2;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (int) id;
-        hash += (int) repair;
+        hash += (int) parent2;
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ItemEntityPK)) {
+        if (!(object instanceof Child2PK)) {
             return false;
         }
-        ItemEntityPK other = (ItemEntityPK) object;
+        Child2PK other = (Child2PK) object;
         if (this.id != other.id) {
             return false;
         }
-        if (this.repair != other.repair) {
+        if (this.parent2 != other.parent2) {
             return false;
         }
         return true;
@@ -71,7 +74,7 @@ public class ItemEntityPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.wdyc.njtrestws.domen.ItemEntityPK[ id=" + id + ", repairId=" + repair + " ]";
+        return "domen.Child2PK[ id=" + id + ", parent2Id=" + parent2 + " ]";
     }
     
 }

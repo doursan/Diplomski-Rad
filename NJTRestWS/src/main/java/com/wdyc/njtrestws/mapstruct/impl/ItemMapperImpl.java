@@ -2,14 +2,14 @@ package com.wdyc.njtrestws.mapstruct.impl;
 
 import com.wdyc.njtrestws.mapstruct.*;
 import com.wdyc.njtrestws.domen.ItemEntity;
-import com.wdyc.njtrestws.domen.ItemEntityPK;
+import com.wdyc.njtrestws.domen.RepairEntity;
 import com.wdyc.njtrestws.dto.ItemDTO;
 import javax.annotation.Generated;
 import org.mapstruct.factory.Mappers;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2018-11-26T01:41:19+0100",
+    date = "2018-12-13T18:54:14+0100",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_111 (Oracle Corporation)"
 )
 public class ItemMapperImpl implements ItemMapper {
@@ -25,10 +25,11 @@ public class ItemMapperImpl implements ItemMapper {
 
         ItemDTO itemDTO = new ItemDTO();
 
-        int id = itemItemPKId( item );
-        itemDTO.setRowNumber( id );
-        int repairId = itemItemPKRepairId( item );
-        itemDTO.setRepairId( repairId );
+        itemDTO.setRowNumber( item.getId() );
+        Integer id = itemRepairId( item );
+        if ( id != null ) {
+            itemDTO.setRepairId( id );
+        }
         if ( item.getAmount() != null ) {
             itemDTO.setAmount( String.valueOf( item.getAmount() ) );
         }
@@ -45,11 +46,12 @@ public class ItemMapperImpl implements ItemMapper {
     public ItemEntity itemDtoToEntity(ItemDTO item) {
         if ( item == null ) {
             return null;
-        }        
-        
-        ItemEntity itemEntity = new ItemEntity();
-        itemEntity.getItemPK().setId(item.getRowNumber());
+        }
 
+        ItemEntity itemEntity = new ItemEntity();
+
+        itemEntity.setRepair( itemDTOToRepairEntity( item ) );
+        itemEntity.setId( item.getRowNumber() );
         if ( item.getAmount() != null ) {
             itemEntity.setAmount( Double.parseDouble( item.getAmount() ) );
         }
@@ -62,27 +64,30 @@ public class ItemMapperImpl implements ItemMapper {
         return itemEntity;
     }
 
-    private int itemItemPKId(ItemEntity itemEntity) {
+    private Integer itemRepairId(ItemEntity itemEntity) {
         if ( itemEntity == null ) {
-            return 0;
+            return null;
         }
-        ItemEntityPK itemPK = itemEntity.getItemPK();
-        if ( itemPK == null ) {
-            return 0;
+        RepairEntity repair = itemEntity.getRepair();
+        if ( repair == null ) {
+            return null;
         }
-        int id = itemPK.getId();
+        Integer id = repair.getId();
+        if ( id == null ) {
+            return null;
+        }
         return id;
     }
 
-    private int itemItemPKRepairId(ItemEntity itemEntity) {
-        if ( itemEntity == null ) {
-            return 0;
+    protected RepairEntity itemDTOToRepairEntity(ItemDTO itemDTO) {
+        if ( itemDTO == null ) {
+            return null;
         }
-        ItemEntityPK itemPK = itemEntity.getItemPK();
-        if ( itemPK == null ) {
-            return 0;
-        }
-        int repairId = itemPK.getRepairId();
-        return repairId;
+
+        RepairEntity repairEntity = new RepairEntity();
+
+        repairEntity.setId( itemDTO.getRepairId() );
+
+        return repairEntity;
     }
 }

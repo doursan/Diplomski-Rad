@@ -17,10 +17,11 @@ import org.mapstruct.Mapping;
 @Mapper(uses = {CarPartMapper.class, ServiceMapper.class})
 public interface ItemMapper {
 
-    @Mapping(target = "rowNumber", source = "itemPK.id")
-    @Mapping(target = "repairId", source = "itemPK.repairId")
+    @Mapping(target = "rowNumber", source = "id")
+    @Mapping(target = "repairId", source = "repair.id")
     ItemDTO itemEntityToDto(ItemEntity item);
 
-    @Mapping(target = "itemPK", ignore = true)
+    @Mapping(target = "repair.id", source = "repairId")
+    @Mapping(target = "id", source = "rowNumber")
     ItemEntity itemDtoToEntity(ItemDTO item);
 }

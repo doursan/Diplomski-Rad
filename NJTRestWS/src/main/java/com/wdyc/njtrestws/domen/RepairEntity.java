@@ -71,7 +71,7 @@ public class RepairEntity implements Serializable {
     @JoinColumn(name = "shop_id", referencedColumnName = "id")
     @ManyToOne
     private UserEntity shop;
-    @OneToMany(mappedBy = "repair", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "repair", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemEntity> itemList = new ArrayList<>();
 
     public RepairEntity() {
