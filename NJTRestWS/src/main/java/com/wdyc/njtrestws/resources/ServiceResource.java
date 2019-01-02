@@ -98,7 +98,7 @@ public class ServiceResource {
     
     @DELETE
     @Path("/{serviceId}")
-    public Response removeCarPart(@PathParam("serviceId") @NotNull int id) {
+    public Response removeService(@PathParam("serviceId") @NotNull int id) {
         try {
             ServiceEntity removedService = serviceDao.removeService(id);
             ServiceDTO convertedService = serviceMapper.serviceEntityToDto(removedService);

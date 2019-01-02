@@ -71,7 +71,7 @@ public class RepairEntity implements Serializable {
     @JoinColumn(name = "shop_id", referencedColumnName = "id")
     @ManyToOne
     private UserEntity shop;
-    @OneToMany(mappedBy = "repair", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "repair", cascade = CascadeType.ALL, orphanRemoval=true)
     private List<ItemEntity> itemList = new ArrayList<>();
 
     public RepairEntity() {
@@ -151,6 +151,9 @@ public class RepairEntity implements Serializable {
 
     public void setItemList(List<ItemEntity> itemList) {
         this.itemList = itemList;
+        for(ItemEntity item : this.itemList) {
+            item.setRepair(this);
+        }
     }
     
     public void addItem(ItemEntity item) {

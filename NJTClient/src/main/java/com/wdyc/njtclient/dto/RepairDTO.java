@@ -100,8 +100,21 @@ public class RepairDTO {
     public void setItemList(List<ItemDTO> itemList) {
         this.itemList = itemList;
     }
-    
+
     public void addItemToList(ItemDTO item) {
         itemList.add(item);
     }
+
+    @Override
+    public String toString() {
+        ServiceDTO service = new ServiceDTO();
+        for (ItemDTO item : itemList) {
+            if (item.getService() != null) {
+                service = item.getService();
+                break;
+            }
+        }
+        return car.getRegistration() + " - " + service.getName();
+    }
+
 }

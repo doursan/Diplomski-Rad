@@ -19,6 +19,8 @@ public interface ItemMapper {
 
     @Mapping(target = "rowNumber", source = "id")
     @Mapping(target = "repairId", source = "repair.id")
+    @Mapping(target = "name", ignore = true)
+    @Mapping(target = "pricePerUnit", ignore = true)
     ItemDTO itemEntityToDto(ItemEntity item);
 
     @Mapping(target = "repair.id", source = "repairId")

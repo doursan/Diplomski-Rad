@@ -5,6 +5,7 @@
  */
 package com.wdyc.njtclient.action;
 
+import com.wdyc.njtclient.dto.RepairDTO;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -16,6 +17,8 @@ public class AddRepairAction extends AbstractAction {
     @Override
     public String execute(HttpServletRequest request) {
 
+        String action = request.getParameter("action");
+        
         ChangeCarPartAction changeCarPartAction = new ChangeCarPartAction();
         String page = changeCarPartAction.execute(request);
 
@@ -25,9 +28,12 @@ public class AddRepairAction extends AbstractAction {
         if (page.equalsIgnoreCase("admin") || page2.equalsIgnoreCase("admin")) {
             return "admin";
         }
+        if(action.equalsIgnoreCase("create_repair")) {
+            AddRepairItemAction.setRepair(new RepairDTO());
+        }
         
         request.setAttribute("banner_page", "/WEB-INF/pages/save_repair_form.jsp");
-        request.setAttribute("items", AddRepairItemAction.getItems());
+        request.setAttribute("items", AddRepairItemAction.getRepair().getItemList());
 
         return "add_repair";
 

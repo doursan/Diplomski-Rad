@@ -63,31 +63,25 @@
                                 </ul>
                             </li>
                             <li class="menu-has-children"><a href="#">Repairs</a>
-                                <ul>
+                                <ul class = "dropdown-menu multi-level">
                                     <li><a href=" 
                                            <c:url value="/controller">
                                                <c:param name="action" value="create_repair"></c:param>
-                                           </c:url> ">Create New Repair</a></li>
+                                           </c:url> ">Create New Repair</a></li>  
                                     <li><a href=" 
                                            <c:url value="/controller">
-                                               <c:param name="action" value="change_service"></c:param>
-                                           </c:url> ">Change a Service</a></li>
+                                               <c:param name="action" value="change_repair"></c:param>
+                                           </c:url> ">Change a Repair</a></li>
                                     <li><a href=" 
                                            <c:url value="/controller">
-                                               <c:param name="action" value="delete_service"></c:param>
-                                           </c:url> ">Delete a Service</a></li>
+                                               <c:param name="action" value="finish_repair"></c:param>
+                                           </c:url> ">Finish a Repair</a></li>
+                                    <li><a href=" 
+                                           <c:url value="/controller">
+                                               <c:param name="action" value="delete_repair"></c:param>
+                                           </c:url> ">Delete a Repair</a></li>
                                 </ul>
-                            </li>
-<!--                            <li><a href="team.html">Team</a></li>
-                            <li><a href="price.html">Price</a></li>
-                            <li><a href="blog-home.html">Blog</a></li>	
-                            <li><a href="contact.html">Contact</a></li>	
-                            <li class="menu-has-children"><a href="">Pages</a>
-                                <ul>
-                                    <li><a href="blog-single.html">blog Single</a></li>
-                                    <li><a href="elements.html">Elements</a></li>
-                                </ul>
-                            </li>			          -->
+                            </li>                         		         
                         </ul>
                     </nav><!-- #nav-menu-container -->		    		
                 </div>

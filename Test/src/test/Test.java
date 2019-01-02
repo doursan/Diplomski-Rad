@@ -5,6 +5,8 @@
  */
 package test;
 
+import java.util.Date;
+
 /**
  *
  * @author Dusan
@@ -16,23 +18,8 @@ public class Test {
      */
     public static void main(String[] args) {
         
-        A a = new A();
-        B b = new B();
-        C c = new C();
+        Date date = new Date();
         
-        writeClass(c);
+        System.out.println(date);
     }
-    
-    public static void writeClass(A a) {
-        if(a instanceof B) {
-            System.out.println("Ovo je B klasa");
-        }
-        else if(a instanceof C) {
-            System.out.println("Ovo je C klasa");
-        }
-        else {
-            System.out.println("Nije ni B ni C");
-        }
-    }
-    
 }

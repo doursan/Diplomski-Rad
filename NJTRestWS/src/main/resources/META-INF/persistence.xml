@@ -6,11 +6,11 @@
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="eclipselink.allow-zero-id" value="true"/>
-      <property name="eclipselink.logging.level" value="FINEST"/>
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
       <property name="hibernate.format_sql" value="true"/>
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
       <property name="hibernate.hbm2ddl.auto" value="update"/>
+      <property name = "hibernate.show_sql" value = "true" />
     </properties>
   </persistence-unit>
 </persistence>

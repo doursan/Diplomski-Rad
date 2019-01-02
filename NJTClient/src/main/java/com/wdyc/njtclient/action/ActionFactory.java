@@ -14,7 +14,7 @@ public class ActionFactory {
     public static AbstractAction createAction(String action) {
 
         AbstractAction command = null;
-     
+
         if (action.equalsIgnoreCase("login")) {
             command = new LoginAction();
         }
@@ -35,13 +35,13 @@ public class ActionFactory {
         }
         if (action.equalsIgnoreCase("sell_car_page")) {
             command = new SellCarPageAction();
-        }  
+        }
         if (action.equalsIgnoreCase("sell_car")) {
             command = new SellCarAction();
         }
         if (action.equalsIgnoreCase("add_part")) {
             command = new AddCarPartAction();
-        }     
+        }
         if (action.equalsIgnoreCase("save_part")) {
             command = new SaveCarPartAction();
         }
@@ -81,8 +81,32 @@ public class ActionFactory {
         if (action.equalsIgnoreCase("add_repair_item")) {
             command = new AddRepairItemAction();
         }
+        if (action.equalsIgnoreCase("remove_item")) {
+            command = new RemoveItemAction();
+        }
         if (action.equalsIgnoreCase("save_repair")) {
             command = new SaveRepairAction();
+        }
+        if (action.equalsIgnoreCase("change_repair")) {
+            command = new SelectRepairAction();
+        }
+        if (action.equalsIgnoreCase("update_repair_select")) {
+            command = new UpdateRepairSelectAction();
+        }
+        if (action.equalsIgnoreCase("update_repair")) {
+            command = new UpdateRepairAction();
+        }
+        if (action.equalsIgnoreCase("finish_repair")) {
+            command = new SelectRepairAction();
+        }
+        if (action.equalsIgnoreCase("deactivate_repair")) {
+            command = new FinishRepairAction();
+        }
+        if (action.equalsIgnoreCase("delete_repair")) {
+            command = new SelectRepairAction();
+        }
+        if (action.equalsIgnoreCase("remove_repair")) {
+            command = new RemoveRepairAction();
         }
         return command;
     }

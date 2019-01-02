@@ -17,11 +17,12 @@ public class ItemDTO {
     private ServiceDTO service;
     private int rowNumber;
     private String name;
+    private String repairId;
     private String pricePerUnit;
 
     public ItemDTO() {
     }
-
+    
     public String getAmount() {
         return amount;
     }
@@ -76,6 +77,14 @@ public class ItemDTO {
 
     public void setPricePerUnit(String pricePerUnit) {
         this.pricePerUnit = pricePerUnit;
+    }
+
+    public String getRepairId() {
+        return repairId;
+    }
+
+    public void setRepairId(String repairId) {
+        this.repairId = repairId;
     }
 
 }

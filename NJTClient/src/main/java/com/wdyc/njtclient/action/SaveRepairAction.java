@@ -51,6 +51,7 @@ public class SaveRepairAction extends AbstractAction {
                 RepairDTO returnedRepair = response.readEntity(RepairDTO.class);
 
                 request.setAttribute("message", "You have successfully created a Repair!");
+                AddRepairItemAction.resetRepair();
             } else {
                 String errorMessage = response.readEntity(String.class);
                 request.setAttribute("message", errorMessage);

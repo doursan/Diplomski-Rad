@@ -38,11 +38,12 @@
             <div class="row">
                 <div class="col-md-12">
                     <h2 class="poruka">${message}</h2>
+                    <h2 class="poruka">UPDATE</h2>
                     <br/>
                     <form class="save_car" action="/NJTClient/controller" method="POST">
                         <input type="hidden" name="action" value="add_repair_item" />   
-                        <input type="hidden" name="type"  value="service" />  
-                        <input type="hidden" name="from"  value="create_repair" />         
+                        <input type="hidden" name="type"  value="service" />        
+                        <input type="hidden" name="from"  value="update_repair" />        
                         <input type="hidden" name="service_name" id="service_name" value="" />  
                         <h3 class="white">Select a Service you wish to Add</h3>   
                         <br/>
@@ -74,8 +75,8 @@
                         <h3 class="white">Select a Car Part you wish to Add</h3>   
                         <br/>
                         <input type="hidden" name="action" value="add_repair_item" />        
-                        <input type="hidden" name="type" value="carPart" />        
-                        <input type="hidden" name="from"  value="create_repair" />            
+                        <input type="hidden" name="type" value="carPart" />       
+                        <input type="hidden" name="from"  value="update_repair" />           
                         <input type="hidden" name="part_name" id="part_name" value="" />    
                         <div class="form-row align-items-center justify-content-center">
                             <div class="form-group col-md-3">
@@ -102,55 +103,57 @@
                     <br/>
                     <br/>
                     <br/>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Price per unit</th>
-                                <th scope="col">Amount</th>
-                                <th scope="col">Price</th>
-                                <th scope="col">Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach var="item" items="${items}" varStatus="loop">
+                    <form class="save_car" action="/NJTClient/controller" method="POST">
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <td>${item.getRowNumber()}</td>
-                                    <td>${item.getName()}</td>
-                                    <td>${item.getPricePerUnit()}</td>
-                                    <td>${item.getAmount()}</td>
-                                    <td>${item.getPrice()}</td>
-                                    <td><a href=" 
-                                           <c:url value="/controller">
-                                               <c:param name="action" value="remove_item"></c:param>
-                                               <c:param name="from" value="create_repair"></c:param>
-                                               <c:param name="rowNumber" value="${item.getRowNumber()}"></c:param>
-                                           </c:url> ">&#10008</a></td>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Price per unit</th>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Delete</th>
                                 </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <c:forEach var="item" items="${items}" varStatus="loop">
+                                    <tr>
+                                        <td>${item.getRowNumber()}</td>
+                                        <td>${item.getName()}</td>
+                                        <td>${item.getPricePerUnit()}</td>
+                                        <td>${item.getAmount()}</td>
+                                        <td>${item.getPrice()}</td>
+                                        <td><a href=" 
+                                               <c:url value="/controller">
+                                                   <c:param name="action" value="remove_item"></c:param>
+                                                   <c:param name="from" value="update_repair"></c:param>
+                                                   <c:param name="rowNumber" value="${item.getRowNumber()}"></c:param>
+                                               </c:url> ">&#10008</a></td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </form>
                     <br/>
                     <br/>
                     <form class="save_car" action="/NJTClient/controller" method="POST">
-                        <input type="hidden" name="action" value="save_repair" />  
+                        <input type="hidden" name="action" value="update_repair" />  
                         <h3 class="white">Car Information</h3>   
                         <br/>
                         <div class="form-row align-items-center justify-content-center">
                             <div class="form-group col-md-3">
                                 <label for="amount">Registration</label>
-                                <input type="text" class="form-control" name="registration" id="registration" placeholder="Registration">
+                                <input type="text" class="form-control" name="registration" id="registration" placeholder="${repair.getCar().getRegistration()}" readonly>
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="amount">Current Kilometers</label>
-                                <input type="text" class="form-control" name="kilometers" id="kilometers" placeholder="Kilometers">
+                                <input type="text" class="form-control" name="kilometers" id="kilometers" value="${repair.getKilometers()}">
                             </div>
                         </div>
                         <br/>
                         <br/>
                         <br/>
-                        <input type="submit" class="primary-btn text-uppercase" value="Create Repair"/>     
+                        <input type="submit" class="primary-btn text-uppercase" value="Update Repair"/>     
                     </form> 
                 </div>
             </div>

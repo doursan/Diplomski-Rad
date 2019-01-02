@@ -22,7 +22,7 @@ public class RemoveServiceAction extends AbstractAction {
         String id = request.getParameter("services");
         
         if(id.equalsIgnoreCase("Select a service")) {
-            request.setAttribute("message", "Please select a car part you want to delete");
+            request.setAttribute("message", "Please select a service you want to delete");
             DeleteServiceAction deleteServicesAction = new DeleteServiceAction();
             return deleteServicesAction.execute(request);
         }

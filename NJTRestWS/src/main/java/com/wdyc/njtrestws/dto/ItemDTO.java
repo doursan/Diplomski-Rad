@@ -15,8 +15,10 @@ public class ItemDTO {
     private String price;
     private CarPartDTO carPart;
     private ServiceDTO service;
-    private int repairId;
     private int rowNumber;
+    private int repairId;
+    private String name;
+    private String pricePerUnit;
 
     public ItemDTO() {
     }
@@ -24,7 +26,7 @@ public class ItemDTO {
     public String getAmount() {
         return amount;
     }
-
+    
     public void setAmount(String amount) {
         this.amount = amount;
     }
@@ -59,6 +61,22 @@ public class ItemDTO {
 
     public void setRowNumber(int rowNumber) {
         this.rowNumber = rowNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPricePerUnit() {
+        return pricePerUnit;
+    }
+
+    public void setPricePerUnit(String pricePerUnit) {
+        this.pricePerUnit = pricePerUnit;
     }
 
     public int getRepairId() {
