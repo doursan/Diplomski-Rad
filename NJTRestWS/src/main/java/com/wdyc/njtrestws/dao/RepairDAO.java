@@ -7,6 +7,8 @@ package com.wdyc.njtrestws.dao;
 
 import com.wdyc.njtrestws.domen.ItemEntity;
 import com.wdyc.njtrestws.domen.RepairEntity;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -24,6 +26,8 @@ import javax.validation.ConstraintViolationException;
 public class RepairDAO {
 
     private static final String RETRIEVE_ACTIVE_REPAIRS_FOR_SHOP = "SELECT r FROM RepairEntity r WHERE r.shop.id = :shopId AND r.isActive = true";
+    private static final String RETRIEVE_FINISHED_REPAIRS_FOR_CLIENT = "SELECT r FROM RepairEntity r WHERE r.car in (SELECT c FROM CarEntity c WHERE c.owner.id = :ownerId) AND r.isActive = false";
+    private static final String RETRIEVE_ACTIVE_REPAIRS_FOR_CLIENT = "SELECT r FROM RepairEntity r WHERE r.car in (SELECT c FROM CarEntity c WHERE c.owner.id = :ownerId) AND r.isActive = true";
 
     public RepairEntity saveRepair(RepairEntity repair) throws Exception {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.wdyc_NJTRestWS_war_1.0-SNAPSHOTPU");
@@ -48,9 +52,14 @@ public class RepairDAO {
     public List<RepairEntity> retrieveActiveRepairsForShop(Integer shopId) throws Exception {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.wdyc_NJTRestWS_war_1.0-SNAPSHOTPU");
         EntityManager em = emf.createEntityManager();
+
+        List<RepairEntity> retrievedRepairs = new ArrayList<>();
         try {
             TypedQuery<RepairEntity> query = em.createQuery(RETRIEVE_ACTIVE_REPAIRS_FOR_SHOP, RepairEntity.class).setParameter("shopId", shopId);
-            return query.getResultList();
+            if (query.getResultList() != null) {
+                retrievedRepairs = query.getResultList();
+            }
+            return retrievedRepairs;
         } catch (Exception e) {
             throw new Exception("Greska prilikom vracanja aktivnih popravki za radionicu");
         } finally {
@@ -80,7 +89,7 @@ public class RepairDAO {
                     em.merge(foundRepair);
                 } else {
                     foundRepair.setIsActive(false);
-                    foundRepair.setDatum(new Date());
+                    foundRepair.setDatum(LocalDate.now());
                 }
                 em.getTransaction().commit();
                 return foundRepair;
@@ -109,6 +118,36 @@ public class RepairDAO {
             return foundRepair;
         } catch (Exception e) {
             throw new Exception("Error while deleting a service!");
+        } finally {
+            em.close();
+            emf.close();
+        }
+    }
+
+    public List<RepairEntity> retrieveFinishedRepairsForUser(Integer userId) throws Exception {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.wdyc_NJTRestWS_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<RepairEntity> query = em.createQuery(RETRIEVE_FINISHED_REPAIRS_FOR_CLIENT, RepairEntity.class).setParameter("ownerId", userId);
+            return query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Greska prilikom vracanja gotovih popravki za korisnika");
+        } finally {
+            em.close();
+            emf.close();
+        }
+    }
+
+    public List<RepairEntity> retrieveRepairsInProgressForUser(Integer userId) throws Exception {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.wdyc_NJTRestWS_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<RepairEntity> query = em.createQuery(RETRIEVE_ACTIVE_REPAIRS_FOR_CLIENT, RepairEntity.class).setParameter("ownerId", userId);
+            return query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Greska prilikom vracanja aktivnih popravki za korisnika");
         } finally {
             em.close();
             emf.close();

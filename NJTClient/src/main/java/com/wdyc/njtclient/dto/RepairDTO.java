@@ -5,8 +5,8 @@
  */
 package com.wdyc.njtclient.dto;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,10 +16,10 @@ import java.util.List;
 public class RepairDTO {
 
     private String id;
-    private Date datum;
+    private String datum;
     private String kilometers;
     private boolean isActive;
-    private String price;
+    private String price = "0.0";
     private CarDTO car;
     private UserDTO shop;
     private List<ItemDTO> itemList = new ArrayList<>();
@@ -27,7 +27,7 @@ public class RepairDTO {
     public RepairDTO() {
     }
 
-    public RepairDTO(Date datum, String kilometers, boolean isActive, String price, CarDTO car, ShopDTO shop, List<ItemDTO> itemList) {
+    public RepairDTO(String datum, String kilometers, boolean isActive, String price, CarDTO car, ShopDTO shop, List<ItemDTO> itemList) {
         this.datum = datum;
         this.kilometers = kilometers;
         this.isActive = isActive;
@@ -45,11 +45,11 @@ public class RepairDTO {
         this.id = id;
     }
 
-    public Date getDatum() {
+    public String getDatum() {
         return datum;
     }
 
-    public void setDatum(Date datum) {
+    public void setDatum(String datum) {
         this.datum = datum;
     }
 

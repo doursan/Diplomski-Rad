@@ -28,7 +28,7 @@
                                 <label for="repairs">Select Repair you wish to Update</label> 
                                 <select class="form-control sacuvaj" name="repairs" id="repairs"> 
                                     <option selected>Select a repair</option>
-                                    <c:forEach var="repair" items="${active_repairs}">
+                                    <c:forEach var="repair" items="${repairs}">
                                         <option value="${repair.getId()}">${repair}</option>                                        
                                     </c:forEach>
                                 </select>

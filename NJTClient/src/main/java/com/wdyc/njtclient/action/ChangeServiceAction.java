@@ -21,22 +21,32 @@ public class ChangeServiceAction extends AbstractAction {
 
     @Override
     public String execute(HttpServletRequest request) {
-        
+
         RestWSClient.getInstance().setTarget(Constants.SERVICES_PATH);
         Response response = RestWSClient.getInstance().getAll_JSON();
+        String action = request.getParameter("action");
 
         if (response.getStatus() == 200) {
-            List<ServiceDTO> services = response.readEntity(new GenericType<List<ServiceDTO>>() {});
+            List<ServiceDTO> services = response.readEntity(new GenericType<List<ServiceDTO>>() {
+            });
 
             request.setAttribute("services", services);
-            request.setAttribute("banner_page", "/WEB-INF/pages/update_service_form.jsp");
-
-            return "update_service";
+            if (action.equalsIgnoreCase("change_service")) {
+                request.setAttribute("banner_page", "/WEB-INF/pages/update_service_form.jsp");
+                return "update_service";
+            } else {
+                request.setAttribute("banner_page", "/WEB-INF/pages/view_services_form.jsp");
+                return "view_services";
+            }
         } else {
             String poruka = response.readEntity(String.class);
             request.setAttribute("message", poruka);
-            return "admin";
+            if (action.equalsIgnoreCase("change_service")) {
+                return "admin";
+            } else {
+                return "index";
+            }
         }
     }
-    
+
 }

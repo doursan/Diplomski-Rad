@@ -39,8 +39,102 @@
     </head>
     <body>
 
-        <jsp:include page="header_admin.jsp"></jsp:include> 
-        <jsp:include page="banner.jsp"></jsp:include> 
+        <jsp:include page="header_admin.jsp"></jsp:include>
+
+            <section class="banner-area relative" id="home">	
+                <div class="overlay overlay-bg"></div>
+                <div class="container">
+                    <div class="row d-flex align-items-center justify-content-center">
+                        <div class="about-content col-lg-12">
+                            <br>  
+                            <br>
+                            <br>  
+                            <br>
+                            <br>            
+                            <br>
+                            <br> 
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h2 class="poruka">DELETE</h2>
+                                        <br/>
+                                        <br/>
+                                        <form class="save_car" action="/NJTClient/controller" method="POST">
+                                            <input type="hidden" name="action" value="delete_repair" />  
+                                            <div class="form-row align-items-center justify-content-center">
+                                                <div class="form-group col-md-3">
+                                                    <label for="repairs">Select Repair you wish to Delete</label> 
+                                                    <select class="form-control sacuvaj" name="repairs" id="repairs" onchange="this.form.submit()"> 
+                                                        <option selected>Select a repair</option>
+                                                        <c:forEach var="repair" items="${repairs}">
+                                                        <option value="${repair.getId()}">${repair}</option>                                        
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+                                        </div> 
+                                    </form>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Price per unit</th>
+                                                <th scope="col">Amount</th>
+                                                <th scope="col">Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <c:forEach var="item" items="${items}" varStatus="loop">
+                                            <tr>
+                                                <td>${item.getRowNumber()}</td>
+                                                <td>${item.getName()}</td>
+                                                <td>${item.getPricePerUnit()}</td>
+                                                <td>${item.getAmount()}</td>
+                                                <td>${item.getPrice()}</td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <br/>
+                                    <h3 class="white">Car Information</h3>   
+                                    <br/>
+                                    <div class="form-row align-items-center justify-content-center save_car">
+                                        <div class="form-group col-md-3">
+                                            <label for="amount">Registration</label>
+                                            <input type="text" class="form-control" name="registration" id="registration" placeholder="Select a repair" value="${repair.getCar().getRegistration()}" readonly>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label for="amount">Current Kilometers</label>
+                                            <input type="text" class="form-control" name="kilometers" id="kilometers" placeholder="Select a repair" value="${repair.getKilometers()}" readonly>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <br/>
+                                    <form class="save_car" action="/NJTClient/controller" method="POST">    
+                                        <input type="hidden" name="action" value="remove_repair" />                  
+                                        <input type="hidden" name="repair_id" value="${repair.getId()}" />                  
+                                        <input type="submit" class="primary-btn text-uppercase" value="Delete Repair"/>     
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                        <br/>
+                                    </form> 
+                                    <br/>
+                                    <h1 class="poruka">${message}</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <br>        
+                    </div>											
+                </div>
+            </div>
+        </section>
 
         <script src="/NJTClient/pages/js/vendor/jquery-2.2.4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

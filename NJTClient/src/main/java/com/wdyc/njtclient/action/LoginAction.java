@@ -8,8 +8,6 @@ package com.wdyc.njtclient.action;
 import com.wdyc.njtclient.constants.Constants;
 import com.wdyc.njtclient.dto.UserDTO;
 import com.wdyc.njtclient.rest.ws.RestWSClient;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -22,6 +20,10 @@ public class LoginAction extends AbstractAction {
     @Override
     public String execute(HttpServletRequest request) {
 
+        if(request.getSession(false)==null) {
+            request.setAttribute("errorMessage", "Your session has expired!");
+            return "login";
+        }
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 

@@ -6,6 +6,7 @@
 package com.wdyc.njtrestws.domen;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -52,8 +53,7 @@ public class RepairEntity implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Column(name = "datum")
-    @Temporal(TemporalType.DATE)
-    private Date datum;
+    private LocalDate datum;
     @Basic(optional = false)
     @NotNull
     @Column(name = "kilometers")
@@ -81,7 +81,7 @@ public class RepairEntity implements Serializable {
         this.id = id;
     }
 
-    public RepairEntity(Integer id, Date datum, int kilometers, boolean isActive) {
+    public RepairEntity(Integer id, LocalDate datum, int kilometers, boolean isActive) {
         this.id = id;
         this.datum = datum;
         this.kilometers = kilometers;
@@ -96,13 +96,14 @@ public class RepairEntity implements Serializable {
         this.id = id;
     }
 
-    public Date getDatum() {
+    public LocalDate getDatum() {
         return datum;
     }
 
-    public void setDatum(Date datum) {
+    public void setDatum(LocalDate datum) {
         this.datum = datum;
     }
+    
 
     public int getKilometers() {
         return kilometers;

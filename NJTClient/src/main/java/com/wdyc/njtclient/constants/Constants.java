@@ -24,5 +24,7 @@ public class Constants {
     public static final String CAR_PARTS_PATH = "parts";
     public static final String SERVICES_PATH = "services";
     public static final String REPAIRS_PATH = "repairs";
-    public static final String REPAIRS_ACTIVE_SHOP_PATH = "active_shop";
+    public static final String REPAIRS_ACTIVE_SHOP_PARAM = "active_shop";
+    public static final String REPAIRS_FINISHED_USER_PARAM = "finished_user";
+    public static final String REPAIRS_ACTIVE_USER_PARAM = "active_user";
 }

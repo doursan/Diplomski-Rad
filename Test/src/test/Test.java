@@ -5,6 +5,7 @@
  */
 package test;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -18,8 +19,12 @@ public class Test {
      */
     public static void main(String[] args) {
         
-        Date date = new Date();
+        LocalDate datum = LocalDate.now();
         
-        System.out.println(date);
+        String parsed = datum.toString();
+        
+        LocalDate parsiran = LocalDate.parse(parsed);
+        
+        System.out.println(datum.toString());
     }
 }

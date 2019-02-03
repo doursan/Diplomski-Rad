@@ -21,6 +21,7 @@ import com.wdyc.njtrestws.dto.ModelEngineDTO;
 import com.wdyc.njtrestws.dto.RepairDTO;
 import com.wdyc.njtrestws.dto.ServiceDTO;
 import com.wdyc.njtrestws.dto.UserDTO;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
@@ -205,7 +206,7 @@ public class ModelEngineMapperImpl implements ModelEngineMapper {
         if ( repairDTO.getId() != null ) {
             repairEntity.setId( Integer.parseInt( repairDTO.getId() ) );
         }
-        repairEntity.setDatum( repairDTO.getDatum() );
+        repairEntity.setDatum( LocalDate.parse(repairDTO.getDatum()) );
         if ( repairDTO.getKilometers() != null ) {
             repairEntity.setKilometers( Integer.parseInt( repairDTO.getKilometers() ) );
         }

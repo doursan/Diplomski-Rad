@@ -43,22 +43,38 @@ public class SelectRepairAction extends AbstractAction {
     public String execute(HttpServletRequest request) {
 
         HttpSession session = request.getSession();
-        String shopId = ((UserDTO) session.getAttribute("logged_user")).getId();
+        UserDTO user = (UserDTO) session.getAttribute("logged_user");
         String action = request.getParameter("action");
 
         RestWSClient.getInstance().setTarget(Constants.REPAIRS_PATH);
-        Response response = RestWSClient.getInstance().getManyByParameter_JSON(Constants.REPAIRS_ACTIVE_SHOP_PATH, shopId);
 
+        Response response;
+        if (user.getTip().equalsIgnoreCase("S")) {
+            response = RestWSClient.getInstance().getManyByParameter_JSON(Constants.REPAIRS_ACTIVE_SHOP_PARAM, user.getId());
+        } else {
+            if (action.equalsIgnoreCase("view_repairs_in_progress")) {
+                response = RestWSClient.getInstance().getManyByParameter_JSON(Constants.REPAIRS_ACTIVE_USER_PARAM, user.getId());
+            } else {
+                response = RestWSClient.getInstance().getManyByParameter_JSON(Constants.REPAIRS_FINISHED_USER_PARAM, user.getId());
+            }
+        }
         if (response.getStatus() == 200) {
             repairs = response.readEntity(new GenericType<List<RepairDTO>>() {
             });
 
-            request.setAttribute("active_repairs", repairs);
+            request.setAttribute("repairs", repairs);
 
             if (action.equalsIgnoreCase("change_repair")) {
                 request.setAttribute("banner_page", "/WEB-INF/pages/update_repair_select_form.jsp");
-
                 return "update_repair";
+            }
+            if (action.equalsIgnoreCase("view_repairs")) {
+                request.setAttribute("banner_page", "/WEB-INF/pages/view_repairs_form.jsp");
+                return "view_repairs";
+            } 
+            if (action.equalsIgnoreCase("view_repairs_in_progress")) {
+                request.setAttribute("banner_page", "/WEB-INF/pages/view_repairs_in_progress_form.jsp");
+                return "view_repairs_in_progress";
             } else {
                 if (request.getParameterMap().containsKey("repairs")) {
                     String repairId = request.getParameter("repairs");

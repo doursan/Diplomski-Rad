@@ -15,8 +15,17 @@ public class ActionFactory {
 
         AbstractAction command = null;
 
+        if (action.equalsIgnoreCase("index")) {
+            command = new IndexAction();
+        }
+        if (action.equalsIgnoreCase("index_admin")) {
+            command = new IndexAdminAction();
+        }
         if (action.equalsIgnoreCase("login")) {
             command = new LoginAction();
+        }
+        if (action.equalsIgnoreCase("logout")) {
+            command = new LogoutAction();
         }
         if (action.equalsIgnoreCase("register")) {
             command = new RegisterAction();
@@ -63,7 +72,7 @@ public class ActionFactory {
         if (action.equalsIgnoreCase("save_service")) {
             command = new SaveServiceAction();
         }
-        if (action.equalsIgnoreCase("change_service")) {
+        if (action.equalsIgnoreCase("change_service") || action.equalsIgnoreCase("view_services")) {
             command = new ChangeServiceAction();
         }
         if (action.equalsIgnoreCase("update_service")) {
@@ -87,7 +96,7 @@ public class ActionFactory {
         if (action.equalsIgnoreCase("save_repair")) {
             command = new SaveRepairAction();
         }
-        if (action.equalsIgnoreCase("change_repair")) {
+        if (action.equalsIgnoreCase("change_repair") || action.equalsIgnoreCase("finish_repair") || action.equalsIgnoreCase("delete_repair") || action.equalsIgnoreCase("view_repairs")|| action.equalsIgnoreCase("view_repairs_in_progress")) {
             command = new SelectRepairAction();
         }
         if (action.equalsIgnoreCase("update_repair_select")) {
@@ -96,14 +105,8 @@ public class ActionFactory {
         if (action.equalsIgnoreCase("update_repair")) {
             command = new UpdateRepairAction();
         }
-        if (action.equalsIgnoreCase("finish_repair")) {
-            command = new SelectRepairAction();
-        }
         if (action.equalsIgnoreCase("deactivate_repair")) {
             command = new FinishRepairAction();
-        }
-        if (action.equalsIgnoreCase("delete_repair")) {
-            command = new SelectRepairAction();
         }
         if (action.equalsIgnoreCase("remove_repair")) {
             command = new RemoveRepairAction();

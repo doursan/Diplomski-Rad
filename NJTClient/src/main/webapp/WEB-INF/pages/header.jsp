@@ -32,7 +32,7 @@
                             <li class="menu-active">
                                 <a href="
                                    <c:url value="/controller">
-                                       <c:param name="action" value="home"></c:param>
+                                       <c:param name="action" value="index"></c:param>
                                    </c:url>">Home</a></li>	
                             <li class="menu-has-children"><a href="#">YOUR CARS</a>
                                 <ul>
@@ -50,17 +50,27 @@
                                            </c:url> ">Sell a Car</a></li>
                                 </ul>
                             </li>
-                            <li><a href="service.html">Service</a></li>
-                            <li><a href="team.html">Team</a></li>
-                            <li><a href="price.html">Price</a></li>
-                            <li><a href="blog-home.html">Blog</a></li>	
-                            <li><a href="contact.html">Contact</a></li>	
-                            <li class="menu-has-children"><a href="">Pages</a>
+                            <li><a href=" 
+                                   <c:url value="/controller">
+                                       <c:param name="action" value="view_services"></c:param>
+                                   </c:url> ">Services</a></li>
+                            <li class="menu-has-children"><a href="#">Repairs</a>
                                 <ul>
-                                    <li><a href="blog-single.html">blog Single</a></li>
-                                    <li><a href="elements.html">Elements</a></li>
+                                    <li><a href=" 
+                                           <c:url value="/controller">
+                                               <c:param name="action" value="view_repairs"></c:param>
+                                           </c:url> ">View finished repairs</a></li>
+                                    <li><a href=" 
+                                           <c:url value="/controller">
+                                               <c:param name="action" value="view_repairs_in_progress"></c:param>
+                                           </c:url> ">View repairs in progress</a></li>                                    
                                 </ul>
-                            </li>			          
+                            </li>
+                            <li class="menu-active">
+                                <a href="
+                                   <c:url value="/controller">
+                                       <c:param name="action" value="logout"></c:param>
+                                   </c:url>">Logout</a></li>
                         </ul>
                     </nav><!-- #nav-menu-container -->		    		
                 </div>

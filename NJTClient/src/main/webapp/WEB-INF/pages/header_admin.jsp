@@ -29,7 +29,11 @@
                     </div>
                     <nav id="nav-menu-container">
                         <ul class="nav-menu">
-                            <li class="menu-active"><a href="inxed.html">Home</a></li>	
+                            <li class="menu-active">
+                                <a href="
+                                   <c:url value="/controller">
+                                       <c:param name="action" value="index_admin"></c:param>
+                                   </c:url>">Home</a></li>
                             <li class="menu-has-children"><a href="#">CAR PARTS</a>
                                 <ul>
                                     <li><a href=" 
@@ -81,7 +85,12 @@
                                                <c:param name="action" value="delete_repair"></c:param>
                                            </c:url> ">Delete a Repair</a></li>
                                 </ul>
-                            </li>                         		         
+                            </li>    
+                            <li class="menu-active">
+                                <a href="
+                                   <c:url value="/controller">
+                                       <c:param name="action" value="logout"></c:param>
+                                   </c:url>">Logout</a></li>                            
                         </ul>
                     </nav><!-- #nav-menu-container -->		    		
                 </div>

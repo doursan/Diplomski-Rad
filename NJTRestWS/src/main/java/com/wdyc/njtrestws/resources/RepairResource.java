@@ -38,11 +38,51 @@ public class RepairResource {
 
     RepairMapper repairMapper = new RepairMapperImpl();
 
-    RepairDAO repairDao = new RepairDAO();
+    RepairDAO repairDao = new RepairDAO();    
+          
+    @GET
+    @Path("finished_user/{userId}")
+    public Response getFinishedRepairsForUser(@PathParam("userId") @NotNull Integer userId) {
+        try {
+            List<RepairEntity> retrievedRepairs = repairDao.retrieveFinishedRepairsForUser(userId);
+            List<RepairDTO> convertedRepairs = new ArrayList<>();
 
+            for (RepairEntity repair : retrievedRepairs) {
+                RepairDTO repairDto = repairMapper.repairEntityToDto(repair);
+                convertedRepairs.add(repairDto);
+            }
+
+            Response response = Response.ok(convertedRepairs).build();
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().type(MediaType.TEXT_PLAIN).entity(e.getMessage()).build();
+        }
+    }        
+         
+    @GET
+    @Path("active_user/{userId}")
+    public Response getRepairsInProgressForUser(@PathParam("userId") @NotNull Integer userId) {
+        try {
+            List<RepairEntity> retrievedRepairs = repairDao.retrieveRepairsInProgressForUser(userId);
+            List<RepairDTO> convertedRepairs = new ArrayList<>();
+
+            for (RepairEntity repair : retrievedRepairs) {
+                RepairDTO repairDto = repairMapper.repairEntityToDto(repair);
+                convertedRepairs.add(repairDto);
+            }
+
+            Response response = Response.ok(convertedRepairs).build();
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().type(MediaType.TEXT_PLAIN).entity(e.getMessage()).build();
+        }
+    }       
+    
     @GET
     @Path("active_shop/{shopId}")
-    public Response getActiveRepairsForShop(@PathParam("shopId") @NotNull Integer shopId) {
+    public Response getActiveRepairsForUser(@PathParam("shopId") @NotNull Integer shopId) {
         try {
             List<RepairEntity> retrievedRepairs = repairDao.retrieveActiveRepairsForShop(shopId);
             List<RepairDTO> convertedRepairs = new ArrayList<>();

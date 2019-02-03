@@ -36,6 +36,9 @@ public class PageResolver {
         view.put("update_repair", "/WEB-INF/pages/update_repair.jsp");
         view.put("delete_repair", "/WEB-INF/pages/delete_repair.jsp");
         view.put("finish_repair", "/WEB-INF/pages/finish_repair.jsp");
+        view.put("view_services", "/WEB-INF/pages/view_services.jsp");
+        view.put("view_repairs", "/WEB-INF/pages/view_repairs.jsp");
+        view.put("view_repairs_in_progress", "/WEB-INF/pages/view_repairs_in_progress.jsp");
     }
 
     public static PageResolver getInstance() {

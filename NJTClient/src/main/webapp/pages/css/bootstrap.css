@@ -1752,6 +1752,9 @@ select.form-control:focus::-ms-value {
 .poruka {
     color : rgba(255, 255, 0, 0.6);
 }
+.h3-class {
+    color : rgba(255, 0, 0, 0.6);
+}
 select {
     background: transparent;
     width: 10%;
