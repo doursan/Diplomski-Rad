@@ -14,6 +14,8 @@ import com.wdyc.njtrestws.mapstruct.impl.ClientMapperImpl;
 import com.wdyc.njtrestws.mapstruct.impl.ShopMapperImpl;
 import com.wdyc.njtrestws.mapstruct.impl.UserMapperImpl;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -76,7 +78,22 @@ public class UserResource {
 
     }
     
+    @GET
+    @Path("shops/name/{name}")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
+    public Response getShopByName(@PathParam("name") @NotNull String name) {
+        try {
+            ShopEntity retrievedShop = userDao.retrieveShopByName(name);
+            ShopDTO convertedShop = shopMapper.shopEntityToDto(retrievedShop);
 
+            return Response.ok(convertedShop).build();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return Response.serverError().type(MediaType.TEXT_PLAIN).entity(ex).build();
+        }
+
+    }    
+    
     @POST
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
     @Consumes(MediaType.APPLICATION_JSON)
@@ -124,6 +141,27 @@ public class UserResource {
         } catch (Exception ex) {
             ex.printStackTrace();
             return Response.serverError().type(MediaType.TEXT_PLAIN).entity(ex).build();
+        }
+    }
+    
+    @GET
+    @Path("clients/buyer_suggest/{username}")
+    @Produces({MediaType.APPLICATION_JSON,MediaType.TEXT_PLAIN})
+    public Response getBuyerSuggestions(@PathParam("username") @NotNull String username) {
+        try {
+            List<ClientEntity> retrievedClients = userDao.retrieveBuyerSuggestions(username);
+            List<ClientDTO> convertedClients = new ArrayList<>();
+            
+            for (ClientEntity buyer : retrievedClients) {
+                ClientDTO buyerDto = clientMapper.clientEntityToDto(buyer);
+                convertedClients.add(buyerDto);
+            }
+            
+            Response response = Response.ok(convertedClients).build();
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().type(MediaType.TEXT_PLAIN).entity(e.getMessage()).build();
         }
     }
 }

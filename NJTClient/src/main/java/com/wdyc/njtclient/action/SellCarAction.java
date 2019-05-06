@@ -10,8 +10,7 @@ import com.wdyc.njtclient.dto.CarDTO;
 import com.wdyc.njtclient.dto.ClientDTO;
 import com.wdyc.njtclient.dto.UserDTO;
 import com.wdyc.njtclient.rest.ws.RestWSClient;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.wdyc.njtclient.validation.UserValidator;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Response;
 
@@ -24,9 +23,19 @@ public class SellCarAction extends AbstractAction {
     @Override
     public String execute(HttpServletRequest request) {
         try {
-            String carId = request.getParameter("cars");
+            String carId = request.getParameter("car_id");
             String buyerUsername = request.getParameter("buyer");
+            String rowIndex = request.getParameter("rowIndex");
             
+            if (!UserValidator.getInstance().validateBuyer(buyerUsername)) {
+            request.setAttribute("message", "Buyer with that username doesn't exist!");
+            request.setAttribute("buyer", buyerUsername);
+            request.setAttribute("index", rowIndex);
+            request.setAttribute("invalid", true);
+            SellCarPageAction sellCarAction = new SellCarPageAction();
+            return sellCarAction.execute(request);
+        }
+
             RestWSClient.getInstance().setTarget(Constants.USERS_PATH);
             UserDTO buyer = RestWSClient.getInstance().getByParameter_JSON(UserDTO.class, Constants.USER_USERNAME_PARAM, buyerUsername);
             ClientDTO newOwner = new ClientDTO();
@@ -35,7 +44,7 @@ public class SellCarAction extends AbstractAction {
             car.setOwner(newOwner);
             RestWSClient.getInstance().setTarget(Constants.CARS_PATH);
             Response response = RestWSClient.getInstance().updateById_JSON(car, carId);
-            if(response.getStatus() == 200) {
+            if (response.getStatus() == 200) {
                 CarDTO soldCar = response.readEntity(CarDTO.class);
                 request.setAttribute("message", "You have successfully sold your car");
             } else {
@@ -48,5 +57,5 @@ public class SellCarAction extends AbstractAction {
             return "index";
         }
     }
-    
+
 }

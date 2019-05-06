@@ -89,5 +89,19 @@ public class ServiceDAO {
             emf.close();
         }
     }
+
+    public ServiceEntity retrieveServiceByName(String name) throws Exception {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.wdyc_NJTRestWS_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+        try {
+            ServiceEntity retrievedService = (ServiceEntity) em.createNamedQuery("ServiceEntity.findByName", ServiceEntity.class).setParameter("name", name).getSingleResult();
+            return retrievedService;
+        } catch (Exception e) {
+            throw new Exception("Greska! No service with that name!");
+        } finally {
+            em.close();
+            emf.close();
+        }
+    }
     
 }

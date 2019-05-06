@@ -27,8 +27,8 @@ public class PageResolver {
         view.put("update_car", "/WEB-INF/pages/update_car.jsp");
         view.put("sell_car", "/WEB-INF/pages/sell_car.jsp");
         view.put("add_part", "/WEB-INF/pages/add_part.jsp");
-        view.put("update_part", "/WEB-INF/pages/delete_part.jsp");
-        view.put("delete_part", "/WEB-INF/pages/update_part.jsp");
+        view.put("update_part", "/WEB-INF/pages/update_part.jsp");
+        view.put("delete_part", "/WEB-INF/pages/delete_part.jsp");
         view.put("add_service", "/WEB-INF/pages/add_service.jsp");
         view.put("update_service", "/WEB-INF/pages/update_service.jsp");
         view.put("delete_service", "/WEB-INF/pages/delete_service.jsp");

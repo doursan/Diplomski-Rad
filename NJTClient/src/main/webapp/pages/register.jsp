@@ -135,6 +135,6 @@
                 </div>
             </div>
         </div>
-        <script type="text/javascript" src="/DMDClient/pages/js/login1.js"></script>
+        <script type="text/javascript" src="/NJTClient/pages/js/login1.js"></script>
     </body>
 </html>

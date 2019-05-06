@@ -4,6 +4,7 @@
     Author     : Dusan
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
@@ -36,15 +37,11 @@
         <link rel="stylesheet" href="/NJTClient/pages/css/owl.carousel.css">
         <link rel="stylesheet" type="text/css" href="/NJTClient/pages/css/main.css">
         <link type="text/css" rel="stylesheet" href="http://fakedomain.com/smilemachine/html.css" />
-    </head>
-    <body>
-
-        <jsp:include page="header.jsp"></jsp:include> 
-        <jsp:include page="banner.jsp"></jsp:include> 
-
         <script src="/NJTClient/pages/js/vendor/jquery-2.2.4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="/NJTClient/pages/js/vendor/bootstrap.min.js"></script>			
+        <<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/sl-1.3.0/datatables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/sl-1.3.0/datatables.min.js"></script>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
         <script src="/NJTClient/pages/js/easing.min.js"></script>			
         <script src="/NJTClient/pages/js/hoverIntent.js"></script>
@@ -58,6 +55,109 @@
         <script src="/NJTClient/pages/js/jquery.counterup.min.js"></script>					
         <script src="/NJTClient/pages/js/parallax.min.js"></script>		
         <script src="/NJTClient/pages/js/mail-script.js"></script>	
-        <script src="/NJTClient/pages/js/main.js"></script>	
+        <script src="/NJTClient/pages/js/main.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#viewRepair').DataTable({
+                    "columns": [
+                        {"width": "0%"},
+                        {"width": "20%"},
+                        {"width": "20%"},
+                        {"width": "20%"},
+                        {"width": "20%"},
+                        {"width": "20%"}
+                    ]
+                });
+                var drops = document.getElementsByName("viewRepair_length");
+                var drop = drops[0];
+                drop.classList.remove("custom-select");
+            });
+        </script>
+    </head>
+    <body>
+
+        <jsp:include page="header.jsp"></jsp:include> 
+
+            <section class="banner-area relative" id="home">	
+                <div class="overlay overlay-bg"></div>
+                <div class="container">
+                    <div class="row d-flex align-items-center justify-content-center">
+                        <div class="about-content col-lg-12">
+                            <br>  
+                            <br>
+                            <br>  
+                            <br>
+                            <br>            
+                            <br>
+                            <br> 
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h2 class="poruka">Finished Repairs</h2>
+                                        <br/>                   
+                                        <br/>
+                                        <br/>
+                                        <table id="viewRepair" class="table dataTabele table-striped" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th class="th-sm" style="display:none;">Id
+                                                    </th>
+                                                    <th class="th-sm">Registration
+                                                    </th>
+                                                    <th class="th-sm">Service
+                                                    </th>
+                                                    <th class="th-sm">Kilometers
+                                                    </th>
+                                                    <th class="th-sm">Owner
+                                                    </th>
+                                                    <th class="th-sm">Price
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <c:forEach var="repair" items="${repairs}" varStatus="loop">
+                                                <tr>
+                                                    <td style="display:none;">${repair.getId()}</td>
+                                                    <td>${repair.getCar().getRegistration()}</td>
+                                                    <td>${repair.getService().getName()}</td>
+                                                    <td>${repair.getKilometers()}</td>
+                                                    <td>${repair.getCar().getOwner().getUsername()}</td>
+                                                    <td>${repair.getPrice()}</td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th class="th-sm" style="display:none;">Id
+                                                </th>
+                                                <th class="th-sm">Registration
+                                                </th>
+                                                <th class="th-sm">Service
+                                                </th>
+                                                <th class="th-sm">Kilometers
+                                                </th>
+                                                <th class="th-sm">Owner
+                                                </th>
+                                                <th class="th-sm">Price
+                                                </th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>  
+                                    <br/>
+                                    <br/>  
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <h1 class="poruka">${message}</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <br>        
+                    </div>											
+                </div>
+            </div>
+        </section>	
     </body>
 </html>

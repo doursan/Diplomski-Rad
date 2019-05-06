@@ -10,6 +10,7 @@ import com.wdyc.njtclient.dto.ClientDTO;
 import com.wdyc.njtclient.dto.ShopDTO;
 import com.wdyc.njtclient.dto.UserDTO;
 import com.wdyc.njtclient.rest.ws.RestWSClient;
+import com.wdyc.njtclient.validation.UserValidator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.Response;
@@ -24,6 +25,7 @@ public class RegisterAction extends AbstractAction {
     public String execute(HttpServletRequest request) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String confirmPassword = request.getParameter("confirm-password");
         String email = request.getParameter("email");
         UserDTO user, returnedUser;
 
@@ -33,6 +35,15 @@ public class RegisterAction extends AbstractAction {
             String maticni = request.getParameter("maticni");
 
             user = new ShopDTO(naziv, pib, maticni, username, password, email);
+
+            if (!UserValidator.getInstance().validateUser(user, confirmPassword, 'S')) {
+                request.setAttribute("message_shop", "Invalid shop!");
+                request.setAttribute("shop", user);
+                request.setAttribute("confirm_password", confirmPassword);
+                request.setAttribute("invalid_shop", true);
+                return "login";
+            }
+
             RestWSClient.getInstance().setTarget(Constants.SHOPS_PATH);
         } else {
             String ime = request.getParameter("ime");
@@ -41,6 +52,14 @@ public class RegisterAction extends AbstractAction {
 
             RestWSClient.getInstance().setTarget(Constants.CLIENTS_PATH);
             user = new ClientDTO(ime, prezime, jmbg, username, password, email);
+
+            if (!UserValidator.getInstance().validateUser(user, confirmPassword, 'C')) {
+                request.setAttribute("message_client", "Invalid client!");
+                request.setAttribute("client", user);
+                request.setAttribute("confirm_password", confirmPassword);
+                request.setAttribute("invalid_client", true);
+                return "login";
+            }
         }
         Response response = RestWSClient.getInstance().create_JSON(user);
         HttpSession session = request.getSession(true);

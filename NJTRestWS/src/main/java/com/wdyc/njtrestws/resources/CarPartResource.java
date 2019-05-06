@@ -59,6 +59,22 @@ public class CarPartResource {
             return Response.serverError().type(MediaType.TEXT_PLAIN).entity(e.getMessage()).build();
         }
     }
+    
+    @GET
+    @Path("name/{name}")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
+    public Response getPartByName(@PathParam("name") @NotNull String name) {
+        try {
+            CarPartEntity retrievedPart = carPartDao.retrievePartByName(name);
+            CarPartDTO convertedPart = carPartMapper.carPartEntityToDto(retrievedPart);
+
+            return Response.ok(convertedPart).build();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return Response.serverError().type(MediaType.TEXT_PLAIN).entity(ex).build();
+        }
+
+    }    
 
     @POST
     public Response saveCarPart(@NotNull CarPartDTO carPart, @Context UriInfo uriInfo) {

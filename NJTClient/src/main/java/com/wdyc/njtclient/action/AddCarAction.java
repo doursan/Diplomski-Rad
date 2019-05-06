@@ -27,7 +27,6 @@ public class AddCarAction extends AbstractAction {
         List<CarBrandDTO> brands = response.readEntity(new GenericType<List<CarBrandDTO>>() { });
         
         request.setAttribute("car_brands", brands);
-        request.setAttribute("banner_page", "/WEB-INF/pages/save_car_form.jsp");
         return "add_car";
     }
 }

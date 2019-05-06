@@ -69,11 +69,9 @@ public class SelectRepairAction extends AbstractAction {
                 return "update_repair";
             }
             if (action.equalsIgnoreCase("view_repairs")) {
-                request.setAttribute("banner_page", "/WEB-INF/pages/view_repairs_form.jsp");
                 return "view_repairs";
-            } 
+            }
             if (action.equalsIgnoreCase("view_repairs_in_progress")) {
-                request.setAttribute("banner_page", "/WEB-INF/pages/view_repairs_in_progress_form.jsp");
                 return "view_repairs_in_progress";
             } else {
                 if (request.getParameterMap().containsKey("repairs")) {
@@ -97,12 +95,10 @@ public class SelectRepairAction extends AbstractAction {
                     request.setAttribute("items", selectedRepair.getItemList());
                 }
 
-                if (action.equalsIgnoreCase("delete_repair")) {
-                    request.setAttribute("banner_page", "/WEB-INF/pages/delete_repair_form.jsp");
+                if (action.equalsIgnoreCase("delete_repair") || action.equalsIgnoreCase("remove_repair")) {
                     return "delete_repair";
                 }
                 if (action.equalsIgnoreCase("finish_repair")) {
-                    request.setAttribute("banner_page", "/WEB-INF/pages/finish_repair_form.jsp");
                     return "finish_repair";
                 } else {
                     request.setAttribute("message", "Unrecognized servlet call!");

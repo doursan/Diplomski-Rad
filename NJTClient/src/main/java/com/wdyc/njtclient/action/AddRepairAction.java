@@ -32,7 +32,6 @@ public class AddRepairAction extends AbstractAction {
             AddRepairItemAction.setRepair(new RepairDTO());
         }
         
-        request.setAttribute("banner_page", "/WEB-INF/pages/save_repair_form.jsp");
         request.setAttribute("items", AddRepairItemAction.getRepair().getItemList());
 
         return "add_repair";

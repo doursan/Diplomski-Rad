@@ -16,7 +16,7 @@ public class IndexAdminAction extends AbstractAction {
     @Override
     public String execute(HttpServletRequest request) {
         
-        if(request.getSession(false).getAttribute("logged_user") == null) {
+        if(request.getSession().getAttribute("logged_user") == null) {
             request.setAttribute("errorMessage", "Your session has expired!");
             return "login";
         }

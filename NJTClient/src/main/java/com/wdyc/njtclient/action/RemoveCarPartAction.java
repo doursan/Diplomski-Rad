@@ -19,14 +19,8 @@ public class RemoveCarPartAction extends AbstractAction {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String id = request.getParameter("parts");
-        System.out.println("Id je :"+id);
-        
-        if(id.equalsIgnoreCase("Select a car part")) {
-            request.setAttribute("message", "Please select a car part you want to delete");
-            DeleteCarPartAction deleteCarPartAction = new DeleteCarPartAction();
-            return deleteCarPartAction.execute(request);
-        }
+        String id = request.getParameter("part_id");
+        System.out.println("Id je :"+id);        
         
         RestWSClient.getInstance().setTarget(Constants.CAR_PARTS_PATH);
         Response response = RestWSClient.getInstance().delete_JSON(id);

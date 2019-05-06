@@ -9,6 +9,7 @@ import com.wdyc.njtclient.dto.CarPartDTO;
 import com.wdyc.njtclient.dto.ItemDTO;
 import com.wdyc.njtclient.dto.RepairDTO;
 import com.wdyc.njtclient.dto.ServiceDTO;
+import com.wdyc.njtclient.validation.RepairValidator;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -71,13 +72,46 @@ public class AddRepairItemAction extends AbstractAction {
     public String execute(HttpServletRequest request) {
         String type = request.getParameter("type");
         String from = request.getParameter("from");
-        String pricePerUnit = request.getParameter("price");
         String amount = request.getParameter("amount");
-        String price = String.valueOf(Double.valueOf(pricePerUnit) * Double.valueOf(amount));
+        String pricePerUnit;
+        if (type.equalsIgnoreCase("service")) {
+            pricePerUnit = request.getParameter("price");
+        } else {
+            pricePerUnit = request.getParameter("part_price");
+        }
 
         ItemDTO item = new ItemDTO();
         item.setAmount(amount);
         item.setPricePerUnit(pricePerUnit);
+
+        AddRepairAction addRepairAction = new AddRepairAction();
+
+        if (!RepairValidator.getInstance().validateItem(item)) {
+            if (type.equalsIgnoreCase("service")) {
+                request.setAttribute("message_service", "Invalid service item");
+                request.setAttribute("service_item", item);
+                request.setAttribute("service_id", request.getParameter("services"));
+                request.setAttribute("service_name", request.getParameter("service_name"));
+            } else {
+                request.setAttribute("message_part", "Invalid car part item");
+                request.setAttribute("part_item", item);
+                request.setAttribute("part_id", request.getParameter("parts"));
+                request.setAttribute("part_name", request.getParameter("part_name"));
+            }
+            request.setAttribute("invalid_item", true);
+            request.setAttribute("type", type);
+            request.setAttribute("repair", repair);
+
+            if (from.equalsIgnoreCase("update_repair")) {
+                addRepairAction.execute(request);
+                request.setAttribute("banner_page", "/WEB-INF/pages/update_repair_form.jsp");
+                return "update_repair";
+            } else {
+                return addRepairAction.execute(request);
+            }
+        }
+
+        String price = String.valueOf(Double.valueOf(pricePerUnit) * Double.valueOf(amount));
         item.setPrice(price);
         item.setRowNumber(rowNumber);
         rowNumber++;
@@ -104,11 +138,10 @@ public class AddRepairItemAction extends AbstractAction {
         repair.addItemToList(item);
 
         request.setAttribute("items", repair.getItemList());
-        AddRepairAction addRepairAction = new AddRepairAction();
+        request.setAttribute("repair", AddRepairItemAction.getRepair());
 
         if (from.equalsIgnoreCase("update_repair")) {
             addRepairAction.execute(request);
-            request.setAttribute("repair", AddRepairItemAction.getRepair());
             request.setAttribute("banner_page", "/WEB-INF/pages/update_repair_form.jsp");
             return "update_repair";
         } else {

@@ -15,7 +15,6 @@ public class AddServiceAction extends AbstractAction {
 
     @Override
     public String execute(HttpServletRequest request) {
-        request.setAttribute("banner_page", "/WEB-INF/pages/save_service_form.jsp");
         return "add_service";
     }
     

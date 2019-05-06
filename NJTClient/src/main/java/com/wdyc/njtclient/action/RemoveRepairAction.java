@@ -22,7 +22,7 @@ public class RemoveRepairAction extends AbstractAction {
         String repairId = request.getParameter("repair_id");
         
         if(repairId.isEmpty()) {
-            request.setAttribute("message", "Please select a repair you want to delete");
+            request.setAttribute("message", "Please select a repair you want to cancel");
             SelectRepairAction changeRepairAction = new SelectRepairAction();
             request.setAttribute("action", "delete_repair");
             return changeRepairAction.execute(request);
@@ -33,7 +33,7 @@ public class RemoveRepairAction extends AbstractAction {
         
         if(response.getStatus() == 200) {
             RepairDTO deletedRepair = response.readEntity(RepairDTO.class);
-            request.setAttribute("message", "You have successfully deleted a repair with id: "+deletedRepair.getId());
+            request.setAttribute("message", "You have successfully canceled a repair with id: "+deletedRepair.getId());
         } else {
             String errorMessage = response.readEntity(String.class);
             request.setAttribute("message", errorMessage);

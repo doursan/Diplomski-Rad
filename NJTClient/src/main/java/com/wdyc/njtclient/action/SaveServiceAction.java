@@ -8,6 +8,7 @@ package com.wdyc.njtclient.action;
 import com.wdyc.njtclient.constants.Constants;
 import com.wdyc.njtclient.dto.ServiceDTO;
 import com.wdyc.njtclient.rest.ws.RestWSClient;
+import com.wdyc.njtclient.validation.ServiceValidator;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Response;
 
@@ -25,11 +26,14 @@ public class SaveServiceAction extends AbstractAction {
 
         ServiceDTO service = new ServiceDTO();
         service.setName(name);
-        if (!hours.isEmpty()) {
-            service.setHours(hours);
-        }
-        if (!price.isEmpty()) {
-            service.setPrice(price);
+        service.setHours(hours);
+        service.setPrice(price);
+        
+        if (!ServiceValidator.getInstance().validateService(service, "add")) {
+            request.setAttribute("message", "Invalid service");
+            request.setAttribute("service", service);
+            request.setAttribute("invalid", true);
+            return "add_service";
         }
 
         RestWSClient.getInstance().setTarget(Constants.SERVICES_PATH);

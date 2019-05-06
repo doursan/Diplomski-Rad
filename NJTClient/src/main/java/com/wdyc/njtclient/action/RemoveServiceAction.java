@@ -19,13 +19,7 @@ public class RemoveServiceAction extends AbstractAction {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String id = request.getParameter("services");
-        
-        if(id.equalsIgnoreCase("Select a service")) {
-            request.setAttribute("message", "Please select a service you want to delete");
-            DeleteServiceAction deleteServicesAction = new DeleteServiceAction();
-            return deleteServicesAction.execute(request);
-        }
+        String id = request.getParameter("service_id");
         
         RestWSClient.getInstance().setTarget(Constants.SERVICES_PATH);
         Response response = RestWSClient.getInstance().delete_JSON(id);

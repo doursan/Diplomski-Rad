@@ -22,10 +22,11 @@ public class RemoveItemAction extends AbstractAction {
         AddRepairItemAction.removeItem(rowNumber);
         AddRepairAction addRepairAction = new AddRepairAction();
 
+        request.setAttribute("repair", AddRepairItemAction.getRepair());
+
         if (from.equalsIgnoreCase("update_repair")) {
             addRepairAction.execute(request);
             request.setAttribute("banner_page", "/WEB-INF/pages/update_repair_form.jsp");
-            request.setAttribute("repair", AddRepairItemAction.getRepair());
             return "update_repair";
         } else {
             return addRepairAction.execute(request);

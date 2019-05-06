@@ -59,6 +59,22 @@ public class ServiceResource {
             return Response.serverError().type(MediaType.TEXT_PLAIN).entity(e.getMessage()).build();
         }
     }
+    
+    @GET
+    @Path("name/{name}")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
+    public Response getPartByName(@PathParam("name") @NotNull String name) {
+        try {
+            ServiceEntity retrievedService = serviceDao.retrieveServiceByName(name);
+            ServiceDTO convertedService = serviceMapper.serviceEntityToDto(retrievedService);
+
+            return Response.ok(convertedService).build();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return Response.serverError().type(MediaType.TEXT_PLAIN).entity(ex).build();
+        }
+
+    }    
 
     @POST
     public Response saveService(@NotNull ServiceDTO service, @Context UriInfo uriInfo) {

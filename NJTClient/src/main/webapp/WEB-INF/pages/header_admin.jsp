@@ -21,7 +21,6 @@
                     </div>			  			
                 </div>
             </div>
-            <hr>
             <div class="container">
                 <div class="row align-items-center justify-content-between d-flex">
                     <div id="logo">
@@ -83,7 +82,7 @@
                                     <li><a href=" 
                                            <c:url value="/controller">
                                                <c:param name="action" value="delete_repair"></c:param>
-                                           </c:url> ">Delete a Repair</a></li>
+                                           </c:url> ">CANCEL a Repair</a></li>
                                 </ul>
                             </li>    
                             <li class="menu-active">

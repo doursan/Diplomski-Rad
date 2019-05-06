@@ -30,7 +30,6 @@ public class UpdateCarPageAction extends AbstractAction {
         List<CarDTO> cars = response.readEntity(new GenericType<List<CarDTO>>() { });
         
         request.setAttribute("user_cars", cars);
-        request.setAttribute("banner_page", "/WEB-INF/pages/update_car_form.jsp");
         return "update_car";
     }
     

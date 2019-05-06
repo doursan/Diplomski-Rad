@@ -36,15 +36,11 @@
         <link rel="stylesheet" href="/NJTClient/pages/css/owl.carousel.css">
         <link rel="stylesheet" type="text/css" href="/NJTClient/pages/css/main.css">
         <link type="text/css" rel="stylesheet" href="http://fakedomain.com/smilemachine/html.css" />
-    </head>
-    <body>
-
-        <jsp:include page="header_admin.jsp"></jsp:include> 
-        <jsp:include page="banner.jsp"></jsp:include> 
-
         <script src="/NJTClient/pages/js/vendor/jquery-2.2.4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="/NJTClient/pages/js/vendor/bootstrap.min.js"></script>			
+        <<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/sl-1.3.0/datatables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/sl-1.3.0/datatables.min.js"></script>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
         <script src="/NJTClient/pages/js/easing.min.js"></script>			
         <script src="/NJTClient/pages/js/hoverIntent.js"></script>
@@ -58,6 +54,11 @@
         <script src="/NJTClient/pages/js/jquery.counterup.min.js"></script>					
         <script src="/NJTClient/pages/js/parallax.min.js"></script>		
         <script src="/NJTClient/pages/js/mail-script.js"></script>	
-        <script src="/NJTClient/pages/js/main.js"></script>	
+        <script src="/NJTClient/pages/js/main.js"></script>
+    </head>
+    <body>
+        <jsp:include page="header_admin.jsp"></jsp:include> 
+        
+        <jsp:include page="banner.jsp"></jsp:include> 
     </body>
 </html>

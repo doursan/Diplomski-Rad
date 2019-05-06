@@ -39,7 +39,7 @@ public class RepairResource {
     RepairMapper repairMapper = new RepairMapperImpl();
 
     RepairDAO repairDao = new RepairDAO();    
-          
+        
     @GET
     @Path("finished_user/{userId}")
     public Response getFinishedRepairsForUser(@PathParam("userId") @NotNull Integer userId) {
@@ -53,6 +53,22 @@ public class RepairResource {
             }
 
             Response response = Response.ok(convertedRepairs).build();
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().type(MediaType.TEXT_PLAIN).entity(e.getMessage()).build();
+        }
+    }  
+    
+    @GET
+    @Path("repair_id/{repairId}")
+    public Response getRepairsById(@PathParam("repairId") @NotNull Integer repairId) {
+        try {
+            RepairEntity retrievedRepair = repairDao.retrieveRepairsById(repairId);
+            
+                RepairDTO convertedRepair = repairMapper.repairEntityToDto(retrievedRepair);
+
+            Response response = Response.ok(convertedRepair).build();
             return response;
         } catch (Exception e) {
             e.printStackTrace();
@@ -121,7 +137,7 @@ public class RepairResource {
     
     @PUT
     @Path("/{repairId}")
-    public Response updateService(@PathParam("repairId") String id, @NotNull RepairDTO repair) {
+    public Response updateRepair(@PathParam("repairId") String id, @NotNull RepairDTO repair) {
         try {
             RepairEntity convertedRepair = repairMapper.repairDtoToEntity(repair);
             RepairEntity updatedRepair = repairDao.updateRepair(convertedRepair);

@@ -20,7 +20,7 @@ public class UpdateRepairSelectAction extends AbstractAction {
     @Override
     public String execute(HttpServletRequest request) {
 
-        String repairId = request.getParameter("repairs");
+        String repairId = request.getParameter("repair_id");
 
         RepairDTO repairToUpdate = new RepairDTO();
 

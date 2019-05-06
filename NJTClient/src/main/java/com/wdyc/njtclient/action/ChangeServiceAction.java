@@ -31,11 +31,9 @@ public class ChangeServiceAction extends AbstractAction {
             });
 
             request.setAttribute("services", services);
-            if (action.equalsIgnoreCase("change_service")) {
-                request.setAttribute("banner_page", "/WEB-INF/pages/update_service_form.jsp");
+            if (action.equalsIgnoreCase("change_service") || action.equalsIgnoreCase("update_service")) {
                 return "update_service";
             } else {
-                request.setAttribute("banner_page", "/WEB-INF/pages/view_services_form.jsp");
                 return "view_services";
             }
         } else {

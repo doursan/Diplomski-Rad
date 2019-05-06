@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -82,6 +83,20 @@ public class CarPartDAO {
             }
         } catch (Exception e) {
             throw new Exception("Error while updating a car part!");
+        } finally {
+            em.close();
+            emf.close();
+        }
+    }
+
+    public CarPartEntity retrievePartByName(String name) throws Exception {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.wdyc_NJTRestWS_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+        try {
+            CarPartEntity retrievedPart = (CarPartEntity) em.createNamedQuery("CarPartEntity.findByName", CarPartEntity.class).setParameter("name", name).getSingleResult();
+            return retrievedPart;
+        } catch (Exception e) {
+            throw new Exception("Greska! No car part with that name!");
         } finally {
             em.close();
             emf.close();

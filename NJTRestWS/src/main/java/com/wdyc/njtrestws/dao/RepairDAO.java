@@ -5,12 +5,11 @@
  */
 package com.wdyc.njtrestws.dao;
 
+import com.wdyc.njtrestws.domen.CarPartEntity;
 import com.wdyc.njtrestws.domen.ItemEntity;
 import com.wdyc.njtrestws.domen.RepairEntity;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -113,7 +112,7 @@ public class RepairDAO {
         try {
             em.getTransaction().begin();
             RepairEntity foundRepair = em.find(RepairEntity.class, id);
-            em.remove(foundRepair);
+            foundRepair = cancelRepair(foundRepair);
             em.getTransaction().commit();
             return foundRepair;
         } catch (Exception e) {
@@ -152,5 +151,39 @@ public class RepairDAO {
             em.close();
             emf.close();
         }
+    }
+
+    private RepairEntity cancelRepair(RepairEntity foundRepair) {
+        CarPartEntity carPart = new CarPartEntity(1);
+        
+        ItemEntity item = new ItemEntity();
+        item.setAmount(1.0);
+        item.setCarPart(carPart);
+        item.setId(foundRepair.getItemList().size()+1);
+        item.setRepair(foundRepair);    
+        item.setPrice(-foundRepair.getPrice());
+        
+        foundRepair.setIsActive(false);
+        foundRepair.addItem(item);
+        foundRepair.setPrice(0.0);
+        foundRepair.setDatum(LocalDate.now());
+        
+        return foundRepair;
+    }
+
+    public RepairEntity retrieveRepairsById(Integer repairId) throws Exception {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.wdyc_NJTRestWS_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+        try {
+            RepairEntity retrievedRepair = em.createNamedQuery("RepairEntity.findById", RepairEntity.class).setParameter("id", repairId).getSingleResult();
+            System.out.println(retrievedRepair);
+            return retrievedRepair;
+        } catch (Exception e) {
+            throw new Exception("Greska! Popravka sa datim Id brojem ne postoji!");
+        } finally {
+            em.close();
+            emf.close();
+        }
+        
     }
 }

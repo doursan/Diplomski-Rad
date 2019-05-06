@@ -19,6 +19,7 @@ import javax.persistence.TypedQuery;
 public class CarDAO {
 
     private static final String RETRIEVE_CARS_FOR_USER = "SELECT c FROM CarEntity c WHERE c.owner.id = :userId";
+    private static final String RETRIEVE_CARS_REGISTRATION_SUGGESTION = "SELECT c FROM CarEntity c WHERE UPPER(c.registration) LIKE CONCAT('%',UPPER(:registration),'%')";
 
     public CarEntity saveCar(CarEntity car) throws Exception {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.wdyc_NJTRestWS_war_1.0-SNAPSHOTPU");
@@ -90,6 +91,34 @@ public class CarDAO {
             return retrievedCar;
         } catch (Exception e) {
             throw new Exception("Greska! Automobil sa tom registarskom oznokom ne postoji!");
+        } finally {
+            em.close();
+            emf.close();
+        }
+    }
+
+    public List<CarEntity> retrieveRegistrationSuggestions(String registration) throws Exception {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.wdyc_NJTRestWS_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<CarEntity> query = em.createQuery(RETRIEVE_CARS_REGISTRATION_SUGGESTION, CarEntity.class).setParameter("registration", registration);
+            return query.getResultList();
+        } catch (Exception e) {
+            throw new Exception("Greska prilikom vracanja vozila za sugestiju registracije!");
+        } finally {
+            em.close();
+            emf.close();
+        }
+    }
+
+    public CarEntity retrieveCarByVin(String vin) throws Exception {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com.wdyc_NJTRestWS_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+        try {
+            CarEntity retrievedCar = (CarEntity) em.createNamedQuery("CarEntity.findByVin", CarEntity.class).setParameter("vin", vin).getSingleResult();
+            return retrievedCar;
+        } catch (Exception e) {
+            throw new Exception("Greska! No car with that vin!");
         } finally {
             em.close();
             emf.close();

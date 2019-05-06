@@ -28,8 +28,13 @@ public class ChangeCarPartAction extends AbstractAction {
         if (response.getStatus() == 200) {
             List<CarPartDTO> carParts = response.readEntity(new GenericType<List<CarPartDTO>>() {});
 
+            for(CarPartDTO carPart : carParts) {
+                if(carPart.getId().equalsIgnoreCase("1")) {
+                    carParts.remove(carPart);
+                    break;
+                }
+            }
             request.setAttribute("car_parts", carParts);
-            request.setAttribute("banner_page", "/WEB-INF/pages/update_part_form.jsp");
 
             return "update_part";
         } else {

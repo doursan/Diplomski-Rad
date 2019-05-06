@@ -5,7 +5,6 @@
  */
 package com.wdyc.njtclient.dto;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,6 +102,15 @@ public class RepairDTO {
 
     public void addItemToList(ItemDTO item) {
         itemList.add(item);
+    }
+    
+    public ServiceDTO getService() {
+        for(ItemDTO item : itemList) {
+            if(item.getService()!= null) {
+                return item.getService();
+            }
+        }
+        return new ServiceDTO("0", "0", "No Service Found");
     }
 
     @Override

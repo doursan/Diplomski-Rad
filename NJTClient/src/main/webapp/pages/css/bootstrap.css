@@ -1746,11 +1746,184 @@ select.form-control:focus::-ms-value {
     background-color: rgba(0, 0, 0, 0.6);
 }
 
+.table {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.dataTables_length select {
+   background-color: rgba(0, 0, 0, 0.5);
+}
+.dataTables_filter input {
+   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.dataTabele tr {
+    cursor: pointer;
+}
+
+.page-item.active .page-link {
+    background-color: rgba(10, 30, 100, 0.5) !important;
+    border-color: rgba(10, 30, 100, 1) !important;
+}
+
+.page-item .page-link {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(255, 255, 255, 0) !important;
+}
+
+#changeService_previous .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.3) !important;
+}
+
+#changeService_next .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.5) !important;
+}
+
+#deleteService_previous .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.3) !important;
+}
+
+#deleteService_next .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.5) !important;
+}
+
+#deleteService_previous .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.3) !important;
+}
+
+#viewService_next .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.5) !important;
+}
+
+#viewService_previous .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.5) !important;
+}
+
+#viewCarPart_previous .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.3) !important;
+}
+
+#changeCarPart_next .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.5) !important;
+}
+
+#changeCarPart_previous .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.5) !important;
+}
+
+#deleteCarPart_previous .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.3) !important;
+}
+
+#deleteCarPart_next .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.5) !important;
+}
+
+#changeRepair_next .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.5) !important;
+}
+
+#changeRepair_previous .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.3) !important;
+}
+
+#changeRepair_next .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.5) !important;
+}
+
+#updateRepair_previous .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.3) !important;
+}
+
+#updateRepair_next .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.5) !important;
+}
+
+#createRepair_previous .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.3) !important;
+}
+
+#finishRepair_next .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.5) !important;
+}
+
+#finishRepair_previous .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.3) !important;
+}
+
+#cancelRepair_next .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.5) !important;
+}
+
+#cancelRepair_previous .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.3) !important;
+}
+
+#viewRepair_next .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.5) !important;
+}
+
+#viewRepair_previous .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.3) !important;
+}
+
+#changeCar_previous .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.3) !important;
+}
+
+#changeCar_next .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.5) !important;
+}
+
+#sellCar_previous .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.3) !important;
+}
+
+#sellCar_next .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.5) !important;
+}
+
 .white {
     color : rgba(255, 255, 255, 0.3);
 }
 .poruka {
     color : rgba(255, 255, 0, 0.6);
+}
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
 }
 .h3-class {
     color : rgba(255, 0, 0, 0.6);

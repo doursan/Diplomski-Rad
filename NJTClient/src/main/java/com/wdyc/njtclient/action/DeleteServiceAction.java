@@ -30,7 +30,6 @@ public class DeleteServiceAction extends AbstractAction {
             });
 
             request.setAttribute("services", services);
-            request.setAttribute("banner_page", "/WEB-INF/pages/delete_service_form.jsp");
 
             return "delete_service";
         } else {

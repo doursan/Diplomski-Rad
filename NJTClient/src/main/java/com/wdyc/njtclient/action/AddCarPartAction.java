@@ -5,10 +5,8 @@
  */
 package com.wdyc.njtclient.action;
 
-import com.wdyc.njtclient.constants.Constants;
-import com.wdyc.njtclient.rest.ws.RestWSClient;
+import com.wdyc.njtclient.dto.CarPartDTO;
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.core.Response;
 
 /**
  *
@@ -19,9 +17,8 @@ public class AddCarPartAction extends AbstractAction {
     @Override
     public String execute(HttpServletRequest request) {
         
-        request.setAttribute("banner_page", "/WEB-INF/pages/save_part_form.jsp");
         return "add_part";
-        
+
     }
-    
+
 }

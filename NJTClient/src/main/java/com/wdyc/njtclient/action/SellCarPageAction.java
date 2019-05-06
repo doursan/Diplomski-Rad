@@ -30,7 +30,6 @@ public class SellCarPageAction extends AbstractAction {
         List<CarDTO> cars = response.readEntity(new GenericType<List<CarDTO>>() { });
         
         request.setAttribute("user_cars", cars);
-        request.setAttribute("banner_page", "/WEB-INF/pages/sell_car_form.jsp");
         return "sell_car";
     }
     

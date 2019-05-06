@@ -8,6 +8,7 @@ package com.wdyc.njtclient.action;
 import com.wdyc.njtclient.constants.Constants;
 import com.wdyc.njtclient.dto.ServiceDTO;
 import com.wdyc.njtclient.rest.ws.RestWSClient;
+import com.wdyc.njtclient.validation.ServiceValidator;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.core.Response;
 
@@ -20,26 +21,27 @@ public class UpdateServiceAction extends AbstractAction {
     @Override
     public String execute(HttpServletRequest request) {
 
-        String id = request.getParameter("services");
+        String id = request.getParameter("service_id");
         String name = request.getParameter("name");
         String hours = request.getParameter("hours");
         String price = request.getParameter("price");
-
-        if (name.isEmpty()) {
-            request.setAttribute("message", "Name field can not be empty!");
+        String rowIndex = request.getParameter("rowIndex");
+        
+        ServiceDTO service = new ServiceDTO();
+        service.setName(name);
+        service.setHours(hours);
+        service.setPrice(price);
+        
+        if (!ServiceValidator.getInstance().validateService(service, "update")) {
+            request.setAttribute("message", "Invalid service");
+            request.setAttribute("service", service);
+            request.setAttribute("index", rowIndex);
+            request.setAttribute("invalid", true);
             ChangeServiceAction changeServiceAction = new ChangeServiceAction();
             return changeServiceAction.execute(request);
         }
-        ServiceDTO service = new ServiceDTO();
-        service.setName(name);
 
-        if (!(hours.isEmpty() || hours.equalsIgnoreCase("Hours not available!"))) {
-            service.setHours(hours);
-        }
-
-        if (!(price.isEmpty() || price.equalsIgnoreCase("Price not available!"))) {
-            service.setPrice(price);
-        }
+        request.setAttribute("invalid", false);
 
         RestWSClient.getInstance().setTarget(Constants.SERVICES_PATH);
         Response response = RestWSClient.getInstance().updateById_JSON(service, id);

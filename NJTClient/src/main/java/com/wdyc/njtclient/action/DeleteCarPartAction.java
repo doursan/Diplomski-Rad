@@ -29,7 +29,6 @@ public class DeleteCarPartAction extends AbstractAction {
             List<CarPartDTO> carParts = response.readEntity(new GenericType<List<CarPartDTO>>() {});
 
             request.setAttribute("car_parts", carParts);
-            request.setAttribute("banner_page", "/WEB-INF/pages/delete_part_form.jsp");
 
             return "delete_part";
         } else {

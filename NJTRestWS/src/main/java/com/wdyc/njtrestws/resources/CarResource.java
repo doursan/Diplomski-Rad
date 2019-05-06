@@ -39,7 +39,7 @@ public class CarResource {
 
     @GET
     @Path("user/{userid}")
-    @Produces({MediaType.APPLICATION_JSON,MediaType.TEXT_PLAIN})
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
     public Response getCarsForUser(@PathParam("userid") @NotNull Integer userId) {
         try {
             List<CarEntity> retrievedCars = carDao.retrieveCarsForUser(userId);
@@ -58,9 +58,25 @@ public class CarResource {
         }
     }
 
+    @GET
+    @Path("vin/{vin}")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
+    public Response getCarsByVin(@PathParam("vin") @NotNull String vin) {
+        try {
+            CarEntity retrievedCar = carDao.retrieveCarByVin(vin);
+            CarDTO convertedCar = carMapper.carEntityToDto(retrievedCar);
+
+            Response response = Response.ok(convertedCar).build();
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().type(MediaType.TEXT_PLAIN).entity(e.getMessage()).build();
+        }
+    }
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces({MediaType.APPLICATION_JSON,MediaType.TEXT_PLAIN})
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
     public Response saveCar(@NotNull CarDTO car, @Context UriInfo uriInfo) {
         System.out.println("Pozivam SAVE CAR iz REST Servisa");
         try {
@@ -82,11 +98,11 @@ public class CarResource {
     @PUT
     @Path("/{carId}")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces({MediaType.APPLICATION_JSON,MediaType.TEXT_PLAIN})
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
     public Response updateCar(@PathParam("carId") String id, @NotNull CarDTO car) {
-            System.out.println("Pozivam UPDATE CAR iz REST Servisa");
-            car.setId(id);
-        try {            
+        System.out.println("Pozivam UPDATE CAR iz REST Servisa");
+        car.setId(id);
+        try {
             CarEntity convertedCar = carMapper.carDtoToEntity(car);
             CarEntity updatedCar = carDao.updateCar(convertedCar);
             CarDTO responseCar = carMapper.carEntityToDto(updatedCar);
@@ -100,13 +116,34 @@ public class CarResource {
 
     @GET
     @Path("registration/{registration}")
-    @Produces({MediaType.APPLICATION_JSON,MediaType.TEXT_PLAIN})
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
     public Response getByRegistration(@PathParam("registration") @NotNull String registration) {
         try {
             CarEntity retrievedCar = carDao.retrieveByRegistration(registration);
             CarDTO convertedCar = carMapper.carEntityToDto(retrievedCar);
 
             Response response = Response.ok(convertedCar).build();
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Response.serverError().type(MediaType.TEXT_PLAIN).entity(e.getMessage()).build();
+        }
+    }
+
+    @GET
+    @Path("registration_suggest/{registration}")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
+    public Response getRegistrationSuggestions(@PathParam("registration") @NotNull String registration) {
+        try {
+            List<CarEntity> retrievedCars = carDao.retrieveRegistrationSuggestions(registration);
+            List<CarDTO> convertedCars = new ArrayList<>();
+
+            for (CarEntity car : retrievedCars) {
+                CarDTO carDto = carMapper.carEntityToDto(car);
+                convertedCars.add(carDto);
+            }
+
+            Response response = Response.ok(convertedCars).build();
             return response;
         } catch (Exception e) {
             e.printStackTrace();

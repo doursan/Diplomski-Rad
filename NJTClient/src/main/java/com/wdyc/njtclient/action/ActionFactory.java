@@ -111,6 +111,30 @@ public class ActionFactory {
         if (action.equalsIgnoreCase("remove_repair")) {
             command = new RemoveRepairAction();
         }
+        if (action.equalsIgnoreCase("ajax_reg_autocomplete")) {
+            command = new AutocompleteRegistrationAction();
+        } 
+        if (action.equalsIgnoreCase("ajax_buy_autocomplete")) {
+            command = new AutocompleteBuyerAction();
+        } 
+        if (action.equalsIgnoreCase("ajax_repair_items")) {
+            command = new ItemsTableAction();
+        } 
+        if (action.equalsIgnoreCase("ajax_validate_user")) {
+            command = new ValidateUserAction();
+        } 
+        if (action.equalsIgnoreCase("ajax_validate_part")) {
+            command = new ValidatePartAction();
+        } 
+        if (action.equalsIgnoreCase("ajax_validate_service")) {
+            command = new ValidateServiceAction();
+        } 
+        if (action.equalsIgnoreCase("ajax_validate_repair")) {
+            command = new ValidateRepairAction();
+        } 
+        if (action.equalsIgnoreCase("ajax_validate_car")) {
+            command = new ValidateCarAction();
+        } 
         return command;
     }
 }
