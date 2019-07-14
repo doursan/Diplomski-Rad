@@ -30,7 +30,7 @@ public class FinishRepairAction extends AbstractAction {
         
         if(response.getStatus() == 200) {
             RepairDTO updatedRepair = response.readEntity(RepairDTO.class);
-            request.setAttribute("message", "You have successfully finished a repair with id: "+updatedRepair.getId());
+            request.setAttribute("message", "Doslo je do greske prilikom zavrsavanja popravke automobila!");
         } else {
             String errorMessage = response.readEntity(String.class);
             request.setAttribute("message", errorMessage);

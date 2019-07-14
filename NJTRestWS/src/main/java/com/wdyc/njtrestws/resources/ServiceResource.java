@@ -63,7 +63,7 @@ public class ServiceResource {
     @GET
     @Path("name/{name}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
-    public Response getPartByName(@PathParam("name") @NotNull String name) {
+    public Response getServiceByName(@PathParam("name") @NotNull String name) {
         try {
             ServiceEntity retrievedService = serviceDao.retrieveServiceByName(name);
             ServiceDTO convertedService = serviceMapper.serviceEntityToDto(retrievedService);

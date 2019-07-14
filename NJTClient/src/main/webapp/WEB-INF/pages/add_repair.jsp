@@ -113,7 +113,7 @@
 
                 if ('${invalid_item}') {
                     if ('${type}' === 'service') {
-                        validateRepair('${item.getAmount()}', 'amount', 'service-amount');
+                        validateRepair('${service_item.getAmount()}', 'amount', 'service-amount');
 
                         var service_id = '${service_id}';
                         for (var i = 0; i < document.getElementById("services").length; i++) {
@@ -126,8 +126,8 @@
                         location.href = "#";
                         location.href = "#service-title";
                     } else {
-                        validateRepair('${item.getAmount()}', 'amount', 'part-amount');
-                        validateRepair('${item.getPricePerUnit()}', 'part_price', 'part_price');
+                        validateRepair('${part_item.getAmount()}', 'amount', 'part-amount');
+                        validateRepair('${part_item.getPricePerUnit()}', 'part_price', 'part_price');
 
                         var part_id = '${part_id}';
                         for (var i = 0; i < document.getElementById("services").length; i++) {

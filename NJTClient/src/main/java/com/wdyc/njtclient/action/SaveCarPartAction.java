@@ -46,7 +46,7 @@ public class SaveCarPartAction extends AbstractAction {
         if (response.getStatus() == 201) {
             CarPartDTO returnedCarPart = response.readEntity(CarPartDTO.class);
 
-            request.setAttribute("message", "You have successfully saved a car part!");
+            request.setAttribute("message", "Automobilski deo je uspesno sacuvan!");
         } else {
             String errorMessage = response.readEntity(String.class);
             request.setAttribute("message", errorMessage);

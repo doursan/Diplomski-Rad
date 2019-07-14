@@ -37,6 +37,7 @@ public class LoginAction extends AbstractAction {
             } else {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("logged_user", returnedUser);
+                session.setAttribute("message", "Sistem ne moze da nadje podatke za izabranu popravku automobila!");
                 if (returnedUser.getTip().equalsIgnoreCase("S")) {
                     return "admin";
                 } else {

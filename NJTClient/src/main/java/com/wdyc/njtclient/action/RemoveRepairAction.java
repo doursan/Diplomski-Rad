@@ -33,7 +33,7 @@ public class RemoveRepairAction extends AbstractAction {
         
         if(response.getStatus() == 200) {
             RepairDTO deletedRepair = response.readEntity(RepairDTO.class);
-            request.setAttribute("message", "You have successfully canceled a repair with id: "+deletedRepair.getId());
+            request.setAttribute("message", "Doslo je do greske prilikom ponistavanja popravke automobila!");
         } else {
             String errorMessage = response.readEntity(String.class);
             request.setAttribute("message", errorMessage);

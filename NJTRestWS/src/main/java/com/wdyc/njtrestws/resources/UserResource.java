@@ -124,7 +124,7 @@ public class UserResource {
     @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN})
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("clients")
-    public Response registerShop(@NotNull ClientDTO user, @Context UriInfo uriInfo) {
+    public Response registerClient(@NotNull ClientDTO user, @Context UriInfo uriInfo) {
 
         System.out.println("Pozivam Register CLIENT iz REST Servisa");
 

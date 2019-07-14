@@ -59,7 +59,7 @@
 
         <script type="text/javascript">
             $(document).ready(function () {
-                $('#viewRepair').DataTable({
+                var table = $('#viewRepair').DataTable({
                     "columns": [
                         {"width": "0%"},
                         {"width": "20%"},
@@ -72,6 +72,26 @@
                 var drops = document.getElementsByName("viewRepair_length");
                 var drop = drops[0];
                 drop.classList.remove("custom-select");
+
+
+                table.on('click', 'tbody tr', function () {
+                    var tabela = document.getElementById("viewRepair");
+                    var index = document.getElementById("rowIndex").value;
+                    if (index) {
+                        tabela.rows[index].style.backgroundColor = "black";
+                    }
+                    $(this).css('background', '#ff0000');
+                    $(this).css('color', '#ffffff');
+                    $(this).css('opacity', '0.34');
+                    document.getElementById("rowIndex").value = this.rowIndex;
+                    var repair_id = tabela.rows[this.rowIndex].cells[0].innerHTML;
+                    document.getElementById("view_repair_id").value = repair_id;
+                    location.href = "#";
+                    $.post("/NJTClient/controller", {repair: repair_id, action: 'ajax_repair_items'}, function (data) {
+                        $('#items-table').html(data);
+                    });
+                    location.href = "#items-table";
+                });
             });
         </script>
     </head>
@@ -145,12 +165,25 @@
                                         </tfoot>
                                     </table>  
                                     <br/>
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-12">                                   
+                                                <div id="items-table">
+                                                </div>                                    
+                                                <br/>
+                                                <br/>  
+                                                <input type="hidden" name="repair_id" id="view_repair_id" value="" />  
+                                                <input type="hidden" name="rowIndex" id="rowIndex" value="" />   
+                                                <br>
+                                                <br>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <br/>  
                                     <br/>
                                     <br/>
                                     <br/>
                                     <br/>
-                                    <h1 class="poruka">${message}</h1>
                                 </div>
                             </div>
                         </div>

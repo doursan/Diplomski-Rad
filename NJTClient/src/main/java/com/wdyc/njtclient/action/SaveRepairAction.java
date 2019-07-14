@@ -27,7 +27,7 @@ public class SaveRepairAction extends AbstractAction {
         String registration = request.getParameter("registration");
         String kilometers = request.getParameter("kilometers");        
         
-        if (!RepairValidator.getInstance().validateRepair(registration, kilometers, "add")) {
+        if (!RepairValidator.getInstance().validateRepair(registration, kilometers, "add_repair")) {
             request.setAttribute("message_repair", "Invalid repair");
             request.setAttribute("registration", registration);
             request.setAttribute("kilometers", kilometers);
@@ -61,7 +61,7 @@ public class SaveRepairAction extends AbstractAction {
             if (response.getStatus() == 201) {
                 RepairDTO returnedRepair = response.readEntity(RepairDTO.class);
 
-                request.setAttribute("message", "You have successfully created a Repair!");
+                request.setAttribute("message", "Popravka automobila je uspesno sacuvana!");
                 AddRepairItemAction.resetRepair();
             } else {
                 String errorMessage = response.readEntity(String.class);

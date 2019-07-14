@@ -71,7 +71,7 @@ public class CarValidator {
 
         color = color.trim();
 
-        String regex = "^[A-Za-z]{3,}$";
+        String regex = "^[A-Za-z ]{3,}$";
 
         Pattern pattern = Pattern.compile(regex);
 

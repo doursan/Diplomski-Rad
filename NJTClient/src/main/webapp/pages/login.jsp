@@ -33,7 +33,7 @@
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
         <script src="/NJTClient/pages/js/vendor/jquery-2.2.4.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script type="text/javascript" src="/NJTClient/pages/js/login1.js"></script>
+    <script type="text/javascript" src="/NJTClient/pages/js/login1.js"></script>
 
         <script type="text/javascript">
 
@@ -203,6 +203,10 @@
                                     </form>
                                     <form id="register-form-customer" action="/NJTClient/controller" method="post" role="form" style="display: none;">
                                         <input type="hidden" name="action" value="register" />
+                                        <div id="errorMessage" style="text-align:center">
+                                            <h4>${message_client}</h4>
+                                        </div>
+                                        <br/>
                                         <div class="form-row align-items-center justify-content-center">
                                             <div class="form-group">
                                                 <input type="text" name="username" id="username-customer" tabindex="1" class="form-control" placeholder="Username  (At least 5 characters long)" value="${client.getUsername()}" onkeyup="validateUser(this.value, this.name, this.id)">

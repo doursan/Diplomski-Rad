@@ -1861,6 +1861,11 @@ select.form-control:focus::-ms-value {
     border-color: rgba(100, 0, 0, 0.3) !important;
 }
 
+#createRepair_next .page-link {
+    background-color: rgba(100, 0, 0, 0.3) !important;
+    border-color: rgba(100, 0, 0, 0.3) !important;
+}
+
 #finishRepair_next .page-link {
     background-color: rgba(100, 0, 0, 0.3) !important;
     border-color: rgba(100, 0, 0, 0.5) !important;

@@ -35,6 +35,10 @@
         <link rel="stylesheet" href="/NJTClient/pages/css/animate.min.css">
         <link rel="stylesheet" href="/NJTClient/pages/css/owl.carousel.css">
         <link rel="stylesheet" href="/NJTClient/pages/css/main.css">
+
+        <script type="text/javascript">
+                alert('${message}');            
+        </script>
     </head>
     <body>
         <jsp:include page="header_admin.jsp"></jsp:include>       
@@ -54,7 +58,6 @@
                         </p>
                         <a href="#" class="primary-btn text-uppercase">Get Started</a>
                     </div>
-                    <h1 class="poruka">${message}</h1>
                 </div>
             </div>					
         </section>

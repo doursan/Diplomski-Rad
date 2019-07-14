@@ -73,7 +73,7 @@ public class SaveCarAction extends AbstractAction {
         if (response.getStatus() == 201) {
             CarDTO returnedCar = response.readEntity(CarDTO.class);
 
-            request.setAttribute("message", "You have successfully saved your car");
+            request.setAttribute("message", "Automobil je uspesno sacuvan!");
         } else {
             String errorMessage = response.readEntity(String.class);
             request.setAttribute("message", errorMessage);

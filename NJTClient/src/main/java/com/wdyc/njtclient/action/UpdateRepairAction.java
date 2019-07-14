@@ -29,7 +29,7 @@ public class UpdateRepairAction extends AbstractAction {
 
         repair.setKilometers(kilometers);
 
-        if (!RepairValidator.getInstance().validateRepair(registration, kilometers, "update")) {
+        if (!RepairValidator.getInstance().validateRepair(registration, kilometers, "update_repair")) {
             request.setAttribute("message_repair", "Invalid repair");
             request.setAttribute("registration", registration);
             request.setAttribute("kilometers", kilometers);
@@ -50,7 +50,7 @@ public class UpdateRepairAction extends AbstractAction {
         Response response = RestWSClient.getInstance().updateById_JSON(repair, repair.getId());
         if (response.getStatus() == 200) {
             RepairDTO updatedRepair = response.readEntity(RepairDTO.class);
-            request.setAttribute("message", "You have successfully updated a repair with id: " + updatedRepair.getId());
+            request.setAttribute("message", "Popravka automobila je uspesno izmenjena!");
         } else {
             String errorMessage = response.readEntity(String.class);
             request.setAttribute("message", errorMessage);

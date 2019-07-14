@@ -27,10 +27,10 @@ public class RemoveCarPartAction extends AbstractAction {
         
         if(response.getStatus() == 200) {
             CarPartDTO deletedCarPart = response.readEntity(CarPartDTO.class);
-            request.setAttribute("message", "You have successfully deleted a car part named: "+deletedCarPart.getName());
+            request.setAttribute("message", "Automobilski deo je uspesno obrisan!");
         } else {
             String errorMessage = response.readEntity(String.class);
-            request.setAttribute("message", errorMessage);
+            request.setAttribute("message", "Doslo je do greske prilikom brisanja automobilskog dela!");
         }
         return "admin";
     }

@@ -7,6 +7,7 @@ package com.wdyc.njtclient.action;
 
 import com.wdyc.njtclient.dto.CarPartDTO;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -17,6 +18,8 @@ public class AddCarPartAction extends AbstractAction {
     @Override
     public String execute(HttpServletRequest request) {
         
+        HttpSession session = request.getSession();
+        session.removeAttribute("message");
         return "add_part";
 
     }

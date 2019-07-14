@@ -28,7 +28,7 @@ public class SellCarAction extends AbstractAction {
             String rowIndex = request.getParameter("rowIndex");
             
             if (!UserValidator.getInstance().validateBuyer(buyerUsername)) {
-            request.setAttribute("message", "Buyer with that username doesn't exist!");
+            request.setAttribute("message", "Kupac sa tim podacima ne postoji!");
             request.setAttribute("buyer", buyerUsername);
             request.setAttribute("index", rowIndex);
             request.setAttribute("invalid", true);
@@ -46,14 +46,14 @@ public class SellCarAction extends AbstractAction {
             Response response = RestWSClient.getInstance().updateById_JSON(car, carId);
             if (response.getStatus() == 200) {
                 CarDTO soldCar = response.readEntity(CarDTO.class);
-                request.setAttribute("message", "You have successfully sold your car");
+                request.setAttribute("message", "Sistem ne moze da proda automobil!");
             } else {
                 String errorMessage = response.readEntity(String.class);
                 request.setAttribute("message", errorMessage);
             }
             return "index";
         } catch (Exception ex) {
-            request.setAttribute("message", "Buyer with that username does not exist!");
+            request.setAttribute("message", "Sistem ne moze da proda automobil!");
             return "index";
         }
     }

@@ -50,7 +50,6 @@ public class RegisterAction extends AbstractAction {
             String prezime = request.getParameter("prezime");
             String jmbg = request.getParameter("jmbg");
 
-            RestWSClient.getInstance().setTarget(Constants.CLIENTS_PATH);
             user = new ClientDTO(ime, prezime, jmbg, username, password, email);
 
             if (!UserValidator.getInstance().validateUser(user, confirmPassword, 'C')) {
@@ -60,11 +59,14 @@ public class RegisterAction extends AbstractAction {
                 request.setAttribute("invalid_client", true);
                 return "login";
             }
+
+            RestWSClient.getInstance().setTarget(Constants.CLIENTS_PATH);
         }
         Response response = RestWSClient.getInstance().create_JSON(user);
         HttpSession session = request.getSession(true);
 
         if (response.getStatusInfo().getStatusCode() == 201) {
+            request.setAttribute("message", "Vasa registracija je uspesna!");
             if (user instanceof ClientDTO) {
                 returnedUser = response.readEntity(ClientDTO.class);
                 session.setAttribute("logged_user", returnedUser);

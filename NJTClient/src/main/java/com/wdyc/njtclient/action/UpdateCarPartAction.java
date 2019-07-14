@@ -45,7 +45,7 @@ public class UpdateCarPartAction extends AbstractAction {
         Response response = RestWSClient.getInstance().updateById_JSON(carPart, id);
         if (response.getStatus() == 200) {
             CarPartDTO updatedCarPart = response.readEntity(CarPartDTO.class);
-            request.setAttribute("message", "You have successfully updated a car part with id: " + updatedCarPart.getId());
+            request.setAttribute("message", "Automobilski deo je uspesno izmenjen!");
         } else {
             String errorMessage = response.readEntity(String.class);
             request.setAttribute("message", errorMessage);

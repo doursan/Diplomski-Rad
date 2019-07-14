@@ -111,6 +111,11 @@ public class AddRepairItemAction extends AbstractAction {
             }
         }
 
+        if (pricePerUnit.isEmpty()) {
+            pricePerUnit = "0";
+            item.setPricePerUnit(pricePerUnit);
+        }
+
         String price = String.valueOf(Double.valueOf(pricePerUnit) * Double.valueOf(amount));
         item.setPrice(price);
         item.setRowNumber(rowNumber);
