@@ -5,12 +5,15 @@
  */
 package com.wdyc.njtclient.action;
 
-import com.wdyc.njtws.services.ClientDTO;
-import com.wdyc.njtws.services.ShopDTO;
-import com.wdyc.njtws.services.UserWS;
-import com.wdyc.njtws.services.UserWS_Service;
+import com.wdyc.njtclient.constants.Constants;
+import com.wdyc.njtclient.dto.ClientDTO;
+import com.wdyc.njtclient.dto.ShopDTO;
+import com.wdyc.njtclient.dto.UserDTO;
+import com.wdyc.njtclient.rest.ws.RestWSClient;
+import com.wdyc.njtclient.validation.UserValidator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.core.Response;
 
 /**
  *
@@ -22,63 +25,60 @@ public class RegisterAction extends AbstractAction {
     public String execute(HttpServletRequest request) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String confirmPassword = request.getParameter("confirm-password");
         String email = request.getParameter("email");
+        UserDTO user, returnedUser;
 
         if (request.getParameterMap().containsKey("pib")) {
             String naziv = request.getParameter("shop-naziv");
             String pib = request.getParameter("pib");
             String maticni = request.getParameter("maticni");
 
-            ShopDTO shopDTO = new ShopDTO();
+            user = new ShopDTO(naziv, pib, maticni, username, password, email);
 
-            shopDTO.setUsername(username);
-            shopDTO.setPassword(password);
-            shopDTO.setEmail(email);
-            shopDTO.setMaticni(maticni);
-            shopDTO.setNaziv(naziv);
-            shopDTO.setPib(pib);
-
-            try {
-                UserWS_Service service = new UserWS_Service();
-                UserWS port = service.getUserWSPort();
-
-                ShopDTO returnedShop = port.registerShop(shopDTO);
-                System.out.println("Result = " + returnedShop);
-                HttpSession session = request.getSession(true);
-                session.setAttribute("logged_user", returnedShop);
-                return "admin";
-            } catch (Exception ex) {
-                request.setAttribute("errorMessage", ex.getMessage());
-                return "register";
+            if (!UserValidator.getInstance().validateUser(user, confirmPassword, 'S')) {
+                request.setAttribute("message_shop", "Invalid shop!");
+                request.setAttribute("shop", user);
+                request.setAttribute("confirm_password", confirmPassword);
+                request.setAttribute("invalid_shop", true);
+                return "login";
             }
 
+            RestWSClient.getInstance().setTarget(Constants.SHOPS_PATH);
         } else {
             String ime = request.getParameter("ime");
             String prezime = request.getParameter("prezime");
             String jmbg = request.getParameter("jmbg");
 
-            ClientDTO clientDTO = new ClientDTO();
+            user = new ClientDTO(ime, prezime, jmbg, username, password, email);
 
-            clientDTO.setUsername(username);
-            clientDTO.setPassword(password);
-            clientDTO.setEmail(email);
-            clientDTO.setIme(ime);
-            clientDTO.setPrezime(prezime);
-            clientDTO.setJmbg(jmbg);
-
-            try {
-                UserWS_Service service = new UserWS_Service();
-                UserWS port = service.getUserWSPort();                
-                
-                ClientDTO returnedClient = port.registerClient(clientDTO);
-                System.out.println("Result = " + returnedClient);
-                HttpSession session = request.getSession(true);
-                session.setAttribute("logged_user", returnedClient);
-                return "index";
-            } catch (Exception ex) {
-                request.setAttribute("errorMessage", ex.getMessage());
-                return "register";
+            if (!UserValidator.getInstance().validateUser(user, confirmPassword, 'C')) {
+                request.setAttribute("message_client", "Invalid client!");
+                request.setAttribute("client", user);
+                request.setAttribute("confirm_password", confirmPassword);
+                request.setAttribute("invalid_client", true);
+                return "login";
             }
+
+            RestWSClient.getInstance().setTarget(Constants.CLIENTS_PATH);
+        }
+        Response response = RestWSClient.getInstance().create_JSON(user);
+        HttpSession session = request.getSession(true);
+
+        if (response.getStatusInfo().getStatusCode() == 201) {
+            request.setAttribute("message", "Vasa registracija je uspesna!");
+            if (user instanceof ClientDTO) {
+                returnedUser = response.readEntity(ClientDTO.class);
+                session.setAttribute("logged_user", returnedUser);
+                return "index";
+            } else {
+                returnedUser = response.readEntity(ShopDTO.class);
+                session.setAttribute("logged_user", returnedUser);
+                return "admin";
+            }
+        } else {
+            request.setAttribute("errorMessage", "Server error! Unable to register user.");
+            return "register";
         }
     }
 

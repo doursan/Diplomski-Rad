@@ -8,6 +8,7 @@ package com.wdyc.njtclient.servlet;
 import com.wdyc.njtclient.controller.ApplicationController;
 import com.wdyc.njtclient.pageresolver.PageResolver;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,11 +34,23 @@ public class FrontController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         
+
+        String view = "";
+
         String action = request.getParameter("action");
-        String view = ApplicationController.getInstance().processRequest(action, request);
-        String page = PageResolver.getInstance().getPage(view);
-        request.getRequestDispatcher(page).forward(request, response);
+        if (request.getSession(false) == null) {
+            request.setAttribute("errorMessage", "Your session has expired!");
+            view = "login";
+        } else {
+            view = ApplicationController.getInstance().processRequest(action, request);
+        }
+        if (action.startsWith("ajax_")) {
+            PrintWriter out = response.getWriter();
+            out.print(view);
+        } else {
+            String page = PageResolver.getInstance().getPage(view);
+            request.getRequestDispatcher(page).forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

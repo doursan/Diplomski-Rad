@@ -33,4 +33,10 @@ $(function () {
         $(this).addClass('active');
         e.preventDefault();
     });
+    $('#shop-naziv').keyup(function (e) {
+        $.post("/NJTClient/controller", {value: this.value, attribute: 'email', action: 'ajax_validate_user'}, function (data) {
+            $('#suggestions').html(data);
+        });
+        e.preventDefault();
+    });
 });
